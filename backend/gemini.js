@@ -1,7 +1,7 @@
 // Google Gemini backend for the doubt-solving chat and AI-generated assessments.
 // Uses the plain REST API via global fetch (Node 18+) rather than an SDK, so no
 // extra dependency is needed. Get a key at https://aistudio.google.com/apikey.
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 const API_KEY = process.env.GEMINI_API_KEY;
 
 const TUTOR_SYSTEM_PROMPT = `You are a patient, precise interview-prep tutor for a learner named Moushana who is

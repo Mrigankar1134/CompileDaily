@@ -208,7 +208,6 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
  <div class="settingRow"><label>Your name</label><input type="text" value="Moushana Bharadwaj" disabled style="opacity:.6"></div>
  <div class="settingRow"><label>Primary target role</label><select id="roleSelect"></select></div>
  <div class="settingRow"><label>Daily study goal</label><select id="goalSelect"><option value="45">45 minutes</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option><option value="180">3 hours</option></select></div>
- <div class="settingRow"><label>Backend URL (cloud sync + AI)</label><input id="apiBaseInput" type="text" placeholder="https://your-backend.onrender.com"></div>
  <div class="row"><button class="secondary" onclick="closeSettings()">Cancel</button><button class="primary" onclick="saveSettings()">Save profile</button></div>
 </div></div>
 
@@ -608,7 +607,8 @@ const USER_NAME='Moushana Bharadwaj';
 const USER_FIRST_NAME='Moushana';
 const USER_INITIALS='MB';
 function profile(){let p=S.get('profile',{role:'backend',goal:'60'});p.name=USER_NAME;return p}
-function apiBase(){return S.get('apiBase','')}
+const API_BASE_URL='https://compiledaily.onrender.com';
+function apiBase(){return API_BASE_URL}
 async function api(path,opts){let base=apiBase();if(!base)return null;try{let r=await fetch(base.replace(/\/$/,'')+path,Object.assign({headers:{'Content-Type':'application/json'}},opts||{}));if(!r.ok)throw new Error('status '+r.status);return await r.json()}catch(e){console.warn('API call failed',path,e);return null}}
 async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:USER_NAME,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks)}
 function populateSettings(){roleSelect.innerHTML=roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
@@ -795,8 +795,8 @@ function renderTracker(){
 }
 function shuffleFocus(){let x=focusPool[Math.floor(Math.random()*focusPool.length)];focusTitle.textContent=x[0];focusText.textContent=x[1];focusTags.innerHTML=x[2].map((t,i)=>`<span class="tag ${i?'green':'purple'}">${t}</span>`).join('')}
 function continueFocus(){learnPhase=computeCurrentModuleIndex();go('learn')}
-function openSettings(){let p=profile();roleSelect.value=p.role;goalSelect.value=p.goal;apiBaseInput.value=apiBase();settingsModal.classList.add('show')}
-function saveSettings(){let p={name:USER_NAME,role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);let newBase=apiBaseInput.value.trim().replace(/\/$/,'');let baseChanged=newBase!==apiBase();S.set('apiBase',newBase);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved');if(baseChanged)pullState().then(renderAll)}
+function openSettings(){let p=profile();roleSelect.value=p.role;goalSelect.value=p.goal;settingsModal.classList.add('show')}
+function saveSettings(){let p={name:USER_NAME,role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved')}
 function closeSettings(){settingsModal.classList.remove('show')}function closeOnBackdrop(e){if(e.target.id==='settingsModal')closeSettings()}
 const viewMeta={
  roadmap:()=>({title:`${(roles.find(x=>x.id===profile().role)||roles[3]).name} roadmap`,sub:`6 stages · 45 modules · ${TRACK_LABEL[roleTrack(profile().role)]} track`,actions:`<button onclick="openGithubGuide()">GitHub guide</button>`}),
