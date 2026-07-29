@@ -281,28 +281,43 @@ const stages=[
  {title:'Test Automation Engineering',summary:'Selenium, API automation and framework architecture',range:[7,13]},
  {title:'Delivery & Platform Engineering',summary:'Build tools, Git, CI/CD, Docker and cloud deployment',range:[14,18]},
  {title:'Engineering Craft & Extras',summary:'Frontend, tooling, security, architecture and more',range:[19,38],optional:true},
- {title:'Career Readiness',summary:'Documentation, portfolio and interview preparation',range:[39,44]}
+ {title:'Career Readiness',summary:'Documentation, portfolio, interview prep and the job search itself',range:[39,45]}
 ];
-// Per-module priority for each of the two career tracks Moushana's six target
-// roles fall into: M=Must learn, I=Important, L=Learn later, O=Optional.
-// Index-aligned with `phases` (module 1 "Core Java" = index 0, etc).
+// Per-module priority, customized for each of the six specific target roles
+// (not just the two broad tracks) — M=Must learn, I=Important, L=Learn later,
+// O=Optional. Index-aligned with `phases` (module 1 "Core Java" = index 0,
+// module 46 "Job Search & Career Operations" = index 45).
+// TRACK_LABEL/roleTrack remain purely for the descriptive grouping shown on
+// Home ("this role sits in the Automation/SDET track") — priority itself is
+// looked up directly by profile().role everywhere else, not by track.
 const TRACK_LABEL={automation:'Java Test Automation / SDET',backend:'Java Backend Engineering'};
 function roleTrack(roleId){return['sdet','automation','qa-dev'].includes(roleId)?'automation':'backend'}
 const PRIORITY_LABEL={M:'Must learn',I:'Important',L:'Learn later',O:'Optional'};
 const PRIORITY_RANK={M:0,I:1,L:2,O:3};
 const modulePriority=[
- {automation:'M',backend:'M'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},
- {automation:'M',backend:'M'},{automation:'I',backend:'I'},{automation:'M',backend:'I'},{automation:'M',backend:'L'},
- {automation:'M',backend:'O'},{automation:'M',backend:'I'},{automation:'M',backend:'L'},{automation:'I',backend:'M'},
- {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'M',backend:'M'},{automation:'M',backend:'M'},
- {automation:'M',backend:'I'},{automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'O',backend:'L'},
- {automation:'O',backend:'O'},{automation:'O',backend:'O'},{automation:'I',backend:'L'},{automation:'L',backend:'L'},
- {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},
- {automation:'L',backend:'I'},{automation:'I',backend:'L'},{automation:'L',backend:'I'},{automation:'L',backend:'I'},
- {automation:'L',backend:'I'},{automation:'L',backend:'I'},{automation:'L',backend:'I'},{automation:'O',backend:'L'},
- {automation:'I',backend:'I'},{automation:'I',backend:'M'},{automation:'M',backend:'M'},{automation:'L',backend:'L'},
- {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'M',backend:'M'},{automation:'M',backend:'M'},
- {automation:'L',backend:'L'}
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},{'sdet':'I','automation':'L','qa-dev':'I','backend':'M','swe':'M','api':'I'},
+ {'sdet':'I','automation':'L','qa-dev':'I','backend':'M','swe':'M','api':'M'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'M','swe':'M','api':'M'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'I','swe':'I','api':'I'},{'sdet':'M','automation':'M','qa-dev':'M','backend':'L','swe':'L','api':'L'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'O','swe':'O','api':'O'},{'sdet':'M','automation':'M','qa-dev':'M','backend':'I','swe':'I','api':'I'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'L','swe':'L','api':'L'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'M','swe':'M','api':'M'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},{'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},{'sdet':'O','automation':'O','qa-dev':'O','backend':'L','swe':'L','api':'L'},
+ {'sdet':'O','automation':'O','qa-dev':'O','backend':'O','swe':'O','api':'O'},{'sdet':'O','automation':'O','qa-dev':'O','backend':'O','swe':'O','api':'O'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'L','swe':'L','api':'L'},{'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'L'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'M','swe':'M','api':'M'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'M','swe':'M','api':'M'},
+ {'sdet':'L','automation':'L','qa-dev':'L','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'L','swe':'L','api':'L'},
+ {'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'M'},{'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'M'},
+ {'sdet':'L','automation':'L','qa-dev':'L','backend':'I','swe':'L','api':'I'},{'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'M'},
+ {'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'I','api':'I'},{'sdet':'O','automation':'O','qa-dev':'O','backend':'L','swe':'L','api':'L'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'M','swe':'M','api':'I'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},{'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'L'},
+ {'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},{'sdet':'I','automation':'I','qa-dev':'I','backend':'I','swe':'I','api':'I'},
+ {'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},{'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'},
+ {'sdet':'L','automation':'L','qa-dev':'L','backend':'L','swe':'L','api':'L'},{'sdet':'M','automation':'M','qa-dev':'M','backend':'M','swe':'M','api':'M'}
 ];
 // Each of the 45 modules below mirrors the full curriculum outline, grouped into
 // scannable topics (every original heading is preserved as a checkable task).
@@ -555,6 +570,13 @@ const phases=[
    {name:'Cloud Browser Testing',tasks:['BrowserStack','Sauce Labs']},
    {name:'Infrastructure as Code',tasks:['Terraform Basics']},
    {name:'Emerging Tech & Ops',tasks:['Kubernetes Basics','Accessibility Testing','Feature Flags','Chaos Engineering Basics','GraphQL Basics','WebSocket Basics','gRPC Basics']}
+ ]},
+ {title:'Job Search & Career Operations',icon:'📨',project:{title:'Job Search Sprint',desc:'Apply to 10 tailored roles with a polished resume, LinkedIn profile and a tracked application log.'},topics:[
+   {name:'Resume Strategy',tasks:['Tailoring a resume per track (SDET vs backend)','Quantifying impact and project outcomes','ATS-friendly formatting','Common resume mistakes to avoid']},
+   {name:'LinkedIn & Professional Branding',tasks:['Profile headline and summary','Skills and endorsements','Sharing project work publicly','Following and engaging target companies']},
+   {name:'Mock Interviews & Behavioural Prep',tasks:['STAR-format storytelling','Common behavioural questions','Recording and reviewing mock answers','Handling salary and availability questions']},
+   {name:'Networking & Referrals',tasks:['Reaching out to alumni and connections','Requesting referrals respectfully','Engaging in developer communities','Following up without being pushy']},
+   {name:'Application Tracking & Follow-up',tasks:['Building an application tracker','Setting follow-up cadences','Managing multiple interview pipelines','Handling rejection and iterating']}
  ]}
 ];
 const questions=[
@@ -639,7 +661,7 @@ function renderTarget(){let r=roles.find(x=>x.id===profile().role)||roles[3];let
 function phaseStats(pi){let leaves=allLeafTasks().filter(l=>l.pi===pi);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length,pct:leaves.length?Math.round(done/leaves.length*100):0}}
 function topicStats(pi,ti){let leaves=allLeafTasks().filter(l=>l.pi===pi&&l.ti===ti);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length}}
 function stageStats(si){let[a,b]=stages[si].range;let leaves=allLeafTasks().filter(l=>l.pi>=a&&l.pi<=b);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length,pct:leaves.length?Math.round(done/leaves.length*100):0,modules:b-a+1}}
-function computeCurrentModuleIndex(){let track=roleTrack(profile().role);let candidates=phases.map((p,pi)=>({pi,pct:phaseStats(pi).pct,rank:PRIORITY_RANK[modulePriority[pi][track]]})).filter(c=>c.pct<100);if(!candidates.length)return phases.length-1;candidates.sort((x,y)=>x.rank-y.rank||x.pi-y.pi);return candidates[0].pi}
+function computeCurrentModuleIndex(){let role=profile().role;let candidates=phases.map((p,pi)=>({pi,pct:phaseStats(pi).pct,rank:PRIORITY_RANK[modulePriority[pi][role]]})).filter(c=>c.pct<100);if(!candidates.length)return phases.length-1;candidates.sort((x,y)=>x.rank-y.rank||x.pi-y.pi);return candidates[0].pi}
 function computeCurrentStageIndex(){let cm=computeCurrentModuleIndex();for(let si=0;si<stages.length;si++){if(cm>=stages[si].range[0]&&cm<=stages[si].range[1])return si}return 0}
 function moduleCardHtml(pi){
  let progress=S.get('roadmapProgress',{}),ghLinks=S.get('githubLinks',{});
@@ -660,7 +682,7 @@ function moduleCardHtml(pi){
   ${ghUrl?`<div style="font-size:13px"><span class="doneDate" style="cursor:default">✓ Submitted</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:6px 10px;font-size:12px;margin-left:4px" onclick="editGithubLink(${pi},event)">Edit</button></div>`
    :`<div class="row"><input type="text" id="gh-${pi}" placeholder="Paste your GitHub repo/PR link"><button class="secondary" style="flex:none" onclick="saveGithubLink(${pi},event)">Save</button></div>`}
  </div>`;
- let track=roleTrack(profile().role),pr=modulePriority[pi][track];
+ let pr=modulePriority[pi][profile().role];
  return `<div class="card phaseCard ${open?'open':''}" id="module-${pi}">
   <div class="phaseHead" onclick="togglePhase(${pi})">
    <div class="ring" style="--p:${st.pct};--accent:${color}"><span>${st.pct}%</span></div>
@@ -671,19 +693,19 @@ function moduleCardHtml(pi){
  </div>`;
 }
 function renderRoadmap(){
- let track=roleTrack(profile().role);
+ let role=profile().role,r=roles.find(x=>x.id===role)||roles[3];
  let currentModule=computeCurrentModuleIndex(),currentStage=computeCurrentStageIndex();
  if(!openStages.size)openStages.add(currentStage);
  let cp=phases[currentModule],cst=phaseStats(currentModule);
  roadmapCurrentCard.innerHTML=`<div class="card" style="background:rgba(101,82,224,.08);border-color:rgba(101,82,224,.25)">
-  <div class="muted" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em">Continue where you left off · ${TRACK_LABEL[track]}</div>
-  <h3 style="margin:4px 0 2px">${cp.icon} ${cp.title}<span class="priorityBadge p-${modulePriority[currentModule][track]}">${PRIORITY_LABEL[modulePriority[currentModule][track]]}</span></h3>
+  <div class="muted" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em">Continue where you left off · ${r.name}</div>
+  <h3 style="margin:4px 0 2px">${cp.icon} ${cp.title}<span class="priorityBadge p-${modulePriority[currentModule][role]}">${PRIORITY_LABEL[modulePriority[currentModule][role]]}</span></h3>
   <div class="muted" style="font-size:13px;margin-bottom:10px">${cst.done} of ${cst.total} tasks complete · ${stages[currentStage].title}</div>
   <button class="primary" style="width:100%" onclick="continueCurrentModule()">Continue current module</button>
  </div>`;
  roadmapList.innerHTML=stages.map((sg,si)=>{
   let[a,b]=sg.range,sst=stageStats(si),open=openStages.has(si);
-  let pis=Array.from({length:b-a+1},(_,k)=>a+k).sort((x,y)=>PRIORITY_RANK[modulePriority[x][track]]-PRIORITY_RANK[modulePriority[y][track]]||x-y);
+  let pis=Array.from({length:b-a+1},(_,k)=>a+k).sort((x,y)=>PRIORITY_RANK[modulePriority[x][role]]-PRIORITY_RANK[modulePriority[y][role]]||x-y);
   let modulesHtml=open?pis.map(pi=>moduleCardHtml(pi)).join(''):'';
   return `<div class="stageCard ${open?'open':''}">
    <div class="stageHead" onclick="toggleStage(${si})">
@@ -799,7 +821,7 @@ function openSettings(){let p=profile();roleSelect.value=p.role;goalSelect.value
 function saveSettings(){let p={name:USER_NAME,role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved')}
 function closeSettings(){settingsModal.classList.remove('show')}function closeOnBackdrop(e){if(e.target.id==='settingsModal')closeSettings()}
 const viewMeta={
- roadmap:()=>({title:`${(roles.find(x=>x.id===profile().role)||roles[3]).name} roadmap`,sub:`6 stages · 45 modules · ${TRACK_LABEL[roleTrack(profile().role)]} track`,actions:`<button onclick="openGithubGuide()">GitHub guide</button>`}),
+ roadmap:()=>({title:`${(roles.find(x=>x.id===profile().role)||roles[3]).name} roadmap`,sub:`6 stages · 46 modules · personalised to your role`,actions:`<button onclick="openGithubGuide()">GitHub guide</button>`}),
  tracker:()=>({title:'Progress & insights',sub:'Your consistency, time and milestones',actions:''}),
  learn:()=>({title:'Learn',sub:'Lessons, links and practice for your roadmap',actions:`<button onclick="openDoubt()">Ask AI</button>`}),
  practice:()=>({title:'Practice',sub:'Interview questions across Java, Selenium, API, Spring, SQL',actions:`<button onclick="randomQuestion()">Surprise me</button>`}),

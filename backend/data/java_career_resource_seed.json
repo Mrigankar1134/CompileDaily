@@ -416,7 +416,8 @@
       "track": "Backend",
       "priority": "P2",
       "resource_ids": [
-        "R098"
+        "R098",
+        "R134"
       ]
     },
     {
@@ -561,6 +562,17 @@
         "R060",
         "R101",
         "R102"
+      ]
+    },
+    {
+      "module_no": 46,
+      "module": "Job Search & Career Operations",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R135",
+        "R136",
+        "R137"
       ]
     }
   ],
@@ -4598,6 +4610,125 @@
       "estimated_time": "1 hour 12 minutes",
       "use": "Fast visual introduction to creating and structuring a modern Spring Boot application.",
       "notes": "Use after the official Spring Boot guide; verify examples against current Spring documentation.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R134",
+      "section": "Engineering craft & extras",
+      "module_no": [
+        33
+      ],
+      "module": "Caching",
+      "topics": [
+        "Redis",
+        "cache-aside pattern",
+        "TTL",
+        "cache invalidation"
+      ],
+      "title": "Redis Documentation",
+      "provider": "Redis",
+      "resource_type": "Documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://redis.io/docs/latest/",
+      "access": "Free; no account required",
+      "estimated_time": "Ongoing reference",
+      "use": "Official Redis documentation covering data types, caching patterns, TTL and configuration.",
+      "notes": "Primary reference for the Cache-Aside pattern and TTL/eviction configuration used in this module.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R135",
+      "section": "Career readiness",
+      "module_no": [
+        46
+      ],
+      "module": "Job Search & Career Operations",
+      "topics": [
+        "resume",
+        "interview strategy",
+        "behavioural prep",
+        "job search"
+      ],
+      "title": "Tech Interview Handbook",
+      "provider": "Yangshun Tay / community",
+      "resource_type": "Free guide",
+      "level": "All levels",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.techinterviewhandbook.org/",
+      "access": "Free; no account required",
+      "estimated_time": "5+ hours",
+      "use": "Structured, free guide covering resumes, behavioural prep, and interview strategy end-to-end.",
+      "notes": "Best single starting point for this module before going deeper on any one topic.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R136",
+      "section": "Career readiness",
+      "module_no": [
+        44,
+        46
+      ],
+      "module": "Job Search & Career Operations",
+      "topics": [
+        "mock interviews",
+        "behavioural prep",
+        "peer practice"
+      ],
+      "title": "Pramp — Free Peer Mock Interviews",
+      "provider": "Pramp",
+      "resource_type": "Practice environment",
+      "level": "All levels",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.pramp.com/",
+      "access": "Free; account required",
+      "estimated_time": "45 minutes per session",
+      "use": "Live peer-to-peer mock interview practice with real-time feedback, for both technical and behavioural rounds.",
+      "notes": "Book at least 2–3 sessions before real interviews begin.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R137",
+      "section": "Career readiness",
+      "module_no": [
+        46
+      ],
+      "module": "Job Search & Career Operations",
+      "topics": [
+        "LinkedIn",
+        "networking",
+        "professional branding"
+      ],
+      "title": "LinkedIn",
+      "provider": "LinkedIn",
+      "resource_type": "Platform",
+      "level": "All levels",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.linkedin.com/",
+      "access": "Free; premium optional",
+      "estimated_time": "Ongoing",
+      "use": "Primary platform for professional branding, networking and recruiter visibility.",
+      "notes": "Keep your profile in sync with your resume and the projects in your portfolio.",
       "primary_or_supplementary": "Supplementary",
       "last_reviewed": "2026-07-29",
       "active": true
