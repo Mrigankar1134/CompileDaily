@@ -4,3 +4,5 @@ backend/.env
 build/
 *.apk
 *.keystore
+*-Source.zip
+.tools/

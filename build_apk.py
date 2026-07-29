@@ -412,7 +412,7 @@ def make_apk(root:Path,out:Path):
     with zipfile.ZipFile(srczip,'w',zipfile.ZIP_DEFLATED) as z:
         z.write(root/'assets/index.html','assets/index.html')
         z.write(root/'assets/icon/ic_launcher.png','assets/icon/ic_launcher.png')
-        z.write(root/'src/build_apk.py','build_apk.py')
+        z.write(root/'build_apk.py','build_apk.py')
         z.writestr('README.txt','Compile Daily APK source\n\nRun: python build_apk.py --root . --out CompileDaily.apk\nRequires Python 3 and a JDK with keytool/jarsigner. No Android SDK is required.\n')
     return dex,axml,arsc,unsigned,srczip
 
