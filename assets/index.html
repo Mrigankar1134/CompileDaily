@@ -127,6 +127,33 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
  .top,.top.compact{max-width:1200px}
 }
 @media(max-width:430px){.top h1{font-size:26px}.card{padding:14px}}
+
+/* ---- Level / XP card ---- */
+.levelCard{display:flex;flex-direction:column;gap:8px;cursor:pointer}
+.levelCard .levelTop{display:flex;justify-content:space-between;align-items:baseline}
+.levelCard .levelNum{font-size:17px;font-weight:800}
+.levelCard .levelTitle{color:var(--muted);font-size:12.5px;font-weight:700}
+.xpBar{height:8px;border-radius:6px;background:rgba(120,120,140,.16);overflow:hidden}
+.xpBar i{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--sky));width:0;transition:.4s}
+.xpMeta{font-size:12px;color:var(--muted);font-weight:700}
+.xpCatRow{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.xpCatRow:first-child{border-top:0}
+
+/* ---- Focus Timer ---- */
+.focusOverlay{position:fixed;inset:0;background:var(--bg);z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s ease}
+.focusOverlay.show{opacity:1;pointer-events:auto}
+.focusOverlay .focusClose{position:absolute;top:calc(env(safe-area-inset-top) + 16px);right:18px;background:transparent;border:0;color:var(--muted);font-size:14px;font-weight:700;padding:10px}
+.focusRing{--p:0;width:min(72vw,280px);height:min(72vw,280px);border-radius:50%;background:conic-gradient(var(--brand) calc(var(--p)*3.6deg),var(--ringTrack) 0);display:grid;place-items:center;transition:background .3s linear}
+.focusRing .inner{width:calc(100% - 22px);height:calc(100% - 22px);border-radius:50%;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.focusTime{font-size:44px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.focusSub{color:var(--muted);font-size:13px;font-weight:700}
+.focusIntent{margin-top:18px;text-align:center;color:var(--muted);font-size:14px;max-width:320px}
+.focusControls{display:flex;gap:12px;margin-top:26px}
+.focusControls button{min-width:120px}
+.presetRow{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.presetChip{border:0;background:rgba(120,120,140,.14);border-radius:999px;padding:11px 16px;font-size:14px;font-weight:700;color:var(--muted);min-height:44px}
+.presetChip.active{background:var(--brand);color:#fff}
+@media(prefers-reduced-motion:reduce){.focusRing{transition:none}.toast{transition:none}}
 </style>
 </head>
 <body>
@@ -145,6 +172,10 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
 
 <main>
 <section id="home" class="view active">
+ <div class="card levelCard" id="levelCard" onclick="openLevelModal()" role="button" aria-label="View level progress">
+  <div class="levelTop"><div><span class="levelNum" id="levelNum">Level 1</span> <span class="levelTitle" id="levelTitleText">Java Starter</span></div><div class="xpMeta" id="levelXpMeta">0 / 100 XP</div></div>
+  <div class="xpBar"><i id="levelXpBar"></i></div>
+ </div>
  <div class="sectionHead"><h2>Today's focus</h2><button onclick="shuffleFocus()">Change focus</button></div>
  <div class="card focus"><div class="focusIcon">☕</div><div style="flex:1"><h3 id="focusTitle">Core Java practice</h3><div class="muted" id="focusText">Complete one focused topic and code a small example.</div><div id="focusTags"><span class="tag purple">Java</span><span class="tag green">45 min</span></div><button class="primary" style="margin-top:12px;width:100%" onclick="continueFocus()">Continue in Learn</button></div></div>
  <div class="sectionHead"><h2>Today's plan</h2><button onclick="resetDaily()">Reset</button></div>
@@ -259,6 +290,50 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
   Add a README to every repo (setup steps, what it does, tech stack). Modules 42 (Technical Documentation) and 43 (Portfolio Development) cover this in depth.
  </div>
  <div class="row" style="margin-top:14px"><button class="primary" onclick="closeGithubGuide()">Got it</button></div>
+</div></div>
+
+<div class="modal" id="focusSetupModal" onclick="closeFocusSetupBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Focus on</h2>
+ <div class="muted" id="focusSetupSubject" style="font-weight:700;font-size:15px;margin-bottom:14px"></div>
+ <div class="settingRow"><label>Duration</label>
+  <div class="presetRow" id="focusPresetRow"></div>
+ </div>
+ <div class="settingRow"><label>Session intention (optional)</label><input type="text" id="focusIntentionInput" placeholder="e.g. Understand hashing and bucket behaviour"></div>
+ <div class="row"><button class="secondary" onclick="closeFocusSetup()">Cancel</button><button class="primary" onclick="beginFocus()">Begin Focus</button></div>
+</div></div>
+
+<div class="focusOverlay" id="focusActiveOverlay">
+ <div class="focusRing" id="focusRing"><div class="inner"><div class="focusTime" id="focusTimeDisplay">00:00</div><div class="focusSub" id="focusSubjectLabel"></div></div></div>
+ <div class="focusIntent" id="focusIntentDisplay"></div>
+ <div class="focusControls">
+  <button class="secondary" id="focusPauseBtn" onclick="togglePauseFocus()">Pause</button>
+  <button class="primary" onclick="endFocusSession()">End Session</button>
+ </div>
+</div>
+
+<div class="modal" id="focusPauseModal" onclick="closeFocusPauseBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Session paused</h2>
+ <div class="muted" style="margin-bottom:12px">What happened? (optional)</div>
+ <div class="row" style="flex-wrap:wrap;gap:8px"><button class="secondary" onclick="resumeFromPause('short_break')">Short break</button><button class="secondary" onclick="resumeFromPause('interrupted')">Interrupted</button></div>
+ <div class="row" style="margin-top:8px"><button class="secondary" onclick="closeFocusPauseModal()">Just resume</button><button class="primary" onclick="endFocusSession()">End session</button></div>
+</div></div>
+
+<div class="modal" id="focusCompleteModal" onclick="closeFocusCompleteBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Focus Session Complete</h2>
+ <div class="muted" id="focusCompleteSummary" style="margin-bottom:14px"></div>
+ <div class="settingRow"><label>How did the session feel?</label>
+  <div class="presetRow" id="focusDifficultyRow">
+   <button class="presetChip" onclick="setFocusDifficulty('easy',event)">Too easy</button>
+   <button class="presetChip active" onclick="setFocusDifficulty('good',event)">Good</button>
+   <button class="presetChip" onclick="setFocusDifficulty('difficult',event)">Difficult</button>
+  </div>
+ </div>
+ <div class="row"><button class="primary" style="width:100%" onclick="saveFocusCompletion()">Save Session</button></div>
+</div></div>
+
+<div class="modal" id="levelModal" onclick="closeLevelBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Progress & Level</h2>
+ <div id="levelDetailBody"></div>
 </div></div>
 
 <div class="toast" id="toast"></div>
@@ -624,7 +699,7 @@ let openStages=new Set();
 function todayStr(){return new Date().toISOString().slice(0,10)}
 function dateStr(offset){return new Date(Date.now()+offset*86400000).toISOString().slice(0,10)}
 function fmtDate(d){if(!d)return '';return new Date(d+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}
-async function init(){populateSettings();renderAll();await pullState();renderAll();if(document.getElementById('learn').classList.contains('active')){renderLearnFilters();loadResources();loadAssessments()}}
+async function init(){populateSettings();renderAll();await pullState();renderAll();restoreFocusUI();if(document.getElementById('learn').classList.contains('active')){renderLearnFilters();loadResources();loadAssessments()}}
 const USER_NAME='Moushana Bharadwaj';
 const USER_FIRST_NAME='Moushana';
 const USER_INITIALS='MB';
@@ -632,7 +707,7 @@ function profile(){let p=S.get('profile',{role:'backend',goal:'60'});p.name=USER
 const API_BASE_URL='https://compiledaily.onrender.com';
 function apiBase(){return API_BASE_URL}
 async function api(path,opts){let base=apiBase();if(!base)return null;try{let r=await fetch(base.replace(/\/$/,'')+path,Object.assign({headers:{'Content-Type':'application/json'}},opts||{}));if(!r.ok)throw new Error('status '+r.status);return await r.json()}catch(e){console.warn('API call failed',path,e);return null}}
-async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:USER_NAME,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks)}
+async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:USER_NAME,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks);if(s.xp)applyXpSummary(s.xp);if(s.activeFocusSession&&!S.get('focusActive',null))adoptServerFocusSession(s.activeFocusSession)}
 function populateSettings(){roleSelect.innerHTML=roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
 function allLeafTasks(){return phases.flatMap((p,pi)=>p.topics.flatMap((t,ti)=>t.tasks.map((label,ki)=>({id:`${pi}-${ti}-${ki}`,pi,ti,ki,m:30,t:label}))))}
 function recordActivity(date){let log=S.get('activityLog',{});log[date]=(log[date]||0)+1;S.set('activityLog',log)}
@@ -651,10 +726,10 @@ function computeStreak(){
  }
  return{current,longest};
 }
-function renderAll(){renderHeader();renderDaily();renderTarget();renderRoadmap();renderFilters();renderQuestions();renderProjects();renderNotes();updateOverall();}
+function renderAll(){renderHeader();renderDaily();renderTarget();renderRoadmap();renderFilters();renderQuestions();renderProjects();renderNotes();updateOverall();renderLevelCard();}
 function renderHeader(){let p=profile(),r=roles.find(x=>x.id===p.role)||roles[3];hello.textContent=`Hello, ${USER_FIRST_NAME}`;targetLine.textContent=`Target: ${r.name}`;avatar.textContent=USER_INITIALS;}
 function renderDaily(){let day=todayStr(),state=S.get('daily',{});let vals=state.day===day?state.done:[];let goal=Number(profile().goal)||60;let slice=Math.max(5,Math.round(goal/dailyBase.length/5)*5);dailyTasks.innerHTML=dailyBase.map((t,i)=>taskHtml(`daily-${i}`,t,`~${slice} min · part of today's ${goal} min plan`,vals.includes(i),`toggleDaily(${i})`)).join('')}
-function toggleDaily(i){let day=todayStr(),st=S.get('daily',{day,done:[]});if(st.day!==day)st={day,done:[]};let was=st.done.includes(i);st.done=was?st.done.filter(x=>x!==i):[...st.done,i];S.set('daily',st);was?decrementActivity(day):recordActivity(day);api('/api/daily/toggle',{method:'POST',body:JSON.stringify({taskIndex:i,done:!was})});renderDaily();updateOverall()}
+function toggleDaily(i){let day=todayStr(),st=S.get('daily',{day,done:[]});if(st.day!==day)st={day,done:[]};let was=st.done.includes(i);st.done=was?st.done.filter(x=>x!==i):[...st.done,i];S.set('daily',st);was?decrementActivity(day):recordActivity(day);api('/api/daily/toggle',{method:'POST',body:JSON.stringify({taskIndex:i,done:!was})}).then(()=>{if(!was)loadXpSummary()});renderDaily();updateOverall()}
 function resetDaily(){if(!confirm("Reset today's plan? This clears today's 5 items — your logged time and roadmap progress are not affected."))return;S.set('daily',{day:todayStr(),done:[]});renderDaily();updateOverall();toastMsg("Today's plan reset")}
 function taskHtml(id,title,sub,done,click){return `<div class="task ${done?'done':''}"><input class="circle" id="${id}" type="checkbox" ${done?'checked':''} onchange="${click}"><label for="${id}">${title}<span>${sub}</span></label></div>`}
 function renderTarget(){let r=roles.find(x=>x.id===profile().role)||roles[3];let track=roleTrack(r.id);targetCard.innerHTML=`<h3>${r.name}</h3><div class="tag purple" style="margin-bottom:8px">${TRACK_LABEL[track]} track</div><div class="roleMeta"><span class="score">Role readiness ${r.score}</span><span>${r.recommendation}</span></div><div class="muted" style="font-size:12px;margin:-4px 0 8px">General fit for this role based on typical hiring expectations — not yet personalised to your progress.</div><div class="stack">${r.use}</div><div style="margin-top:9px">${r.stack.slice(0,5).map(x=>`<span class="tag purple">${x}</span>`).join('')}</div>`}
@@ -681,6 +756,7 @@ function moduleCardHtml(pi){
   <div class="muted" style="font-size:13px;margin-bottom:10px">${p.project.desc}</div>
   ${ghUrl?`<div style="font-size:13px"><span class="doneDate" style="cursor:default">✓ Submitted</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:6px 10px;font-size:12px;margin-left:4px" onclick="editGithubLink(${pi},event)">Edit</button></div>`
    :`<div class="row"><input type="text" id="gh-${pi}" placeholder="Paste your GitHub repo/PR link"><button class="secondary" style="flex:none" onclick="saveGithubLink(${pi},event)">Save</button></div>`}
+  <button class="secondary" style="width:100%;margin-top:10px" onclick="openFocusSetup(event,'roadmap','${pi}',${pi},null,'${p.title.replace(/'/g,"\\'")}')">Focus on this module</button>
  </div>`;
  let pr=modulePriority[pi][profile().role];
  return `<div class="card phaseCard ${open?'open':''}" id="module-${pi}">
@@ -721,7 +797,7 @@ function toggleStage(si){if(openStages.has(si))openStages.delete(si);else openSt
 function continueCurrentModule(){let pi=computeCurrentModuleIndex(),si=computeCurrentStageIndex();openStages.add(si);openPhases.add(pi);renderRoadmap();setTimeout(()=>{let el=document.getElementById('module-'+pi);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
 function togglePhase(pi){if(openPhases.has(pi))openPhases.delete(pi);else openPhases.add(pi);renderRoadmap()}
 function toggleTopic(key){if(openTopics.has(key))openTopics.delete(key);else openTopics.add(key);renderRoadmap()}
-function toggleRoadmapTask(id){let done=S.get('roadmapProgress',{});if(done[id]){let rec=done[id];delete done[id];S.set('roadmapProgress',done);decrementActivity(rec.date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:false})})}else{let date=todayStr();done[id]={date};S.set('roadmapProgress',done);recordActivity(date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:true,date})})}renderRoadmap();updateOverall()}
+function toggleRoadmapTask(id){let done=S.get('roadmapProgress',{});if(done[id]){let rec=done[id];delete done[id];S.set('roadmapProgress',done);decrementActivity(rec.date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:false})})}else{let date=todayStr();done[id]={date};S.set('roadmapProgress',done);recordActivity(date);let pi=Number(id.split('-')[0]),priority=modulePriority[pi][profile().role];api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:true,date,priority,moduleIndex:pi})}).then(()=>loadXpSummary())}renderRoadmap();updateOverall()}
 function editRoadmapDate(id,ev){ev.stopPropagation();let done=S.get('roadmapProgress',{});let cur=done[id];if(!cur)return;let nd=prompt('Completion date (YYYY-MM-DD):',cur.date);if(!nd)return;if(!/^\d{4}-\d{2}-\d{2}$/.test(nd)||isNaN(new Date(nd+'T00:00:00').getTime())){alert('Please enter a valid date as YYYY-MM-DD');return}decrementActivity(cur.date);cur.date=nd;done[id]=cur;S.set('roadmapProgress',done);recordActivity(nd);api('/api/roadmap/date',{method:'POST',body:JSON.stringify({taskId:id,date:nd})});renderRoadmap();updateOverall()}
 function saveGithubLink(pi,ev){ev.stopPropagation();let el=document.getElementById('gh-'+pi);let url=el.value.trim();if(!url)return;if(!/^https?:\/\//i.test(url)){alert('Please paste a full https:// GitHub link');return}let links=S.get('githubLinks',{});links[pi]={url,date:todayStr()};S.set('githubLinks',links);api('/api/github-link',{method:'POST',body:JSON.stringify({phaseIndex:pi,url})});recordActivity(todayStr());renderRoadmap();updateOverall();toastMsg('Milestone project link saved')}
 function editGithubLink(pi,ev){ev.stopPropagation();if(!confirm('Remove the saved link so you can paste a new one?'))return;let links=S.get('githubLinks',{});delete links[pi];S.set('githubLinks',links);api('/api/github-link/'+pi,{method:'DELETE'});renderRoadmap()}
@@ -748,7 +824,7 @@ function renderProjects(){
   return `<div class="card"><div class="projectHead"><div class="projectIcon">${['⚙','✓','↗'][pi]}</div><div><h3>${p.title}</h3><div class="muted" style="font-size:12px">${p.desc}</div></div></div><div class="projectProgress"><i style="width:${pct}%"></i></div><div class="roleMeta"><span>${p.stack}</span><span class="score">${pct}%</span></div>${ghHtml}${p.steps.map((s,si)=>taskHtml(`p-${p.id}-${si}`,s,'Portfolio milestone',d.includes(si),`toggleProject('${p.id}',${si})`)).join('')}</div>`;
  }).join('');
 }
-function toggleProject(id,i){let all=S.get('projectDone',{}),d=all[id]||[];let was=d.includes(i);all[id]=was?d.filter(x=>x!==i):[...d,i];S.set('projectDone',all);let day=todayStr();was?decrementActivity(day):recordActivity(day);api('/api/project/toggle',{method:'POST',body:JSON.stringify({projectId:id,stepIndex:i,done:!was})});renderProjects();updateOverall()}
+function toggleProject(id,i){let all=S.get('projectDone',{}),d=all[id]||[];let was=d.includes(i);all[id]=was?d.filter(x=>x!==i):[...d,i];S.set('projectDone',all);let day=todayStr();was?decrementActivity(day):recordActivity(day);api('/api/project/toggle',{method:'POST',body:JSON.stringify({projectId:id,stepIndex:i,done:!was})}).then(()=>{if(!was)loadXpSummary()});renderProjects();updateOverall()}
 function saveProjectGithubLink(id){let el=document.getElementById('pgh-'+id);let url=el.value.trim();if(!url)return;if(!/^https?:\/\//i.test(url)){alert('Please paste a full https:// GitHub link');return}let links=S.get('projectGithubLinks',{});links[id]={url,date:todayStr()};S.set('projectGithubLinks',links);api('/api/project-github-link',{method:'POST',body:JSON.stringify({projectId:id,url})});recordActivity(todayStr());renderProjects();toastMsg('Project repo link saved')}
 function editProjectGithubLink(id){if(!confirm('Remove the saved link so you can paste a new one?'))return;let links=S.get('projectGithubLinks',{});delete links[id];S.set('projectGithubLinks',links);api('/api/project-github-link/'+id,{method:'DELETE'});renderProjects()}
 function renderNotes(){let n=S.get('notes','');notesPreview.textContent=n||'No notes yet.'}
@@ -901,6 +977,146 @@ function closeDoubt(){doubtModal.classList.remove('show')}
 function closeDoubtBackdrop(e){if(e.target.id==='doubtModal')closeDoubt()}
 async function askDoubt(){if(!apiBase()){doubtAnswer.textContent='Your learning coach needs to be connected first — open Settings to set it up.';return}let q=doubtQuestion.value.trim();if(!q)return;askBtn.disabled=true;askBtn.textContent='Thinking…';doubtAnswer.textContent='';let res=await api('/api/doubt',{method:'POST',body:JSON.stringify({question:q,topic:doubtTopic.value.trim()})});askBtn.disabled=false;askBtn.textContent='Ask';doubtAnswer.textContent=res?res.answer:'Could not reach your learning coach right now — please try again shortly.';if(res)loadDoubtHistory()}
 async function loadDoubtHistory(){if(!apiBase()){doubtHistory.innerHTML='';return}let list=await api('/api/doubt/history');if(!list){doubtHistory.innerHTML='';return}doubtHistory.innerHTML='<h3 style="font-size:13px;margin-top:6px">Recent</h3>'+list.slice(0,8).map(h=>`<div style="padding:8px 0;border-top:1px solid var(--line);font-size:12.5px"><b>${h.question}</b><div class="muted" style="margin-top:3px">${h.answer.slice(0,140)}${h.answer.length>140?'…':''}</div></div>`).join('')}
+
+// ---- XP and Levels ----------------------------------------------------------
+function newEventId(){return 'evt_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8)}
+function applyXpSummary(xp){
+ let prev=S.get('xp',null);
+ S.set('xp',xp);
+ renderLevelCard();
+ if(prev&&xp.currentLevel>prev.currentLevel){
+  toastMsg(`LEVEL ${xp.currentLevel} — you are now ${xp.title}`);
+ }
+}
+async function loadXpSummary(){let xp=await api('/api/xp/summary');if(xp)applyXpSummary(xp)}
+function renderLevelCard(){
+ let xp=S.get('xp',{totalXp:0,currentLevel:1,currentLevelXp:0,xpForNextLevel:100,title:'Java Starter'});
+ levelNum.textContent=`Level ${xp.currentLevel}`;
+ levelTitleText.textContent=xp.title;
+ levelXpMeta.textContent=`${xp.currentLevelXp} / ${xp.xpForNextLevel} XP`;
+ levelXpBar.style.width=Math.min(100,Math.round(xp.currentLevelXp/xp.xpForNextLevel*100))+'%';
+}
+const XP_CATEGORY_FOR_EVENT={roadmap_task_completed:'Learning',daily_task_completed:'Consistency',project_step_completed:'Projects',focus_session_completed:'Learning'};
+async function openLevelModal(){
+ let xp=S.get('xp',{totalXp:0,currentLevel:1,currentLevelXp:0,xpForNextLevel:100,title:'Java Starter'});
+ let history=await api('/api/xp/history')||[];
+ let cats={Learning:0,Revision:0,Practice:0,Projects:0,Mastery:0,Consistency:0};
+ history.forEach(h=>{let c=XP_CATEGORY_FOR_EVENT[h.event_type];if(c)cats[c]=(cats[c]||0)+h.xp_amount});
+ let recent=history.slice(0,10).map(h=>`<div class="xpCatRow"><span>${(h.reason||h.event_type||'').replace(/_/g,' ')}</span><span class="score">+${h.xp_amount}</span></div>`).join('')||'<div class="empty">No XP activity yet — complete a task or focus session to get started.</div>';
+ levelDetailBody.innerHTML=`
+  <div class="card" style="margin-bottom:14px">
+   <div class="levelTop"><div><span class="levelNum">Level ${xp.currentLevel}</span> <span class="levelTitle">${xp.title}</span></div><div class="xpMeta">${xp.totalXp} lifetime XP</div></div>
+   <div class="xpBar" style="margin-top:8px"><i style="width:${Math.min(100,Math.round(xp.currentLevelXp/xp.xpForNextLevel*100))}%"></i></div>
+   <div class="xpMeta" style="margin-top:6px">${xp.xpForNextLevel-xp.currentLevelXp} XP to Level ${xp.currentLevel+1}</div>
+  </div>
+  <h3 style="font-size:15px">XP by category</h3>
+  <div class="card">${Object.keys(cats).map(c=>`<div class="xpCatRow"><span>${c}</span><span>${cats[c]}</span></div>`).join('')}</div>
+  <h3 style="font-size:15px">Recent XP activity</h3>
+  <div class="card">${recent}</div>`;
+ levelModal.classList.add('show');
+}
+function closeLevelBackdrop(e){if(e.target.id==='levelModal')levelModal.classList.remove('show')}
+
+// ---- Focus Timer -------------------------------------------------------------
+const FOCUS_PRESETS=[15,25,45,60];
+let pendingFocusSubject=null,pendingFocusMinutes=25,pendingFocusDifficulty='good',focusTickInterval=null;
+function getFocusState(){return S.get('focusActive',null)}
+function saveFocusState(f){S.set('focusActive',f)}
+function clearFocusState(){localStorage.removeItem('focusActive')}
+function openFocusSetup(ev,sourceType,sourceId,moduleIndex,topicIndex,title){
+ if(ev)ev.stopPropagation();
+ if(getFocusState()){toastMsg('A focus session is already running — end it first');return}
+ pendingFocusSubject={sourceType,sourceId:String(sourceId),moduleIndex,topicIndex,title};
+ pendingFocusMinutes=25;
+ focusSetupSubject.textContent=title;
+ focusIntentionInput.value='';
+ focusPresetRow.innerHTML=FOCUS_PRESETS.map(m=>`<button type="button" class="presetChip ${m===25?'active':''}" onclick="selectFocusPreset(${m},event)">${m} min</button>`).join('');
+ focusSetupModal.classList.add('show');
+}
+function selectFocusPreset(m,ev){pendingFocusMinutes=m;document.querySelectorAll('#focusPresetRow .presetChip').forEach(b=>b.classList.remove('active'));ev.currentTarget.classList.add('active')}
+function closeFocusSetup(){focusSetupModal.classList.remove('show')}
+function closeFocusSetupBackdrop(e){if(e.target.id==='focusSetupModal')closeFocusSetup()}
+function beginFocus(){
+ let intention=focusIntentionInput.value.trim();
+ let id=newEventId();
+ let f={id,sourceType:pendingFocusSubject.sourceType,sourceId:pendingFocusSubject.sourceId,moduleIndex:pendingFocusSubject.moduleIndex,topicIndex:pendingFocusSubject.topicIndex,title:pendingFocusSubject.title,intention,plannedMinutes:pendingFocusMinutes,startedAt:Date.now(),pausedAt:null,totalPausedMs:0,status:'running'};
+ saveFocusState(f);
+ api('/api/focus/start',{method:'POST',body:JSON.stringify({id,sourceType:f.sourceType,sourceId:f.sourceId,moduleIndex:f.moduleIndex,topicIndex:f.topicIndex,title:f.title,intention:f.intention,plannedMinutes:f.plannedMinutes})});
+ closeFocusSetup();
+ showFocusOverlay();
+}
+function showFocusOverlay(){
+ let f=getFocusState();if(!f)return;
+ focusSubjectLabel.textContent=f.title||'';
+ focusIntentDisplay.textContent=f.intention||'';
+ focusPauseBtn.textContent=f.status==='paused'?'Resume':'Pause';
+ focusActiveOverlay.classList.add('show');
+ renderFocusTick();
+ startTicking();
+}
+function restoreFocusUI(){let f=getFocusState();if(f&&(f.status==='running'||f.status==='paused'))showFocusOverlay()}
+function startTicking(){if(focusTickInterval)return;focusTickInterval=setInterval(renderFocusTick,1000)}
+function stopTicking(){if(focusTickInterval){clearInterval(focusTickInterval);focusTickInterval=null}}
+function getPausedMs(f){let p=f.totalPausedMs||0;if(f.status==='paused'&&f.pausedAt)p+=(Date.now()-f.pausedAt);return p}
+function getElapsedMinutes(f){let elapsedMs=Math.max(0,Date.now()-f.startedAt-getPausedMs(f));return Math.round(elapsedMs/60000)}
+function renderFocusTick(){
+ let f=getFocusState();
+ if(!f){stopTicking();focusActiveOverlay.classList.remove('show');return}
+ let plannedMs=f.plannedMinutes*60000;
+ let remainingMs=plannedMs-Math.max(0,Date.now()-f.startedAt-getPausedMs(f));
+ if(remainingMs<0)remainingMs=0;
+ let mm=Math.floor(remainingMs/60000),ss=Math.floor((remainingMs%60000)/1000);
+ focusTimeDisplay.textContent=`${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+ focusRing.style.setProperty('--p',Math.min(100,Math.round((1-remainingMs/plannedMs)*100)));
+ if(remainingMs<=0&&f.status==='running'){stopTicking();openFocusCompletion(f.plannedMinutes)}
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){let f=getFocusState();if(f&&f.status==='running'){renderFocusTick();startTicking()}}});
+window.addEventListener('pageshow',()=>{let f=getFocusState();if(f&&f.status==='running')renderFocusTick()});
+function togglePauseFocus(){let f=getFocusState();if(!f)return;if(f.status==='running')pauseFocusNow();else resumeFocusNow()}
+function pauseFocusNow(){let f=getFocusState();if(!f||f.status!=='running')return;f.status='paused';f.pausedAt=Date.now();saveFocusState(f);stopTicking();focusPauseBtn.textContent='Resume';api(`/api/focus/${f.id}/pause`,{method:'POST'});focusPauseModal.classList.add('show')}
+function resumeFocusNow(){let f=getFocusState();if(!f||f.status!=='paused')return;f.totalPausedMs=(f.totalPausedMs||0)+(Date.now()-f.pausedAt);f.pausedAt=null;f.status='running';saveFocusState(f);focusPauseBtn.textContent='Pause';startTicking();renderFocusTick();api(`/api/focus/${f.id}/resume`,{method:'POST'})}
+function resumeFromPause(){resumeFocusNow();closeFocusPauseModal()}
+function closeFocusPauseModal(){focusPauseModal.classList.remove('show');let f=getFocusState();if(f&&f.status==='paused')resumeFocusNow()}
+function closeFocusPauseBackdrop(e){if(e.target.id==='focusPauseModal')closeFocusPauseModal()}
+function endFocusSession(){
+ let f=getFocusState();if(!f)return;
+ focusPauseModal.classList.remove('show');
+ let minutes=getElapsedMinutes(f);
+ stopTicking();
+ if(minutes<5){
+  clearFocusState();
+  focusActiveOverlay.classList.remove('show');
+  api(`/api/focus/${f.id}/abandon`,{method:'POST'});
+  toastMsg('Session discarded — under 5 minutes');
+  return;
+ }
+ openFocusCompletion(minutes);
+}
+function openFocusCompletion(minutes){
+ focusActiveOverlay.classList.remove('show');
+ pendingFocusDifficulty='good';
+ document.querySelectorAll('#focusDifficultyRow .presetChip').forEach(b=>b.classList.toggle('active',b.textContent.trim()==='Good'));
+ focusCompleteSummary.textContent=`${minutes} minutes focused — ${(getFocusState()||{}).title||''}`;
+ focusCompleteModal.classList.add('show');
+}
+function setFocusDifficulty(level,ev){pendingFocusDifficulty=level;document.querySelectorAll('#focusDifficultyRow .presetChip').forEach(b=>b.classList.remove('active'));ev.currentTarget.classList.add('active')}
+async function saveFocusCompletion(){
+ let f=getFocusState();if(!f)return;
+ let minutes=getElapsedMinutes(f);
+ let res=await api(`/api/focus/${f.id}/complete`,{method:'POST',body:JSON.stringify({completedMinutes:minutes,difficultyRating:pendingFocusDifficulty})});
+ clearFocusState();
+ focusCompleteModal.classList.remove('show');
+ recordActivity(todayStr());
+ updateOverall();
+ if(res&&res.xp_awarded)toastMsg(`Focus session saved · +${res.xp_awarded} XP`);
+ else toastMsg('Focus session saved');
+ loadXpSummary();
+}
+function closeFocusCompleteBackdrop(e){if(e.target.id==='focusCompleteModal'){/* require an explicit save/discard, do nothing on backdrop tap */}}
+function adoptServerFocusSession(session){
+ if(session.status!=='running'&&session.status!=='paused')return;
+ saveFocusState({id:session.id,sourceType:session.source_type,sourceId:session.source_id,moduleIndex:session.module_index,topicIndex:session.topic_index,title:session.title,intention:session.intention,plannedMinutes:session.planned_minutes,startedAt:new Date(session.started_at).getTime(),pausedAt:session.paused_at?new Date(session.paused_at).getTime():null,totalPausedMs:(session.pause_seconds||0)*1000,status:session.status});
+}
 
 init();
 </script>

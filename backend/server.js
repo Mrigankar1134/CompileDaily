@@ -3,6 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const { pool, bumpActivity } = require('./db');
 const { answerDoubt, generateAssessment } = require('./gemini');
+const eventService = require('./services/eventService');
+const xpService = require('./services/xpService');
+const focusService = require('./services/focusService');
+const eventTypes = require('./lib/eventTypes');
+const focusRoutes = require('./routes/focus');
+const xpRoutes = require('./routes/xp');
 
 const app = express();
 app.use(express.json());
@@ -20,12 +26,15 @@ app.use(cors({
 
 const todayStr = () => new Date().toISOString().slice(0, 10);
 
+app.use('/api/focus', focusRoutes);
+app.use('/api/xp', xpRoutes);
+
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 // ---- Full-state sync: one call returns everything the app needs ----------
 app.get('/api/state', async (req, res, next) => {
   try {
-    const [profile, roadmap, daily, projects, activity, notes, githubLinks, projectGithubLinks] = await Promise.all([
+    const [profile, roadmap, daily, projects, activity, notes, githubLinks, projectGithubLinks, activeFocus] = await Promise.all([
       pool.query('select name, role, goal_minutes from profile where id = 1'),
       pool.query('select task_id, completed_date from roadmap_progress'),
       pool.query('select task_index from daily_progress where day = $1', [todayStr()]),
@@ -33,7 +42,8 @@ app.get('/api/state', async (req, res, next) => {
       pool.query('select day, count from activity_log'),
       pool.query('select content from notes where id = 1'),
       pool.query('select phase_index, url, submitted_at from github_links'),
-      pool.query('select project_id, url, submitted_at from project_github_links')
+      pool.query('select project_id, url, submitted_at from project_github_links'),
+      focusService.getActive()
     ]);
 
     const roadmapProgress = {};
@@ -54,6 +64,9 @@ app.get('/api/state', async (req, res, next) => {
     const projectGithubLinksMap = {};
     projectGithubLinks.rows.forEach(r => { projectGithubLinksMap[r.project_id] = { url: r.url, date: r.submitted_at.toISOString().slice(0, 10) }; });
 
+    const role = profile.rows[0]?.role || 'backend';
+    const xp = await xpService.getSummary(pool, role);
+
     res.json({
       profile: profile.rows[0] || { name: 'Moushana Bharadwaj', role: 'backend', goal_minutes: 60 },
       roadmapProgress,
@@ -62,7 +75,9 @@ app.get('/api/state', async (req, res, next) => {
       activityLog,
       notes: notes.rows[0]?.content || '',
       githubLinks: githubLinksMap,
-      projectGithubLinks: projectGithubLinksMap
+      projectGithubLinks: projectGithubLinksMap,
+      xp,
+      activeFocusSession: activeFocus
     });
   } catch (e) { next(e); }
 });
@@ -87,7 +102,7 @@ app.post('/api/notes', async (req, res, next) => {
 
 // ---- Roadmap task toggling -------------------------------------------------
 app.post('/api/roadmap/toggle', async (req, res, next) => {
-  const { taskId, done, date } = req.body;
+  const { taskId, done, date, priority, moduleIndex, topicIndex } = req.body;
   if (!taskId) return res.status(400).json({ error: 'taskId required' });
   const client = await pool.connect();
   try {
@@ -100,6 +115,20 @@ app.post('/api/roadmap/toggle', async (req, res, next) => {
         [taskId, d]
       );
       await bumpActivity(client, d, 1);
+      // Deterministic event_id: re-toggling the same task always produces the
+      // same id, so xpService's on-conflict-do-nothing blocks a second award.
+      const eventId = `xp-roadmap-${taskId}`;
+      await eventService.recordEvent(client, {
+        event_id: eventId, event_type: eventTypes.ROADMAP_TASK_COMPLETED,
+        source_type: 'roadmap', source_id: taskId, module_index: moduleIndex ?? null,
+        topic_index: topicIndex ?? null, task_id: taskId
+      });
+      await xpService.awardXp(client, {
+        event_id: eventId, event_type: eventTypes.ROADMAP_TASK_COMPLETED,
+        source_type: 'roadmap', source_id: taskId,
+        xp_amount: xpService.XP_VALUES.roadmapTaskByPriority[priority] || xpService.XP_VALUES.roadmapTaskByPriority.I,
+        reason: 'Roadmap task completed'
+      });
     } else {
       const existing = await client.query('select completed_date from roadmap_progress where task_id=$1', [taskId]);
       await client.query('delete from roadmap_progress where task_id=$1', [taskId]);
@@ -140,6 +169,16 @@ app.post('/api/daily/toggle', async (req, res, next) => {
     if (done) {
       await client.query('insert into daily_progress (day, task_index) values ($1,$2) on conflict do nothing', [day, taskIndex]);
       await bumpActivity(client, day, 1);
+      const eventId = `xp-daily-${day}-${taskIndex}`;
+      await eventService.recordEvent(client, {
+        event_id: eventId, event_type: eventTypes.DAILY_TASK_COMPLETED,
+        source_type: 'daily', source_id: String(taskIndex)
+      });
+      await xpService.awardXp(client, {
+        event_id: eventId, event_type: eventTypes.DAILY_TASK_COMPLETED,
+        source_type: 'daily', source_id: String(taskIndex),
+        xp_amount: xpService.XP_VALUES.dailyTaskCompleted, reason: 'Daily checklist item completed'
+      });
     } else {
       const r = await client.query('delete from daily_progress where day=$1 and task_index=$2', [day, taskIndex]);
       if (r.rowCount) await bumpActivity(client, day, -1);
@@ -164,6 +203,16 @@ app.post('/api/project/toggle', async (req, res, next) => {
         [projectId, stepIndex, day]
       );
       await bumpActivity(client, day, 1);
+      const eventId = `xp-project-${projectId}-${stepIndex}`;
+      await eventService.recordEvent(client, {
+        event_id: eventId, event_type: eventTypes.PROJECT_STEP_COMPLETED,
+        source_type: 'project', source_id: `${projectId}-${stepIndex}`
+      });
+      await xpService.awardXp(client, {
+        event_id: eventId, event_type: eventTypes.PROJECT_STEP_COMPLETED,
+        source_type: 'project', source_id: `${projectId}-${stepIndex}`,
+        xp_amount: xpService.XP_VALUES.projectStepCompleted, reason: 'Project step completed'
+      });
     } else {
       const r = await client.query('delete from project_progress where project_id=$1 and step_index=$2', [projectId, stepIndex]);
       if (r.rowCount) await bumpActivity(client, day, -1);
