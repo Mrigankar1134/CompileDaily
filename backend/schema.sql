@@ -3,7 +3,7 @@
 
 create table if not exists profile (
   id smallint primary key default 1,
-  name text not null default 'Moushana',
+  name text not null default 'Moushana Bharadwaj',
   role text not null default 'backend',
   goal_minutes int not null default 60,
   updated_at timestamptz not null default now(),
@@ -43,18 +43,32 @@ create table if not exists notes (
 );
 insert into notes (id) values (1) on conflict (id) do nothing;
 
+-- Resource catalogue, seeded from backend/data/java_career_resource_seed.json via
+-- import-resources.js. `id` is the catalogue's own stable ID (e.g. "R001") so
+-- re-imports upsert cleanly; user-added resources get a synthetic "user-..." id.
 create table if not exists resources (
-  id serial primary key,
-  phase_index int,
-  topic_index int,
+  id text primary key,
+  phase_index int,               -- primary module (0-based, module_no[0]-1)
+  module_indexes int[],          -- all related modules (0-based), phase_index included
   title text not null,
+  provider text,
+  resource_type text,
+  level text,
+  priority text,                  -- P0 | P1 | P2 | P3 (module-agnostic; see modulePriority in the app for track-aware ranking)
+  tracks text[],                  -- Shared | Automation | Backend | Advanced
   url text not null,
-  kind text not null default 'article',   -- article | video | course | docs | practice
-  source text,                            -- e.g. "Baeldung", "YouTube - Java Brains"
-  is_free boolean not null default true,
-  added_by text not null default 'planned', -- planned | ai | user
+  access text,
+  estimated_time text,
+  use_desc text,
+  notes text,
+  resource_role text,             -- Primary | Supplementary | Practice | Reference | Optional
+  topics text[],
+  active boolean not null default true,
+  last_reviewed date,
+  added_by text not null default 'catalogue', -- catalogue | ai | user
   created_at timestamptz not null default now()
 );
+create index if not exists idx_resources_module_indexes on resources using gin (module_indexes);
 
 create table if not exists assessments (
   id serial primary key,
@@ -95,5 +109,5 @@ create table if not exists doubt_log (
   created_at timestamptz not null default now()
 );
 
-create index if not exists idx_resources_phase_topic on resources (phase_index, topic_index);
+create index if not exists idx_resources_phase on resources (phase_index);
 create index if not exists idx_assessments_phase_topic on assessments (phase_index, topic_index);

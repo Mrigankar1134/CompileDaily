@@ -1,0 +1,4606 @@
+{
+  "catalogue_title": "Free Learning Resource Catalogue — Java SDET and Backend Career Platform",
+  "version": "1.0",
+  "last_reviewed": "2026-07-29",
+  "target_roles": [
+    "SDET – Java",
+    "Java Automation Engineer",
+    "QA Automation Developer",
+    "Associate Java Backend Developer",
+    "Software Engineer I – Java",
+    "Java API Developer"
+  ],
+  "priority_legend": {
+    "P0": "Essential before or during initial job applications",
+    "P1": "Important and should appear in projects or interview preparation",
+    "P2": "Supporting differentiator after core readiness",
+    "P3": "Optional, role-specific or advanced; postpone unless demanded by target jobs"
+  },
+  "resource_schema": {
+    "id": "Stable resource ID",
+    "module_no": "One or more curriculum module numbers",
+    "module": "Primary module label",
+    "topics": "Searchable topic tags",
+    "title": "Display title",
+    "provider": "Publisher or owner",
+    "resource_type": "Documentation, course, video, practice, reference, etc.",
+    "level": "Learner level",
+    "priority": "P0–P3",
+    "tracks": "Shared, Automation, Backend, Advanced",
+    "url": "External link",
+    "access": "Free-access/account/licensing note",
+    "estimated_time": "Estimated learner time",
+    "use": "Recommended use in the platform",
+    "notes": "Cautions, sequencing or freshness note",
+    "primary_or_supplementary": "Content role",
+    "last_reviewed": "ISO date",
+    "active": "Platform activation flag"
+  },
+  "module_map": [
+    {
+      "module_no": 1,
+      "module": "Core Java",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R001",
+        "R002",
+        "R003",
+        "R004",
+        "R006",
+        "R008",
+        "R009",
+        "R132"
+      ]
+    },
+    {
+      "module_no": 2,
+      "module": "Data Structures and Algorithms",
+      "track": "Shared / Backend",
+      "priority": "P1 automation; P0 backend",
+      "resource_ids": [
+        "R009",
+        "R010",
+        "R011",
+        "R012",
+        "R013",
+        "R127"
+      ]
+    },
+    {
+      "module_no": 3,
+      "module": "Java Backend Development",
+      "track": "Backend",
+      "priority": "P0 backend; P2 automation",
+      "resource_ids": [
+        "R068",
+        "R069",
+        "R070",
+        "R076",
+        "R133"
+      ]
+    },
+    {
+      "module_no": 4,
+      "module": "Database Development",
+      "track": "Shared / Backend",
+      "priority": "P0",
+      "resource_ids": [
+        "R014",
+        "R015",
+        "R016",
+        "R071",
+        "R072",
+        "R073",
+        "R074"
+      ]
+    },
+    {
+      "module_no": 5,
+      "module": "REST API Engineering",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R017",
+        "R018",
+        "R019",
+        "R020",
+        "R070"
+      ]
+    },
+    {
+      "module_no": 6,
+      "module": "API Documentation Tools",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R080",
+        "R081"
+      ]
+    },
+    {
+      "module_no": 7,
+      "module": "API Development and Testing Tools",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R020",
+        "R021",
+        "R045",
+        "R065",
+        "R066"
+      ]
+    },
+    {
+      "module_no": 8,
+      "module": "Java Test Automation",
+      "track": "Automation",
+      "priority": "P0",
+      "resource_ids": [
+        "R032",
+        "R033",
+        "R038",
+        "R039",
+        "R040",
+        "R041"
+      ]
+    },
+    {
+      "module_no": 9,
+      "module": "Selenium Advanced Topics",
+      "track": "Automation",
+      "priority": "P0",
+      "resource_ids": [
+        "R034",
+        "R035",
+        "R036",
+        "R037",
+        "R061",
+        "R063"
+      ]
+    },
+    {
+      "module_no": 10,
+      "module": "API Automation",
+      "track": "Automation",
+      "priority": "P0",
+      "resource_ids": [
+        "R043",
+        "R044",
+        "R045",
+        "R046",
+        "R064",
+        "R066"
+      ]
+    },
+    {
+      "module_no": 11,
+      "module": "Testing Framework Architecture",
+      "track": "Automation",
+      "priority": "P0",
+      "resource_ids": [
+        "R036",
+        "R038",
+        "R039",
+        "R047"
+      ]
+    },
+    {
+      "module_no": 12,
+      "module": "Unit and Integration Testing",
+      "track": "Backend / Automation",
+      "priority": "P0 backend; P1 automation",
+      "resource_ids": [
+        "R040",
+        "R049",
+        "R050",
+        "R077",
+        "R113"
+      ]
+    },
+    {
+      "module_no": 13,
+      "module": "Testcontainers",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R048",
+        "R131"
+      ]
+    },
+    {
+      "module_no": 14,
+      "module": "Mocking and Service Virtualization",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R047",
+        "R049"
+      ]
+    },
+    {
+      "module_no": 15,
+      "module": "Build and Dependency Management",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R025",
+        "R026"
+      ]
+    },
+    {
+      "module_no": 16,
+      "module": "Version Control",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R022",
+        "R023",
+        "R024"
+      ]
+    },
+    {
+      "module_no": 17,
+      "module": "CI/CD",
+      "track": "Automation / Backend",
+      "priority": "P0 automation; P1 backend",
+      "resource_ids": [
+        "R023",
+        "R051",
+        "R052"
+      ]
+    },
+    {
+      "module_no": 18,
+      "module": "Containerization",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R053",
+        "R054",
+        "R048"
+      ]
+    },
+    {
+      "module_no": 19,
+      "module": "Cloud Development",
+      "track": "Backend / Automation",
+      "priority": "P2",
+      "resource_ids": [
+        "R099",
+        "R100"
+      ]
+    },
+    {
+      "module_no": 20,
+      "module": "Frontend UI Development",
+      "track": "Optional",
+      "priority": "P3",
+      "resource_ids": [
+        "R106",
+        "R107"
+      ]
+    },
+    {
+      "module_no": 21,
+      "module": "React UI Tools",
+      "track": "Optional",
+      "priority": "P3",
+      "resource_ids": [
+        "R107",
+        "R108"
+      ]
+    },
+    {
+      "module_no": 22,
+      "module": "UI and UX Design",
+      "track": "Optional",
+      "priority": "P3",
+      "resource_ids": [
+        "R109",
+        "R057"
+      ]
+    },
+    {
+      "module_no": 23,
+      "module": "Browser Development Tools",
+      "track": "Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R030"
+      ]
+    },
+    {
+      "module_no": 24,
+      "module": "Database UI Tools",
+      "track": "Shared support",
+      "priority": "P2",
+      "resource_ids": [
+        "R110"
+      ]
+    },
+    {
+      "module_no": 25,
+      "module": "IntelliJ IDEA Productivity",
+      "track": "Shared",
+      "priority": "P1",
+      "resource_ids": [
+        "R029",
+        "R111"
+      ]
+    },
+    {
+      "module_no": 26,
+      "module": "Code Quality",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R112",
+        "R113",
+        "R114",
+        "R115"
+      ]
+    },
+    {
+      "module_no": 27,
+      "module": "Application Security",
+      "track": "Backend / Automation",
+      "priority": "P0 backend; P1 automation",
+      "resource_ids": [
+        "R078",
+        "R079",
+        "R082",
+        "R083",
+        "R084",
+        "R115"
+      ]
+    },
+    {
+      "module_no": 28,
+      "module": "Logging",
+      "track": "Backend / Automation",
+      "priority": "P1",
+      "resource_ids": [
+        "R085",
+        "R086"
+      ]
+    },
+    {
+      "module_no": 29,
+      "module": "Monitoring and Observability",
+      "track": "Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R087",
+        "R088",
+        "R089",
+        "R090",
+        "R091"
+      ]
+    },
+    {
+      "module_no": 30,
+      "module": "Performance Testing",
+      "track": "Automation / Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R055",
+        "R056"
+      ]
+    },
+    {
+      "module_no": 31,
+      "module": "Microservices",
+      "track": "Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R093",
+        "R091",
+        "R122"
+      ]
+    },
+    {
+      "module_no": 32,
+      "module": "Messaging Systems",
+      "track": "Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R095",
+        "R096",
+        "R097"
+      ]
+    },
+    {
+      "module_no": 33,
+      "module": "Caching",
+      "track": "Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R098"
+      ]
+    },
+    {
+      "module_no": 34,
+      "module": "Resilience Engineering",
+      "track": "Backend",
+      "priority": "P2",
+      "resource_ids": [
+        "R092",
+        "R093",
+        "R094"
+      ]
+    },
+    {
+      "module_no": 35,
+      "module": "Architecture and System Design",
+      "track": "Backend",
+      "priority": "P1–P2",
+      "resource_ids": [
+        "R103",
+        "R093",
+        "R094"
+      ]
+    },
+    {
+      "module_no": 36,
+      "module": "Architecture Diagram Tools",
+      "track": "Shared support",
+      "priority": "P2",
+      "resource_ids": [
+        "R104",
+        "R105"
+      ]
+    },
+    {
+      "module_no": 37,
+      "module": "Linux and Command Line",
+      "track": "Shared",
+      "priority": "P1",
+      "resource_ids": [
+        "R021",
+        "R027",
+        "R028"
+      ]
+    },
+    {
+      "module_no": 38,
+      "module": "Computer Science Fundamentals",
+      "track": "Shared / Backend",
+      "priority": "P1",
+      "resource_ids": [
+        "R011",
+        "R012",
+        "R027",
+        "R116"
+      ]
+    },
+    {
+      "module_no": 39,
+      "module": "Debugging Skills",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R029",
+        "R030",
+        "R027",
+        "R066"
+      ]
+    },
+    {
+      "module_no": 40,
+      "module": "AI-Assisted Development",
+      "track": "Shared support",
+      "priority": "P2",
+      "resource_ids": [
+        "R117"
+      ]
+    },
+    {
+      "module_no": 41,
+      "module": "Collaboration and Agile Development",
+      "track": "Shared",
+      "priority": "P1",
+      "resource_ids": [
+        "R023",
+        "R042",
+        "R118"
+      ]
+    },
+    {
+      "module_no": 42,
+      "module": "Technical Documentation",
+      "track": "Shared",
+      "priority": "P1",
+      "resource_ids": [
+        "R104",
+        "R105",
+        "R119",
+        "R120"
+      ]
+    },
+    {
+      "module_no": 43,
+      "module": "Portfolio Development",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R051",
+        "R053",
+        "R120",
+        "R121",
+        "R122",
+        "R123",
+        "R124",
+        "R131"
+      ]
+    },
+    {
+      "module_no": 44,
+      "module": "Interview Preparation",
+      "track": "Shared",
+      "priority": "P0",
+      "resource_ids": [
+        "R009",
+        "R010",
+        "R019",
+        "R031",
+        "R125",
+        "R126",
+        "R127"
+      ]
+    },
+    {
+      "module_no": 45,
+      "module": "Optional Advanced Learnings",
+      "track": "Role-specific optional",
+      "priority": "P2–P3",
+      "resource_ids": [
+        "R057",
+        "R058",
+        "R059",
+        "R060",
+        "R101",
+        "R102"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "R001",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        38
+      ],
+      "module": "Core Java",
+      "topics": [
+        "Java fundamentals",
+        "OOP",
+        "collections",
+        "streams",
+        "I/O",
+        "JVM"
+      ],
+      "title": "Learn Java",
+      "provider": "Dev.java / Oracle",
+      "resource_type": "Documentation + tutorials",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://dev.java/learn/",
+      "access": "Free; no account required",
+      "estimated_time": "Ongoing reference",
+      "use": "Primary learning hub for modern Java language features, APIs, JVM topics and practical tutorials.",
+      "notes": "Prefer this over the legacy Java 8 tutorial for current learning.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R002",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1
+      ],
+      "module": "Core Java",
+      "topics": [
+        "language basics",
+        "classes",
+        "objects",
+        "control flow"
+      ],
+      "title": "Java Language Basics",
+      "provider": "Dev.java / Oracle",
+      "resource_type": "Article series",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://dev.java/learn/language-basics/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Structured starting point for syntax, variables, operators, control flow and language fundamentals.",
+      "notes": "Use before collections and streams.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R003",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1
+      ],
+      "module": "Core Java",
+      "topics": [
+        "collections",
+        "List",
+        "Set",
+        "Map",
+        "Queue"
+      ],
+      "title": "The Collections Framework",
+      "provider": "Dev.java / Oracle",
+      "resource_type": "Tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://dev.java/learn/api/collections-framework/",
+      "access": "Free",
+      "estimated_time": "3–5 hours",
+      "use": "Explains collection interfaces, implementations, iteration and common usage patterns.",
+      "notes": "Pair with coding exercises in R009 and R010.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R004",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1
+      ],
+      "module": "Core Java",
+      "topics": [
+        "streams",
+        "lambdas",
+        "collectors"
+      ],
+      "title": "Processing Data in Memory Using the Stream API",
+      "provider": "Dev.java / Oracle",
+      "resource_type": "Tutorial",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://dev.java/learn/api/streams/",
+      "access": "Free",
+      "estimated_time": "3–5 hours",
+      "use": "Modern Java stream pipelines, reduction, collectors and common data-processing patterns.",
+      "notes": "Complete after collections and lambdas.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R005",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        38
+      ],
+      "module": "Core Java / CS Fundamentals",
+      "topics": [
+        "threads",
+        "concurrency",
+        "executors"
+      ],
+      "title": "Virtual Threads and Concurrency Learning Paths",
+      "provider": "Dev.java / Oracle",
+      "resource_type": "Tutorial collection",
+      "level": "Intermediate–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Shared",
+        "Backend"
+      ],
+      "url": "https://dev.java/learn/",
+      "access": "Free",
+      "estimated_time": "4–10 hours",
+      "use": "Use the concurrency and virtual-thread sections to understand thread safety, executors and modern Java concurrency.",
+      "notes": "Automation learners need working knowledge; backend learners should go deeper.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R006",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        38
+      ],
+      "module": "Core Java",
+      "topics": [
+        "API reference",
+        "standard library"
+      ],
+      "title": "Java SE 21 API Documentation",
+      "provider": "Oracle",
+      "resource_type": "Reference documentation",
+      "level": "All levels",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://docs.oracle.com/en/java/javase/21/docs/api/index.html",
+      "access": "Free",
+      "estimated_time": "Reference",
+      "use": "Authoritative class and method reference for the Java standard library.",
+      "notes": "Teach learners to navigate API docs instead of memorising methods.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R007",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        2
+      ],
+      "module": "Core Java / DSA",
+      "topics": [
+        "Java basics",
+        "OOP",
+        "collections",
+        "exercises"
+      ],
+      "title": "Java Programming MOOC",
+      "provider": "University of Helsinki",
+      "resource_type": "Course + exercises",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://java-programming.mooc.fi/",
+      "access": "Free; account may be required for exercise tooling",
+      "estimated_time": "80–120 hours",
+      "use": "Highly practical course with many programming exercises and automatic feedback.",
+      "notes": "Legacy and no longer actively maintained; use for practice, not for the latest Java features.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R008",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1
+      ],
+      "module": "Core Java",
+      "topics": [
+        "Java fundamentals",
+        "OOP",
+        "exceptions",
+        "collections"
+      ],
+      "title": "Java Programming",
+      "provider": "Test Automation University",
+      "resource_type": "Video course + examples",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared",
+        "Automation"
+      ],
+      "url": "https://testautomationu.applitools.com/java-programming-course/",
+      "access": "Free; account optional/required for progress",
+      "estimated_time": "8–12 hours",
+      "use": "Beginner-friendly Java course designed for people entering test automation.",
+      "notes": "Strong first video course for QA learners transitioning to Java.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R009",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        2,
+        44
+      ],
+      "module": "Java Practice",
+      "topics": [
+        "exercises",
+        "mentoring",
+        "problem solving"
+      ],
+      "title": "Java Track",
+      "provider": "Exercism",
+      "resource_type": "Interactive coding practice",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://exercism.org/tracks/java",
+      "access": "Free; account required to submit",
+      "estimated_time": "Ongoing",
+      "use": "Concept-based exercises with automated tests and community mentoring.",
+      "notes": "Assign exercises after each Java topic.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R010",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        1,
+        2,
+        44
+      ],
+      "module": "Java Practice",
+      "topics": [
+        "arrays",
+        "strings",
+        "logic"
+      ],
+      "title": "CodingBat Java",
+      "provider": "CodingBat",
+      "resource_type": "Interactive exercises",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://codingbat.com/java",
+      "access": "Free",
+      "estimated_time": "10–30 minutes per set",
+      "use": "Short browser-based practice for strings, arrays, maps, recursion and warm-up logic.",
+      "notes": "Useful for daily streaks and interview warm-ups.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R011",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        2,
+        38,
+        44
+      ],
+      "module": "DSA / CS Fundamentals",
+      "topics": [
+        "algorithms",
+        "complexity",
+        "graphs",
+        "dynamic programming"
+      ],
+      "title": "Introduction to Algorithms (6.006)",
+      "provider": "MIT OpenCourseWare",
+      "resource_type": "Lectures + notes + problem sets",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared",
+        "Backend"
+      ],
+      "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-fall-2011/",
+      "access": "Free",
+      "estimated_time": "40–70 hours",
+      "use": "Rigorous algorithms course for Software Engineer I and backend interview depth.",
+      "notes": "Automation learners can select arrays, hashing, searching, sorting and complexity first.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R012",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        2,
+        38
+      ],
+      "module": "DSA",
+      "topics": [
+        "data structures",
+        "algorithms",
+        "visualisation"
+      ],
+      "title": "OpenDSA",
+      "provider": "Virginia Tech / OpenDSA Project",
+      "resource_type": "Open textbook + exercises",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://opendsa-server.cs.vt.edu/OpenDSA/Books/CS3/html/index.html",
+      "access": "Free",
+      "estimated_time": "Topic-based",
+      "use": "Interactive explanations and visualisations for core data structures and algorithms.",
+      "notes": "Use as a reference alongside coding practice.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R013",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        2
+      ],
+      "module": "DSA",
+      "topics": [
+        "visualisation",
+        "trees",
+        "graphs",
+        "sorting"
+      ],
+      "title": "VisuAlgo",
+      "provider": "National University of Singapore",
+      "resource_type": "Interactive visualisation",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://visualgo.net/en",
+      "access": "Free",
+      "estimated_time": "5–20 minutes per topic",
+      "use": "Visual demonstrations of data structures and algorithms before implementation practice.",
+      "notes": "Supplementary; not a substitute for coding.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R014",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        4,
+        38
+      ],
+      "module": "Database Development",
+      "topics": [
+        "SQL",
+        "PostgreSQL",
+        "joins",
+        "transactions"
+      ],
+      "title": "PostgreSQL Tutorial",
+      "provider": "PostgreSQL Global Development Group",
+      "resource_type": "Official tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared",
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://www.postgresql.org/docs/current/tutorial.html",
+      "access": "Free",
+      "estimated_time": "8–15 hours",
+      "use": "Official introduction to relational concepts, SQL querying, joins, aggregates and advanced features.",
+      "notes": "Use PostgreSQL as the default project database.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R015",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        4,
+        44
+      ],
+      "module": "SQL Practice",
+      "topics": [
+        "SQL",
+        "joins",
+        "aggregation",
+        "subqueries"
+      ],
+      "title": "SQLBolt",
+      "provider": "SQLBolt",
+      "resource_type": "Interactive lessons",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://sqlbolt.com/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Browser-based SQL lessons with immediate exercises.",
+      "notes": "Ideal first SQL practice resource.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R016",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        4,
+        44
+      ],
+      "module": "SQL Practice",
+      "topics": [
+        "PostgreSQL",
+        "joins",
+        "window functions"
+      ],
+      "title": "PGExercises",
+      "provider": "PGExercises",
+      "resource_type": "Interactive exercises",
+      "level": "Beginner–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Shared",
+        "Backend"
+      ],
+      "url": "https://pgexercises.com/",
+      "access": "Free",
+      "estimated_time": "Ongoing",
+      "use": "Practice PostgreSQL queries from simple SELECT statements to recursive and window queries.",
+      "notes": "Use after SQLBolt.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R017",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        5,
+        38
+      ],
+      "module": "REST API Engineering",
+      "topics": [
+        "HTTP",
+        "requests",
+        "responses"
+      ],
+      "title": "Overview of HTTP",
+      "provider": "MDN Web Docs",
+      "resource_type": "Documentation",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Clear conceptual foundation for HTTP messages, clients, servers, proxies and sessions.",
+      "notes": "Required before API development or API automation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R018",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        5
+      ],
+      "module": "REST API Engineering",
+      "topics": [
+        "HTTP methods",
+        "semantics"
+      ],
+      "title": "HTTP Request Methods",
+      "provider": "MDN Web Docs",
+      "resource_type": "Reference",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods",
+      "access": "Free",
+      "estimated_time": "30–60 minutes",
+      "use": "Reference for GET, POST, PUT, PATCH, DELETE and method semantics.",
+      "notes": "Pair with idempotency exercises.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R019",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        5,
+        44
+      ],
+      "module": "REST API Engineering",
+      "topics": [
+        "status codes",
+        "error handling"
+      ],
+      "title": "HTTP Response Status Codes",
+      "provider": "MDN Web Docs",
+      "resource_type": "Reference",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status",
+      "access": "Free",
+      "estimated_time": "Reference",
+      "use": "Authoritative quick reference for successful, redirect, client-error and server-error responses.",
+      "notes": "Create practice cards around common codes.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R020",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        7,
+        10
+      ],
+      "module": "API Development and Testing Tools",
+      "topics": [
+        "Postman",
+        "collections",
+        "environments",
+        "scripts"
+      ],
+      "title": "Postman Learning Center",
+      "provider": "Postman",
+      "resource_type": "Documentation + tutorials",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Shared",
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://learning.postman.com/docs/getting-started/overview/",
+      "access": "Free documentation; app account may be required for some features",
+      "estimated_time": "5–15 hours",
+      "use": "Covers requests, collections, variables, environments, scripts, runners, mocks and documentation.",
+      "notes": "Use as the default manual API exploration tool.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R021",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        7,
+        37
+      ],
+      "module": "API Tools / Linux",
+      "topics": [
+        "cURL",
+        "HTTP",
+        "command line"
+      ],
+      "title": "Everything curl — Tutorial",
+      "provider": "curl Project",
+      "resource_type": "Documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://curl.se/docs/tutorial.html",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Learn to make and debug API requests directly from the command line.",
+      "notes": "Useful in CI, containers and production diagnostics.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R022",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        16,
+        41
+      ],
+      "module": "Version Control",
+      "topics": [
+        "Git",
+        "branches",
+        "merging",
+        "rebasing"
+      ],
+      "title": "Pro Git",
+      "provider": "Git Project / Scott Chacon and Ben Straub",
+      "resource_type": "Free book",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://git-scm.com/book/en/v2",
+      "access": "Free; Creative Commons licensed",
+      "estimated_time": "Topic-based",
+      "use": "Authoritative book for Git fundamentals, branching, remotes, internals and workflows.",
+      "notes": "Read chapters 1–3 first.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R023",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        16,
+        17,
+        41
+      ],
+      "module": "Version Control / CI",
+      "topics": [
+        "GitHub",
+        "pull requests",
+        "Actions"
+      ],
+      "title": "GitHub Skills",
+      "provider": "GitHub",
+      "resource_type": "Interactive courses",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://skills.github.com/",
+      "access": "Free; GitHub account required",
+      "estimated_time": "30–90 minutes per course",
+      "use": "Hands-on repositories teach pull requests, Actions, Markdown, code review and release workflows.",
+      "notes": "Excellent onboarding content for platform projects.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R024",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        16
+      ],
+      "module": "Version Control",
+      "topics": [
+        "branching",
+        "merging",
+        "rebase"
+      ],
+      "title": "Learn Git Branching",
+      "provider": "Peter Cottle and contributors",
+      "resource_type": "Interactive visual practice",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://learngitbranching.js.org/",
+      "access": "Free",
+      "estimated_time": "2–5 hours",
+      "use": "Visual exercises for commits, branches, merge, rebase, reset and remote workflows.",
+      "notes": "Use after basic Git commands.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R025",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        15
+      ],
+      "module": "Build and Dependency Management",
+      "topics": [
+        "Maven",
+        "pom.xml",
+        "build lifecycle"
+      ],
+      "title": "Maven in Five Minutes",
+      "provider": "Apache Maven",
+      "resource_type": "Quick start",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html",
+      "access": "Free",
+      "estimated_time": "30–60 minutes",
+      "use": "Creates a first Maven project and explains essential commands and structure.",
+      "notes": "First Maven activity.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R026",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        15
+      ],
+      "module": "Build and Dependency Management",
+      "topics": [
+        "dependencies",
+        "plugins",
+        "profiles",
+        "multi-module"
+      ],
+      "title": "Maven Getting Started Guide",
+      "provider": "Apache Maven",
+      "resource_type": "Official guide",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://maven.apache.org/guides/getting-started/index.html",
+      "access": "Free",
+      "estimated_time": "3–6 hours",
+      "use": "Dependency management, plugins, builds, resources, tests and project conventions.",
+      "notes": "Reference while building both portfolio projects.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R027",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        16,
+        37,
+        38,
+        39
+      ],
+      "module": "Developer Tools",
+      "topics": [
+        "shell",
+        "Git",
+        "debugging",
+        "editors",
+        "data wrangling"
+      ],
+      "title": "The Missing Semester of Your CS Education",
+      "provider": "MIT",
+      "resource_type": "Lectures + notes + exercises",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://missing.csail.mit.edu/",
+      "access": "Free; openly licensed",
+      "estimated_time": "12–20 hours",
+      "use": "Practical shell, command-line tools, Git, debugging, data wrangling and developer workflow.",
+      "notes": "Use selected lectures rather than forcing the full course.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R028",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        37,
+        38
+      ],
+      "module": "Linux and Command Line",
+      "topics": [
+        "Linux",
+        "shell",
+        "permissions",
+        "processes"
+      ],
+      "title": "Linux Journey",
+      "provider": "Linux Journey community",
+      "resource_type": "Interactive lessons",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://linuxjourney.com/",
+      "access": "Free",
+      "estimated_time": "10–20 hours",
+      "use": "Friendly introduction to command line, permissions, processes, networking and system administration basics.",
+      "notes": "Prioritise command line, text processing, processes and networking.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R029",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        25,
+        39
+      ],
+      "module": "IntelliJ and Debugging",
+      "topics": [
+        "breakpoints",
+        "watches",
+        "debugging"
+      ],
+      "title": "Debug Code in IntelliJ IDEA",
+      "provider": "JetBrains",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.jetbrains.com/help/idea/debugging-code.html",
+      "access": "Free documentation",
+      "estimated_time": "2–4 hours",
+      "use": "Breakpoints, stepping, watches, expression evaluation and debugger workflows.",
+      "notes": "Require learners to debug a failing test and backend exception.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R030",
+      "section": "Shared engineering foundation",
+      "module_no": [
+        23,
+        39
+      ],
+      "module": "Browser Development Tools",
+      "topics": [
+        "Chrome DevTools",
+        "network",
+        "console",
+        "storage"
+      ],
+      "title": "Chrome DevTools Documentation",
+      "provider": "Google Chrome for Developers",
+      "resource_type": "Documentation + tutorials",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://developer.chrome.com/docs/devtools/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Inspect DOM, network requests, console errors, storage, performance and device emulation.",
+      "notes": "Essential for diagnosing UI and API integration failures.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R031",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        41,
+        44
+      ],
+      "module": "Testing Fundamentals",
+      "topics": [
+        "test design",
+        "testing principles",
+        "CTFL"
+      ],
+      "title": "Certified Tester Foundation Level (CTFL) Syllabus and Sample Exams",
+      "provider": "ISTQB",
+      "resource_type": "Syllabus + sample exams",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.istqb.org/certifications/certified-tester-foundation-level-ctfl-v4-0/",
+      "access": "Free learning documents; certification exam is paid",
+      "estimated_time": "20–35 hours",
+      "use": "Structured source for testing principles, test design techniques, defect management and test activities.",
+      "notes": "Use the syllabus as learning content without requiring certification.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R032",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        9
+      ],
+      "module": "Java Test Automation",
+      "topics": [
+        "Selenium",
+        "WebDriver",
+        "browser automation"
+      ],
+      "title": "Selenium Overview",
+      "provider": "Selenium Project",
+      "resource_type": "Official documentation",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/overview/",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Introduces Selenium components, WebDriver and how browser automation works.",
+      "notes": "Start here before WebDriver API details.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R033",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        9
+      ],
+      "module": "Java Test Automation",
+      "topics": [
+        "WebDriver",
+        "browser interaction"
+      ],
+      "title": "WebDriver Documentation",
+      "provider": "Selenium Project",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/webdriver/",
+      "access": "Free",
+      "estimated_time": "10–20 hours",
+      "use": "Authoritative WebDriver guide covering browsers, elements, interactions, waits and support features.",
+      "notes": "Core Selenium reference.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R034",
+      "section": "Automation and SDET",
+      "module_no": [
+        9
+      ],
+      "module": "Selenium Advanced Topics",
+      "topics": [
+        "locators",
+        "CSS",
+        "XPath"
+      ],
+      "title": "Locator Strategies",
+      "provider": "Selenium Project",
+      "resource_type": "Official guide",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/webdriver/elements/locators/",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Reliable element selection with ID, name, CSS and XPath strategies.",
+      "notes": "Add exercises comparing locator stability.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R035",
+      "section": "Automation and SDET",
+      "module_no": [
+        9
+      ],
+      "module": "Selenium Advanced Topics",
+      "topics": [
+        "waits",
+        "synchronisation",
+        "dynamic elements"
+      ],
+      "title": "Waiting Strategies",
+      "provider": "Selenium Project",
+      "resource_type": "Official guide",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/webdriver/waits/",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Explains implicit and explicit waits and the risks of mixing strategies.",
+      "notes": "Pair with flaky-test debugging labs.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R036",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        11
+      ],
+      "module": "Testing Framework Architecture",
+      "topics": [
+        "Page Object Model",
+        "design"
+      ],
+      "title": "Page Object Models",
+      "provider": "Selenium Project",
+      "resource_type": "Test practice guide",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Official rationale and patterns for separating test logic from page interactions.",
+      "notes": "Use as the minimum framework architecture pattern.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R037",
+      "section": "Automation and SDET",
+      "module_no": [
+        9,
+        17,
+        18
+      ],
+      "module": "Selenium Grid",
+      "topics": [
+        "Grid",
+        "remote execution",
+        "parallel testing"
+      ],
+      "title": "Getting Started with Selenium Grid",
+      "provider": "Selenium Project",
+      "resource_type": "Official guide",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.selenium.dev/documentation/grid/getting_started/",
+      "access": "Free",
+      "estimated_time": "2–4 hours",
+      "use": "Run tests remotely and in parallel across browsers and machines.",
+      "notes": "Learn after local framework stability.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R038",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        9,
+        11
+      ],
+      "module": "Java Test Automation",
+      "topics": [
+        "Selenium Java",
+        "framework basics"
+      ],
+      "title": "Selenium WebDriver with Java",
+      "provider": "Test Automation University",
+      "resource_type": "Video course + code",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://testautomationu.applitools.com/selenium-webdriver-tutorial-java/",
+      "access": "Free",
+      "estimated_time": "8–12 hours",
+      "use": "Practical Selenium Java course with browser automation examples and test structure.",
+      "notes": "Use alongside official Selenium documentation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R039",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        11,
+        44
+      ],
+      "module": "Java Test Automation",
+      "topics": [
+        "TestNG",
+        "data providers",
+        "listeners",
+        "parallel execution"
+      ],
+      "title": "TestNG Documentation",
+      "provider": "TestNG",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://testng.org/documentation.html",
+      "access": "Free",
+      "estimated_time": "5–10 hours",
+      "use": "Annotations, assertions, parameters, data providers, groups, listeners and parallel test execution.",
+      "notes": "Primary test runner for the automation project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R040",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        12,
+        44
+      ],
+      "module": "Unit and Integration Testing",
+      "topics": [
+        "JUnit 5",
+        "parameterized tests",
+        "extensions"
+      ],
+      "title": "JUnit 5 User Guide",
+      "provider": "JUnit Team",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Shared",
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://junit.org/junit5/docs/current/user-guide/",
+      "access": "Free",
+      "estimated_time": "5–12 hours",
+      "use": "Unit-test lifecycle, assertions, parameterized tests, extensions and platform integration.",
+      "notes": "Required for backend; automation learners should understand it even if using TestNG.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R041",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        44
+      ],
+      "module": "Cucumber BDD",
+      "topics": [
+        "Cucumber",
+        "Gherkin",
+        "step definitions"
+      ],
+      "title": "Cucumber Documentation",
+      "provider": "Cucumber",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://cucumber.io/docs/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Gherkin, scenarios, step definitions, hooks and Cucumber framework integration.",
+      "notes": "Use only after understanding test design and framework architecture.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R042",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        41
+      ],
+      "module": "Cucumber BDD",
+      "topics": [
+        "BDD",
+        "discovery",
+        "examples"
+      ],
+      "title": "Behaviour-Driven Development",
+      "provider": "Cucumber",
+      "resource_type": "Concept guide",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://cucumber.io/docs/bdd/",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Explains BDD as a collaboration practice rather than merely a Gherkin syntax tool.",
+      "notes": "Important to avoid writing low-value, UI-heavy BDD suites.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R043",
+      "section": "Automation and SDET",
+      "module_no": [
+        10,
+        44
+      ],
+      "module": "API Automation",
+      "topics": [
+        "REST Assured",
+        "requests",
+        "responses",
+        "validation"
+      ],
+      "title": "REST Assured Usage Guide",
+      "provider": "REST Assured Project",
+      "resource_type": "Official wiki",
+      "level": "Beginner–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://github.com/rest-assured/rest-assured/wiki/Usage",
+      "access": "Free",
+      "estimated_time": "8–15 hours",
+      "use": "Requests, response assertions, authentication, object mapping, JSON/XML parsing and reusable specifications.",
+      "notes": "Core API automation reference.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R044",
+      "section": "Automation and SDET",
+      "module_no": [
+        10
+      ],
+      "module": "API Automation",
+      "topics": [
+        "REST Assured",
+        "hands-on course"
+      ],
+      "title": "REST Assured Course",
+      "provider": "Automation in Testing",
+      "resource_type": "Free course",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://automationintesting.com/restassured/course/",
+      "access": "Free",
+      "estimated_time": "6–10 hours",
+      "use": "Practical progression from basic requests to a maintainable API automation suite.",
+      "notes": "Use as the guided course paired with R043.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R045",
+      "section": "Automation and SDET",
+      "module_no": [
+        7,
+        10
+      ],
+      "module": "API Development and Testing Tools",
+      "topics": [
+        "Postman scripts",
+        "tests",
+        "variables"
+      ],
+      "title": "Write Scripts in Postman",
+      "provider": "Postman",
+      "resource_type": "Official tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://learning.postman.com/docs/tests-and-scripts/write-scripts/intro-to-scripts/",
+      "access": "Free documentation",
+      "estimated_time": "2–5 hours",
+      "use": "Pre-request and post-response scripting for validation, chaining and dynamic data.",
+      "notes": "Good bridge from manual API testing to Java automation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R046",
+      "section": "Automation and SDET",
+      "module_no": [
+        10
+      ],
+      "module": "API Automation",
+      "topics": [
+        "JSONPath",
+        "response extraction"
+      ],
+      "title": "JsonPath for Java",
+      "provider": "Jayway JsonPath",
+      "resource_type": "Open-source documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://github.com/json-path/JsonPath",
+      "access": "Free; open source",
+      "estimated_time": "1–3 hours",
+      "use": "Query and extract values from JSON documents for API validation and data chaining.",
+      "notes": "Supplement REST Assured JsonPath knowledge.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R047",
+      "section": "Automation and SDET",
+      "module_no": [
+        14,
+        31,
+        34
+      ],
+      "module": "Mocking and Service Virtualization",
+      "topics": [
+        "WireMock",
+        "stubs",
+        "fault simulation"
+      ],
+      "title": "WireMock Documentation",
+      "provider": "WireMock",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://wiremock.org/docs/",
+      "access": "Free; open source core",
+      "estimated_time": "5–10 hours",
+      "use": "Stub HTTP services, simulate latency and failures, and test third-party integrations.",
+      "notes": "Excellent advanced SDET and backend-testing skill.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R048",
+      "section": "Automation and SDET",
+      "module_no": [
+        13,
+        18
+      ],
+      "module": "Testcontainers",
+      "topics": [
+        "JUnit 5",
+        "containers",
+        "integration tests"
+      ],
+      "title": "Testcontainers for Java — JUnit 5 Quickstart",
+      "provider": "Testcontainers",
+      "resource_type": "Official quickstart",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://java.testcontainers.org/quickstart/junit_5_quickstart/",
+      "access": "Free; open source",
+      "estimated_time": "2–4 hours",
+      "use": "Run disposable real dependencies such as PostgreSQL during integration tests.",
+      "notes": "Use after Docker fundamentals.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R049",
+      "section": "Automation and SDET",
+      "module_no": [
+        12,
+        14
+      ],
+      "module": "Unit and Integration Testing",
+      "topics": [
+        "Mockito",
+        "mocks",
+        "stubs",
+        "spies"
+      ],
+      "title": "Mockito Documentation",
+      "provider": "Mockito Project",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://site.mockito.org/",
+      "access": "Free; open source",
+      "estimated_time": "3–8 hours",
+      "use": "Mock dependencies and isolate unit tests using mocks, stubs, spies and verification.",
+      "notes": "Backend P0; automation P1 for framework and utility testing.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R050",
+      "section": "Automation and SDET",
+      "module_no": [
+        12
+      ],
+      "module": "Unit and Integration Testing",
+      "topics": [
+        "MockMvc",
+        "web layer testing"
+      ],
+      "title": "Testing the Web Layer",
+      "provider": "Spring",
+      "resource_type": "Hands-on guide",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://spring.io/guides/gs/testing-web/",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Test Spring MVC controllers with MockMvc without starting the complete server.",
+      "notes": "Useful for SDETs working close to backend code.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R051",
+      "section": "Automation and SDET",
+      "module_no": [
+        17,
+        43
+      ],
+      "module": "CI/CD",
+      "topics": [
+        "GitHub Actions",
+        "Java",
+        "Maven",
+        "test reports"
+      ],
+      "title": "Build and Test Java with Maven in GitHub Actions",
+      "provider": "GitHub Docs",
+      "resource_type": "Official tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.github.com/en/actions/tutorials/build-and-test-code/building-and-testing-java-with-maven",
+      "access": "Free documentation; GitHub Actions free allowances depend on plan/repository",
+      "estimated_time": "2–4 hours",
+      "use": "Configure CI to build Java, cache Maven dependencies and execute tests on every change.",
+      "notes": "Mandatory in both portfolio projects.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R052",
+      "section": "Automation and SDET",
+      "module_no": [
+        17
+      ],
+      "module": "CI/CD",
+      "topics": [
+        "Jenkins",
+        "pipeline",
+        "Jenkinsfile"
+      ],
+      "title": "Using a Jenkinsfile",
+      "provider": "Jenkins",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://www.jenkins.io/doc/book/pipeline/jenkinsfile/",
+      "access": "Free; open source",
+      "estimated_time": "3–6 hours",
+      "use": "Declarative pipelines, stages, agents, environment variables and credentials.",
+      "notes": "Learn after GitHub Actions; many enterprises still use Jenkins.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R053",
+      "section": "Automation and SDET",
+      "module_no": [
+        18,
+        43
+      ],
+      "module": "Containerization",
+      "topics": [
+        "Docker",
+        "images",
+        "containers",
+        "Dockerfile"
+      ],
+      "title": "Docker Get Started",
+      "provider": "Docker",
+      "resource_type": "Official learning path",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.docker.com/get-started/",
+      "access": "Free documentation; product licensing varies by organisation",
+      "estimated_time": "5–10 hours",
+      "use": "Images, containers, Dockerfiles, ports, volumes, networks and container workflows.",
+      "notes": "Use before Testcontainers and deployment exercises.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R054",
+      "section": "Automation and SDET",
+      "module_no": [
+        18,
+        43
+      ],
+      "module": "Containerization",
+      "topics": [
+        "Docker Compose",
+        "multi-container"
+      ],
+      "title": "Docker Compose Quickstart",
+      "provider": "Docker",
+      "resource_type": "Official guide",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.docker.com/compose/gettingstarted/",
+      "access": "Free documentation",
+      "estimated_time": "2–4 hours",
+      "use": "Run an application, database and supporting services together from a Compose file.",
+      "notes": "Use in the backend portfolio project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R055",
+      "section": "Automation and SDET",
+      "module_no": [
+        30
+      ],
+      "module": "Performance Testing",
+      "topics": [
+        "k6",
+        "load testing",
+        "thresholds"
+      ],
+      "title": "Get Started with k6",
+      "provider": "Grafana Labs",
+      "resource_type": "Official tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://grafana.com/docs/k6/latest/get-started/running-k6/",
+      "access": "Free documentation; k6 open source available",
+      "estimated_time": "3–6 hours",
+      "use": "Script and run API load tests, inspect metrics and define performance thresholds.",
+      "notes": "Choose k6 or JMeter initially, not both deeply.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R056",
+      "section": "Automation and SDET",
+      "module_no": [
+        30
+      ],
+      "module": "Performance Testing",
+      "topics": [
+        "JMeter",
+        "load testing"
+      ],
+      "title": "Apache JMeter User Manual",
+      "provider": "Apache Software Foundation",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://jmeter.apache.org/usermanual/index.html",
+      "access": "Free; open source",
+      "estimated_time": "5–12 hours",
+      "use": "Create HTTP load tests, parameterise data, use assertions and analyse results.",
+      "notes": "Useful where JMeter appears in job descriptions.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R057",
+      "section": "Automation and SDET",
+      "module_no": [
+        45
+      ],
+      "module": "Accessibility Testing",
+      "topics": [
+        "accessibility",
+        "WCAG",
+        "testing"
+      ],
+      "title": "Web Accessibility Tutorials",
+      "provider": "W3C Web Accessibility Initiative",
+      "resource_type": "Official tutorials",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.w3.org/WAI/tutorials/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Practical accessibility guidance for forms, images, tables, menus and page structure.",
+      "notes": "Optional differentiator for QA automation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R058",
+      "section": "Automation and SDET",
+      "module_no": [
+        45
+      ],
+      "module": "Mobile Automation",
+      "topics": [
+        "Appium",
+        "mobile testing"
+      ],
+      "title": "Appium Documentation",
+      "provider": "Appium Project",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://appium.io/docs/en/latest/",
+      "access": "Free; open source",
+      "estimated_time": "8–20 hours",
+      "use": "Mobile application automation setup, drivers, sessions and element interaction.",
+      "notes": "Only after web and API automation unless targeting mobile roles.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R059",
+      "section": "Automation and SDET",
+      "module_no": [
+        10,
+        45
+      ],
+      "module": "Contract Testing",
+      "topics": [
+        "Pact",
+        "consumer-driven contracts"
+      ],
+      "title": "Pact Documentation",
+      "provider": "Pact Foundation",
+      "resource_type": "Official documentation",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.pact.io/",
+      "access": "Free; open source",
+      "estimated_time": "6–12 hours",
+      "use": "Consumer-driven contract testing for independently deployed services.",
+      "notes": "Advanced differentiator for SDET and microservice teams.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R060",
+      "section": "Automation and SDET",
+      "module_no": [
+        10,
+        45
+      ],
+      "module": "Contract Testing",
+      "topics": [
+        "Spring Cloud Contract",
+        "contracts"
+      ],
+      "title": "Spring Cloud Contract Reference",
+      "provider": "Spring",
+      "resource_type": "Official documentation",
+      "level": "Advanced",
+      "priority": "P3",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-cloud-contract/reference/",
+      "access": "Free; open source",
+      "estimated_time": "8–15 hours",
+      "use": "Contract-driven testing and stub generation in Spring ecosystems.",
+      "notes": "Choose Pact or Spring Cloud Contract based on the target stack.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R061",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        9,
+        43
+      ],
+      "module": "UI Automation Practice",
+      "topics": [
+        "forms",
+        "alerts",
+        "frames",
+        "dynamic controls"
+      ],
+      "title": "The Internet — Test Practice Site",
+      "provider": "Elemental Selenium",
+      "resource_type": "Practice environment",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://the-internet.herokuapp.com/",
+      "access": "Free public demo; availability is not guaranteed",
+      "estimated_time": "Ongoing labs",
+      "use": "Small isolated browser scenarios for locators, waits, alerts, frames, uploads and dynamic elements.",
+      "notes": "External demo site; do not depend on it for production assessments.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R062",
+      "section": "Automation and SDET",
+      "module_no": [
+        8,
+        9,
+        43
+      ],
+      "module": "UI Automation Practice",
+      "topics": [
+        "e-commerce flow",
+        "login",
+        "cart"
+      ],
+      "title": "Sauce Demo",
+      "provider": "Sauce Labs",
+      "resource_type": "Practice environment",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://www.saucedemo.com/",
+      "access": "Free public demo; availability is not guaranteed",
+      "estimated_time": "Project-sized practice",
+      "use": "Automate a small end-to-end e-commerce flow including login, inventory, cart and checkout.",
+      "notes": "Good beginner portfolio mini-project.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R063",
+      "section": "Automation and SDET",
+      "module_no": [
+        9,
+        39
+      ],
+      "module": "UI Automation Practice",
+      "topics": [
+        "flaky UI",
+        "dynamic IDs",
+        "AJAX",
+        "shadow DOM"
+      ],
+      "title": "UI Test Automation Playground",
+      "provider": "UI Testing Playground",
+      "resource_type": "Practice environment",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "http://uitestingplayground.com/",
+      "access": "Free public demo; availability is not guaranteed",
+      "estimated_time": "Ongoing labs",
+      "use": "Purpose-built challenges for dynamic IDs, waits, scrolling, AJAX, shadow DOM and automation pitfalls.",
+      "notes": "Use for debugging and robust-locator exercises.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R064",
+      "section": "Automation and SDET",
+      "module_no": [
+        10,
+        43
+      ],
+      "module": "API Automation Practice",
+      "topics": [
+        "REST API",
+        "authentication",
+        "booking workflow"
+      ],
+      "title": "Restful Booker",
+      "provider": "Mark Winteringham / Ministry of Testing community",
+      "resource_type": "Practice API",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://restful-booker.herokuapp.com/",
+      "access": "Free public demo; data resets and availability may vary",
+      "estimated_time": "Project-sized practice",
+      "use": "CRUD, authentication, request chaining and negative API tests against a realistic booking service.",
+      "notes": "Do not store sensitive data.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R065",
+      "section": "Automation and SDET",
+      "module_no": [
+        7,
+        10
+      ],
+      "module": "API Practice",
+      "topics": [
+        "JSON",
+        "CRUD",
+        "mock API"
+      ],
+      "title": "JSONPlaceholder",
+      "provider": "Typicode",
+      "resource_type": "Practice API",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://jsonplaceholder.typicode.com/",
+      "access": "Free public fake API",
+      "estimated_time": "1–3 hours",
+      "use": "Quick practice for GET, POST, JSON parsing and client integration.",
+      "notes": "Writes are simulated, not persisted.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R066",
+      "section": "Automation and SDET",
+      "module_no": [
+        5,
+        7,
+        10,
+        39
+      ],
+      "module": "HTTP and API Debugging",
+      "topics": [
+        "headers",
+        "status",
+        "authentication",
+        "delays"
+      ],
+      "title": "httpbin",
+      "provider": "Kenneth Reitz / community",
+      "resource_type": "HTTP testing service",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://httpbin.org/",
+      "access": "Free public service; availability may vary",
+      "estimated_time": "1–3 hours",
+      "use": "Inspect requests and test headers, authentication, redirects, delays, cookies and response codes.",
+      "notes": "Excellent for HTTP fundamentals and debugging labs.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R067",
+      "section": "Automation and SDET",
+      "module_no": [
+        7,
+        10
+      ],
+      "module": "API Practice",
+      "topics": [
+        "products",
+        "users",
+        "auth",
+        "pagination"
+      ],
+      "title": "DummyJSON",
+      "provider": "DummyJSON",
+      "resource_type": "Practice API",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://dummyjson.com/",
+      "access": "Free public fake API",
+      "estimated_time": "2–5 hours",
+      "use": "Practice CRUD-like requests, authentication, pagination, filtering and nested JSON.",
+      "notes": "Use as supplementary practice; writes may be simulated.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R068",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3,
+        12,
+        27,
+        28,
+        29,
+        31,
+        34
+      ],
+      "module": "Spring Ecosystem",
+      "topics": [
+        "Spring",
+        "Spring Boot",
+        "data",
+        "security",
+        "testing"
+      ],
+      "title": "Spring Guides",
+      "provider": "Spring",
+      "resource_type": "Hands-on guides",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://spring.io/guides",
+      "access": "Free",
+      "estimated_time": "1–3 hours per guide",
+      "use": "Curated, runnable guides for REST, data access, security, messaging, testing and cloud patterns.",
+      "notes": "Use as the main practical sequence for backend learners.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R069",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3
+      ],
+      "module": "Java Backend Development",
+      "topics": [
+        "Spring Boot",
+        "application setup"
+      ],
+      "title": "Building an Application with Spring Boot",
+      "provider": "Spring",
+      "resource_type": "Hands-on guide",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://spring.io/guides/gs/spring-boot/",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Creates a first Spring Boot application and explains auto-configuration and application startup.",
+      "notes": "First backend lab.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R070",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3,
+        5
+      ],
+      "module": "REST API Development",
+      "topics": [
+        "REST controller",
+        "JSON",
+        "HTTP"
+      ],
+      "title": "Building a RESTful Web Service",
+      "provider": "Spring",
+      "resource_type": "Hands-on guide",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://spring.io/guides/gs/rest-service/",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Build a simple REST endpoint with Spring Boot and JSON responses.",
+      "notes": "Extend it with validation and error handling.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R071",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3,
+        4
+      ],
+      "module": "Database Development",
+      "topics": [
+        "JPA",
+        "entities",
+        "repositories"
+      ],
+      "title": "Accessing Data with JPA",
+      "provider": "Spring",
+      "resource_type": "Hands-on guide",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://spring.io/guides/gs/accessing-data-jpa/",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Introduces JPA entities, repositories and database persistence in Spring Boot.",
+      "notes": "Follow with PostgreSQL rather than remaining on an in-memory database.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R072",
+      "section": "Backend and API engineering",
+      "module_no": [
+        4
+      ],
+      "module": "Database Development",
+      "topics": [
+        "Spring Data JPA",
+        "queries",
+        "repositories",
+        "pagination"
+      ],
+      "title": "Spring Data JPA Reference",
+      "provider": "Spring",
+      "resource_type": "Official reference",
+      "level": "Intermediate–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-data/jpa/reference/jpa.html",
+      "access": "Free",
+      "estimated_time": "Reference",
+      "use": "Repositories, query methods, custom queries, specifications, projections, transactions and auditing.",
+      "notes": "Use selectively alongside the backend project.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R073",
+      "section": "Backend and API engineering",
+      "module_no": [
+        4
+      ],
+      "module": "Database Development",
+      "topics": [
+        "Hibernate",
+        "ORM",
+        "entity mapping"
+      ],
+      "title": "Hibernate ORM Getting Started",
+      "provider": "Hibernate",
+      "resource_type": "Official guide",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://hibernate.org/orm/documentation/getting-started/",
+      "access": "Free; open source",
+      "estimated_time": "3–6 hours",
+      "use": "ORM fundamentals, mappings, sessions/entity managers and persistence concepts.",
+      "notes": "Use to understand what Spring Data JPA abstracts.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R074",
+      "section": "Backend and API engineering",
+      "module_no": [
+        4
+      ],
+      "module": "Database Migration",
+      "topics": [
+        "Flyway",
+        "schema migration"
+      ],
+      "title": "Flyway Documentation",
+      "provider": "Redgate",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://documentation.red-gate.com/flyway",
+      "access": "Free documentation; product editions vary",
+      "estimated_time": "2–5 hours",
+      "use": "Version and apply database schema changes consistently across environments.",
+      "notes": "Use Flyway or Liquibase, not both in the first project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R075",
+      "section": "Backend and API engineering",
+      "module_no": [
+        4
+      ],
+      "module": "Database Migration",
+      "topics": [
+        "Liquibase",
+        "schema migration"
+      ],
+      "title": "Liquibase Get Started",
+      "provider": "Liquibase",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.liquibase.com/start/home.html",
+      "access": "Free documentation; open-source core available",
+      "estimated_time": "2–5 hours",
+      "use": "Alternative migration tool using changelogs and repeatable deployment workflows.",
+      "notes": "Optional alternative to Flyway.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R076",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3,
+        5
+      ],
+      "module": "Error Handling",
+      "topics": [
+        "ControllerAdvice",
+        "ExceptionHandler",
+        "API errors"
+      ],
+      "title": "Spring MVC Exception Handling",
+      "provider": "Spring",
+      "resource_type": "Official reference",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-framework/reference/web/webmvc/mvc-controller/ann-exceptionhandler.html",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Build centralised, consistent API error responses with exception handlers and controller advice.",
+      "notes": "Require a documented error model in the backend project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R077",
+      "section": "Backend and API engineering",
+      "module_no": [
+        12,
+        13
+      ],
+      "module": "Unit and Integration Testing",
+      "topics": [
+        "Spring Boot Test",
+        "integration tests",
+        "test slices"
+      ],
+      "title": "Testing Spring Boot Applications",
+      "provider": "Spring",
+      "resource_type": "Official reference",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-boot/reference/testing/spring-boot-applications.html",
+      "access": "Free",
+      "estimated_time": "5–10 hours",
+      "use": "Test slices, application contexts, web tests, test utilities and integration-test configuration.",
+      "notes": "Pair with JUnit, Mockito and Testcontainers.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R078",
+      "section": "Backend and API engineering",
+      "module_no": [
+        27
+      ],
+      "module": "Application Security",
+      "topics": [
+        "Spring Security",
+        "authentication",
+        "authorization"
+      ],
+      "title": "Spring Security Reference",
+      "provider": "Spring",
+      "resource_type": "Official reference",
+      "level": "Intermediate–Advanced",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-security/reference/",
+      "access": "Free",
+      "estimated_time": "10–25 hours",
+      "use": "Authentication, authorisation, filters, method security, OAuth2, resource servers and secure configuration.",
+      "notes": "Use selected sections; do not attempt the whole reference at once.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R079",
+      "section": "Backend and API engineering",
+      "module_no": [
+        27
+      ],
+      "module": "Application Security",
+      "topics": [
+        "Spring Security",
+        "login",
+        "access control"
+      ],
+      "title": "Securing a Web Application",
+      "provider": "Spring",
+      "resource_type": "Hands-on guide",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://spring.io/guides/gs/securing-web/",
+      "access": "Free",
+      "estimated_time": "1–3 hours",
+      "use": "Practical introduction to Spring Security configuration and protected resources.",
+      "notes": "Extend to stateless API authentication in the portfolio project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R080",
+      "section": "Backend and API engineering",
+      "module_no": [
+        5,
+        6
+      ],
+      "module": "API Documentation",
+      "topics": [
+        "OpenAPI",
+        "API schemas",
+        "operations"
+      ],
+      "title": "Learn OpenAPI",
+      "provider": "OpenAPI Initiative",
+      "resource_type": "Open specification guide",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://learn.openapis.org/",
+      "access": "Free",
+      "estimated_time": "3–6 hours",
+      "use": "Understand OpenAPI structure, operations, parameters, schemas, responses and reusable components.",
+      "notes": "Use before generating or reviewing Swagger documentation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R081",
+      "section": "Backend and API engineering",
+      "module_no": [
+        6
+      ],
+      "module": "API Documentation",
+      "topics": [
+        "Swagger",
+        "OpenAPI 3"
+      ],
+      "title": "OpenAPI Specification Guide",
+      "provider": "Swagger",
+      "resource_type": "Documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://swagger.io/docs/specification/v3_0/about/",
+      "access": "Free documentation",
+      "estimated_time": "3–6 hours",
+      "use": "Practical OpenAPI 3 guide with request, response, authentication and schema examples.",
+      "notes": "Use to document the project API completely.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R082",
+      "section": "Backend and API engineering",
+      "module_no": [
+        27,
+        44
+      ],
+      "module": "Application Security",
+      "topics": [
+        "OWASP Top 10",
+        "web security risks"
+      ],
+      "title": "OWASP Top 10",
+      "provider": "OWASP Foundation",
+      "resource_type": "Security standard + guidance",
+      "level": "Beginner–Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://owasp.org/Top10/",
+      "access": "Free; openly licensed",
+      "estimated_time": "5–10 hours",
+      "use": "Core awareness of common web application security risks and mitigations.",
+      "notes": "Use the current released edition and update platform content when OWASP changes it.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R083",
+      "section": "Backend and API engineering",
+      "module_no": [
+        27
+      ],
+      "module": "Application Security",
+      "topics": [
+        "secure coding",
+        "authentication",
+        "REST security",
+        "SQL injection"
+      ],
+      "title": "OWASP Cheat Sheet Series",
+      "provider": "OWASP Foundation",
+      "resource_type": "Practical security guides",
+      "level": "Intermediate",
+      "priority": "P0",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://cheatsheetseries.owasp.org/",
+      "access": "Free; Creative Commons licensed",
+      "estimated_time": "Topic-based",
+      "use": "Actionable secure-coding guidance for authentication, REST, input validation, secrets, logging and SQL injection.",
+      "notes": "Link specific cheat sheets to matching lessons.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R084",
+      "section": "Backend and API engineering",
+      "module_no": [
+        27,
+        44
+      ],
+      "module": "Application Security",
+      "topics": [
+        "web security labs",
+        "vulnerabilities"
+      ],
+      "title": "Web Security Academy",
+      "provider": "PortSwigger",
+      "resource_type": "Articles + interactive labs",
+      "level": "Beginner–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://portswigger.net/web-security",
+      "access": "Free; account helpful for progress",
+      "estimated_time": "Ongoing",
+      "use": "Hands-on labs for authentication, access control, injection, CSRF, CORS and API security.",
+      "notes": "Use only within the authorised training labs.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R085",
+      "section": "Backend and API engineering",
+      "module_no": [
+        28
+      ],
+      "module": "Logging",
+      "topics": [
+        "SLF4J",
+        "logging facade"
+      ],
+      "title": "SLF4J User Manual",
+      "provider": "SLF4J Project",
+      "resource_type": "Official manual",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://www.slf4j.org/manual.html",
+      "access": "Free; open source",
+      "estimated_time": "1–3 hours",
+      "use": "Logging API, placeholders, levels and integration with logging implementations.",
+      "notes": "Teach parameterised logging and avoidance of sensitive data.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R086",
+      "section": "Backend and API engineering",
+      "module_no": [
+        28
+      ],
+      "module": "Logging",
+      "topics": [
+        "Logback",
+        "appenders",
+        "configuration"
+      ],
+      "title": "Logback Manual",
+      "provider": "QOS.ch",
+      "resource_type": "Official manual",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://logback.qos.ch/manual/",
+      "access": "Free; open source",
+      "estimated_time": "3–8 hours",
+      "use": "Configure appenders, formats, rolling files, levels and structured application logging.",
+      "notes": "Use selected chapters in the project.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R087",
+      "section": "Backend and API engineering",
+      "module_no": [
+        3,
+        29
+      ],
+      "module": "Monitoring and Observability",
+      "topics": [
+        "Actuator",
+        "health",
+        "metrics"
+      ],
+      "title": "Spring Boot Actuator",
+      "provider": "Spring",
+      "resource_type": "Official reference",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.spring.io/spring-boot/reference/actuator/",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Expose health, metrics, environment and operational endpoints safely.",
+      "notes": "Add health and metrics endpoints to the backend project.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R088",
+      "section": "Backend and API engineering",
+      "module_no": [
+        29
+      ],
+      "module": "Monitoring and Observability",
+      "topics": [
+        "Micrometer",
+        "metrics",
+        "timers",
+        "counters"
+      ],
+      "title": "Micrometer Reference",
+      "provider": "Micrometer",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://docs.micrometer.io/micrometer/reference/",
+      "access": "Free; open source",
+      "estimated_time": "4–8 hours",
+      "use": "Instrument JVM and application metrics with a vendor-neutral facade.",
+      "notes": "Learn after Actuator.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R089",
+      "section": "Backend and API engineering",
+      "module_no": [
+        29
+      ],
+      "module": "Monitoring and Observability",
+      "topics": [
+        "Prometheus",
+        "metrics",
+        "queries"
+      ],
+      "title": "Prometheus Getting Started",
+      "provider": "Prometheus Project",
+      "resource_type": "Official tutorial",
+      "level": "Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://prometheus.io/docs/prometheus/latest/getting_started/",
+      "access": "Free; open source",
+      "estimated_time": "3–6 hours",
+      "use": "Collect time-series metrics, configure scrape targets and run basic PromQL queries.",
+      "notes": "Optional after application metrics are working.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R090",
+      "section": "Backend and API engineering",
+      "module_no": [
+        29,
+        43
+      ],
+      "module": "Monitoring and Observability",
+      "topics": [
+        "Grafana",
+        "dashboards",
+        "visualisation"
+      ],
+      "title": "Grafana Tutorials",
+      "provider": "Grafana Labs",
+      "resource_type": "Tutorial collection",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://grafana.com/tutorials/",
+      "access": "Free tutorials; open-source Grafana available",
+      "estimated_time": "3–8 hours",
+      "use": "Build dashboards and visualise application or infrastructure metrics.",
+      "notes": "Use for the optional monitoring dashboard portfolio evidence.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R091",
+      "section": "Backend and API engineering",
+      "module_no": [
+        29,
+        31
+      ],
+      "module": "Monitoring and Observability",
+      "topics": [
+        "OpenTelemetry",
+        "traces",
+        "metrics",
+        "logs"
+      ],
+      "title": "OpenTelemetry Java",
+      "provider": "OpenTelemetry Project",
+      "resource_type": "Official documentation",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://opentelemetry.io/docs/languages/java/",
+      "access": "Free; open source",
+      "estimated_time": "6–12 hours",
+      "use": "Instrument Java services for traces, metrics and logs using open standards.",
+      "notes": "Advanced after logging and metrics fundamentals.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R092",
+      "section": "Backend and API engineering",
+      "module_no": [
+        34,
+        31
+      ],
+      "module": "Resilience Engineering",
+      "topics": [
+        "Resilience4j",
+        "retry",
+        "circuit breaker",
+        "rate limiter"
+      ],
+      "title": "Resilience4j Documentation",
+      "provider": "Resilience4j",
+      "resource_type": "Official documentation",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://resilience4j.readme.io/docs/getting-started",
+      "access": "Free; open source",
+      "estimated_time": "5–10 hours",
+      "use": "Implement retries, circuit breakers, rate limiters, bulkheads and time limiters.",
+      "notes": "Do not add resilience patterns without failure scenarios and metrics.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R093",
+      "section": "Backend and API engineering",
+      "module_no": [
+        31,
+        34,
+        35
+      ],
+      "module": "Microservices and Architecture",
+      "topics": [
+        "microservice patterns",
+        "sagas",
+        "API gateway",
+        "database per service"
+      ],
+      "title": "Microservice Architecture Patterns",
+      "provider": "Chris Richardson / Microservices.io",
+      "resource_type": "Pattern catalogue",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://microservices.io/patterns/index.html",
+      "access": "Free articles; books/courses are separate",
+      "estimated_time": "Topic-based",
+      "use": "Pattern catalogue for decomposition, data consistency, communication, observability and deployment.",
+      "notes": "Use as a reference, not as a first architecture course.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R094",
+      "section": "Backend and API engineering",
+      "module_no": [
+        29,
+        34,
+        35
+      ],
+      "module": "Reliability and System Design",
+      "topics": [
+        "SRE",
+        "reliability",
+        "monitoring",
+        "incident response"
+      ],
+      "title": "Site Reliability Engineering Books",
+      "provider": "Google",
+      "resource_type": "Free online books",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://sre.google/books/",
+      "access": "Free to read online",
+      "estimated_time": "Topic-based",
+      "use": "Reliability principles, service-level objectives, monitoring, incident response and operational practices.",
+      "notes": "Select chapters relevant to junior backend projects.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R095",
+      "section": "Backend and API engineering",
+      "module_no": [
+        32
+      ],
+      "module": "Messaging Systems",
+      "topics": [
+        "Kafka",
+        "producers",
+        "consumers",
+        "partitions"
+      ],
+      "title": "Apache Kafka Documentation",
+      "provider": "Apache Kafka",
+      "resource_type": "Official documentation",
+      "level": "Intermediate–Advanced",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://kafka.apache.org/documentation/",
+      "access": "Free; open source",
+      "estimated_time": "10–25 hours",
+      "use": "Core Kafka concepts, clients, configuration, delivery semantics and operations.",
+      "notes": "Backend optional until the main API project is complete.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R096",
+      "section": "Backend and API engineering",
+      "module_no": [
+        32
+      ],
+      "module": "Messaging Systems",
+      "topics": [
+        "Kafka",
+        "hands-on courses"
+      ],
+      "title": "Kafka Courses",
+      "provider": "Confluent Developer",
+      "resource_type": "Free courses + tutorials",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://developer.confluent.io/courses/",
+      "access": "Free; account may be required",
+      "estimated_time": "5–15 hours per course",
+      "use": "Guided practical learning for Kafka fundamentals, streams and event-driven applications.",
+      "notes": "Use before deep-diving into broker configuration.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R097",
+      "section": "Backend and API engineering",
+      "module_no": [
+        32
+      ],
+      "module": "Messaging Systems",
+      "topics": [
+        "RabbitMQ",
+        "queues",
+        "routing"
+      ],
+      "title": "RabbitMQ Tutorials",
+      "provider": "RabbitMQ",
+      "resource_type": "Official tutorials",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://www.rabbitmq.com/tutorials",
+      "access": "Free; open source",
+      "estimated_time": "4–8 hours",
+      "use": "Hands-on queues, work distribution, publish/subscribe, routing and topics.",
+      "notes": "Choose Kafka or RabbitMQ based on target job demand.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R098",
+      "section": "Backend and API engineering",
+      "module_no": [
+        33
+      ],
+      "module": "Caching",
+      "topics": [
+        "Redis",
+        "cache",
+        "TTL",
+        "data structures"
+      ],
+      "title": "Redis Developer Documentation",
+      "provider": "Redis",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://redis.io/docs/latest/develop/",
+      "access": "Free documentation; open-source/community options available",
+      "estimated_time": "5–12 hours",
+      "use": "Redis data types, clients, caching patterns, expiration and application integration.",
+      "notes": "Learn cache invalidation and failure behaviour, not only commands.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R099",
+      "section": "Backend and API engineering",
+      "module_no": [
+        19,
+        43
+      ],
+      "module": "Cloud Development",
+      "topics": [
+        "AWS",
+        "cloud fundamentals",
+        "deployment"
+      ],
+      "title": "AWS Skill Builder — Free Digital Training",
+      "provider": "Amazon Web Services",
+      "resource_type": "Learning plans + digital courses",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://skillbuilder.aws/",
+      "access": "Free tier of courses available; account required",
+      "estimated_time": "Varies",
+      "use": "AWS fundamentals, IAM, compute, storage, databases, containers and cloud operations.",
+      "notes": "Select fundamentals and developer learning plans; do not attempt every service.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R100",
+      "section": "Backend and API engineering",
+      "module_no": [
+        19
+      ],
+      "module": "Cloud Development",
+      "topics": [
+        "Azure",
+        "cloud fundamentals"
+      ],
+      "title": "Microsoft Learn for Azure",
+      "provider": "Microsoft",
+      "resource_type": "Interactive learning paths",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://learn.microsoft.com/en-us/training/azure/",
+      "access": "Free; account optional for browsing and useful for tracking",
+      "estimated_time": "Varies",
+      "use": "Guided modules for cloud concepts, application services, containers, identity and databases.",
+      "notes": "Choose one cloud platform initially.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R101",
+      "section": "Backend and API engineering",
+      "module_no": [
+        45
+      ],
+      "module": "Kubernetes Basics",
+      "topics": [
+        "pods",
+        "deployments",
+        "services"
+      ],
+      "title": "Learn Kubernetes Basics",
+      "provider": "Kubernetes Project",
+      "resource_type": "Official interactive tutorial",
+      "level": "Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/",
+      "access": "Free; open source",
+      "estimated_time": "4–8 hours",
+      "use": "Deploy, scale, update and debug a containerised application on Kubernetes.",
+      "notes": "Optional after Docker and deployment fundamentals.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R102",
+      "section": "Backend and API engineering",
+      "module_no": [
+        45
+      ],
+      "module": "Infrastructure as Code",
+      "topics": [
+        "Terraform",
+        "IaC"
+      ],
+      "title": "Terraform Tutorials",
+      "provider": "HashiCorp Developer",
+      "resource_type": "Official tutorials",
+      "level": "Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://developer.hashicorp.com/terraform/tutorials",
+      "access": "Free documentation and tutorials",
+      "estimated_time": "5–12 hours",
+      "use": "Infrastructure-as-code concepts, providers, state and reusable configuration.",
+      "notes": "Optional for the target junior roles.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R103",
+      "section": "Backend and API engineering",
+      "module_no": [
+        35,
+        44
+      ],
+      "module": "Architecture and System Design",
+      "topics": [
+        "system design",
+        "scalability",
+        "databases",
+        "caching"
+      ],
+      "title": "System Design Primer",
+      "provider": "Donne Martin and contributors",
+      "resource_type": "Open-source study guide",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "access": "Free; open source",
+      "estimated_time": "Topic-based",
+      "use": "Structured introduction to scalability, availability, load balancing, caching, databases and design interviews.",
+      "notes": "Use selected beginner sections for Software Engineer I interviews.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R104",
+      "section": "Backend and API engineering",
+      "module_no": [
+        36,
+        42,
+        43
+      ],
+      "module": "Architecture Diagram Tools",
+      "topics": [
+        "Mermaid",
+        "diagrams as code"
+      ],
+      "title": "Mermaid Documentation",
+      "provider": "Mermaid Project",
+      "resource_type": "Official documentation",
+      "level": "Beginner",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://mermaid.js.org/intro/",
+      "access": "Free; open source",
+      "estimated_time": "2–4 hours",
+      "use": "Create flowcharts, sequence diagrams, class diagrams and architecture visuals from text.",
+      "notes": "Good for README and technical documentation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R105",
+      "section": "Backend and API engineering",
+      "module_no": [
+        36,
+        42,
+        43
+      ],
+      "module": "Architecture Diagram Tools",
+      "topics": [
+        "PlantUML",
+        "UML",
+        "sequence diagrams"
+      ],
+      "title": "PlantUML Guide",
+      "provider": "PlantUML Project",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://plantuml.com/guide",
+      "access": "Free; open source",
+      "estimated_time": "2–5 hours",
+      "use": "Text-based UML, sequence, component, deployment and entity-relationship diagrams.",
+      "notes": "Choose Mermaid or PlantUML for the first project.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R106",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        20,
+        23
+      ],
+      "module": "Frontend UI Development",
+      "topics": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "web fundamentals"
+      ],
+      "title": "Learn Web Development",
+      "provider": "MDN Web Docs",
+      "resource_type": "Tutorial curriculum",
+      "level": "Beginner–Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Advanced"
+      ],
+      "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development",
+      "access": "Free",
+      "estimated_time": "40–100 hours",
+      "use": "HTML, CSS, JavaScript, accessibility and web platform fundamentals.",
+      "notes": "Optional for target roles; use selected sections to understand applications under test.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R107",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        20,
+        21
+      ],
+      "module": "Frontend UI Development",
+      "topics": [
+        "React",
+        "components",
+        "state",
+        "hooks"
+      ],
+      "title": "React Learn",
+      "provider": "React Team",
+      "resource_type": "Official tutorial",
+      "level": "Beginner–Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Advanced"
+      ],
+      "url": "https://react.dev/learn",
+      "access": "Free; open source",
+      "estimated_time": "15–30 hours",
+      "use": "Modern React components, state, hooks, forms and application thinking.",
+      "notes": "Optional; useful only for full-stack projects or deeper UI understanding.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R108",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        21,
+        22
+      ],
+      "module": "React UI Tools / UI Design",
+      "topics": [
+        "Material UI",
+        "components",
+        "design system"
+      ],
+      "title": "Material UI Getting Started",
+      "provider": "MUI",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Advanced"
+      ],
+      "url": "https://mui.com/material-ui/getting-started/",
+      "access": "Free documentation; open-source core",
+      "estimated_time": "5–12 hours",
+      "use": "Build accessible React interfaces using a mature component library and theming system.",
+      "notes": "Optional for an admin dashboard portfolio extension.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R109",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        22
+      ],
+      "module": "UI and UX Design",
+      "topics": [
+        "Material Design",
+        "layout",
+        "components",
+        "accessibility"
+      ],
+      "title": "Material Design 3",
+      "provider": "Google",
+      "resource_type": "Design guidelines",
+      "level": "Beginner–Intermediate",
+      "priority": "P3",
+      "tracks": [
+        "Advanced"
+      ],
+      "url": "https://m3.material.io/",
+      "access": "Free",
+      "estimated_time": "Topic-based",
+      "use": "Guidance for visual hierarchy, components, interaction, accessibility and responsive design.",
+      "notes": "Optional; useful for improving project presentation.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R110",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        24
+      ],
+      "module": "Database UI Tools",
+      "topics": [
+        "DBeaver",
+        "database client"
+      ],
+      "title": "DBeaver Documentation",
+      "provider": "DBeaver",
+      "resource_type": "Official documentation",
+      "level": "Beginner",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://dbeaver.com/docs/dbeaver/",
+      "access": "Free documentation; Community Edition available",
+      "estimated_time": "1–3 hours",
+      "use": "Connect to databases, browse schemas, run queries, inspect plans and export data.",
+      "notes": "Use as a practical database client, not as a replacement for SQL knowledge.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R111",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        25
+      ],
+      "module": "IntelliJ IDEA Productivity",
+      "topics": [
+        "navigation",
+        "refactoring",
+        "inspections",
+        "Git"
+      ],
+      "title": "IntelliJ IDEA Documentation",
+      "provider": "JetBrains",
+      "resource_type": "Official documentation",
+      "level": "Beginner–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.jetbrains.com/help/idea/getting-started.html",
+      "access": "Free documentation; IDE editions vary",
+      "estimated_time": "Topic-based",
+      "use": "Project navigation, refactoring, inspections, Maven, Git, database tools and productivity workflows.",
+      "notes": "Link specific pages from each practical task.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R112",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        26,
+        43
+      ],
+      "module": "Code Quality",
+      "topics": [
+        "SonarQube",
+        "quality gates",
+        "static analysis"
+      ],
+      "title": "SonarQube Documentation",
+      "provider": "Sonar",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://docs.sonarsource.com/sonarqube-server/",
+      "access": "Free documentation; Community Build available",
+      "estimated_time": "3–8 hours",
+      "use": "Static analysis, code smells, vulnerabilities, duplication, coverage and quality gates.",
+      "notes": "Add an optional quality-gate exercise in CI.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R113",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        26,
+        12
+      ],
+      "module": "Code Quality",
+      "topics": [
+        "JaCoCo",
+        "test coverage"
+      ],
+      "title": "JaCoCo Documentation",
+      "provider": "JaCoCo Project",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://www.jacoco.org/jacoco/trunk/doc/",
+      "access": "Free; open source",
+      "estimated_time": "2–4 hours",
+      "use": "Generate Java test-coverage reports and integrate coverage into Maven builds.",
+      "notes": "Teach coverage as a signal, not a quality guarantee.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R114",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        26
+      ],
+      "module": "Code Quality",
+      "topics": [
+        "SpotBugs",
+        "static analysis"
+      ],
+      "title": "SpotBugs Documentation",
+      "provider": "SpotBugs Project",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://spotbugs.readthedocs.io/",
+      "access": "Free; open source",
+      "estimated_time": "2–4 hours",
+      "use": "Detect common Java bug patterns during builds and code review.",
+      "notes": "Optional after tests and Sonar are established.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R115",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        26,
+        27
+      ],
+      "module": "Code Quality / Security",
+      "topics": [
+        "dependency scanning",
+        "vulnerabilities"
+      ],
+      "title": "OWASP Dependency-Check",
+      "provider": "OWASP Foundation",
+      "resource_type": "Official documentation",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://owasp.org/www-project-dependency-check/",
+      "access": "Free; open source",
+      "estimated_time": "2–5 hours",
+      "use": "Identify known vulnerable third-party dependencies in Java builds and CI.",
+      "notes": "Use with careful triage of false positives and update policies.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R116",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        38
+      ],
+      "module": "Computer Science Fundamentals",
+      "topics": [
+        "OS",
+        "networking",
+        "databases",
+        "distributed systems"
+      ],
+      "title": "Teach Yourself Computer Science",
+      "provider": "TeachYourselfCS community",
+      "resource_type": "Curriculum guide",
+      "level": "Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend",
+        "Shared"
+      ],
+      "url": "https://teachyourselfcs.com/",
+      "access": "Free guide; linked materials vary",
+      "estimated_time": "Long-term",
+      "use": "Long-term map for programming, architecture, algorithms, operating systems, networking and databases.",
+      "notes": "Use selectively; not a prerequisite for applications.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R117",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        40
+      ],
+      "module": "AI-Assisted Development",
+      "topics": [
+        "AI coding",
+        "responsible use",
+        "validation"
+      ],
+      "title": "Responsible Use of GitHub Copilot Features",
+      "provider": "GitHub Docs",
+      "resource_type": "Guidance",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features",
+      "access": "Free documentation; Copilot product access may require a plan",
+      "estimated_time": "1–2 hours",
+      "use": "Risks, limitations, review requirements, privacy and responsible validation of AI-generated code.",
+      "notes": "The platform should teach verification, security and attribution—not blind copying.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R118",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        41
+      ],
+      "module": "Collaboration and Agile Development",
+      "topics": [
+        "Agile",
+        "Scrum",
+        "Kanban",
+        "user stories"
+      ],
+      "title": "Agile Coach",
+      "provider": "Atlassian",
+      "resource_type": "Articles and guides",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.atlassian.com/agile",
+      "access": "Free",
+      "estimated_time": "4–8 hours",
+      "use": "Agile principles, Scrum, Kanban, planning, retrospectives, user stories and team practices.",
+      "notes": "Pair theory with project boards and pull-request workflows.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R119",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        42,
+        43
+      ],
+      "module": "Technical Documentation",
+      "topics": [
+        "technical writing",
+        "clarity",
+        "documentation"
+      ],
+      "title": "Technical Writing Courses",
+      "provider": "Google for Developers",
+      "resource_type": "Free courses",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://developers.google.com/tech-writing",
+      "access": "Free",
+      "estimated_time": "6–12 hours",
+      "use": "Clear sentences, paragraphs, audience awareness and technical-document structure.",
+      "notes": "Apply directly to README, API and architecture documentation.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R120",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        42,
+        43
+      ],
+      "module": "Portfolio Development",
+      "topics": [
+        "README",
+        "repository documentation"
+      ],
+      "title": "About READMEs",
+      "provider": "GitHub Docs",
+      "resource_type": "Official guide",
+      "level": "Beginner",
+      "priority": "P0",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+      "access": "Free",
+      "estimated_time": "1–2 hours",
+      "use": "Create a clear repository landing page with setup, architecture, usage, tests and project evidence.",
+      "notes": "Every portfolio project must include a professional README.",
+      "primary_or_supplementary": "Primary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R121",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        43
+      ],
+      "module": "Portfolio Development",
+      "topics": [
+        "GitHub Pages",
+        "project site"
+      ],
+      "title": "GitHub Pages",
+      "provider": "GitHub",
+      "resource_type": "Official documentation",
+      "level": "Beginner",
+      "priority": "P2",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://pages.github.com/",
+      "access": "Free for supported GitHub repositories/plans",
+      "estimated_time": "2–5 hours",
+      "use": "Publish a simple project portfolio or documentation site directly from a repository.",
+      "notes": "Optional presentation upgrade.",
+      "primary_or_supplementary": "Optional",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R122",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        3,
+        4,
+        5,
+        12,
+        27,
+        43
+      ],
+      "module": "Backend Portfolio Reference",
+      "topics": [
+        "Spring Boot",
+        "JPA",
+        "tests",
+        "security"
+      ],
+      "title": "Spring Petclinic",
+      "provider": "Spring Projects",
+      "resource_type": "Reference project",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://github.com/spring-projects/spring-petclinic",
+      "access": "Free; open source",
+      "estimated_time": "Code reading project",
+      "use": "Study the structure, configuration, testing and conventions of a maintained Spring application.",
+      "notes": "Do not copy it as a portfolio project; use it for architecture reading.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R123",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        8,
+        9,
+        43
+      ],
+      "module": "Automation Portfolio Reference",
+      "topics": [
+        "Selenium examples",
+        "Java bindings"
+      ],
+      "title": "Selenium Documentation Examples",
+      "provider": "Selenium Project",
+      "resource_type": "Open-source examples",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://github.com/SeleniumHQ/seleniumhq.github.io/tree/trunk/examples",
+      "access": "Free; open source",
+      "estimated_time": "Code reference",
+      "use": "Official example code used by Selenium documentation in several languages.",
+      "notes": "Use to compare API usage and idioms.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R124",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        27,
+        43
+      ],
+      "module": "Security Practice Project",
+      "topics": [
+        "security testing",
+        "vulnerable application"
+      ],
+      "title": "OWASP Juice Shop",
+      "provider": "OWASP Foundation",
+      "resource_type": "Open-source practice application",
+      "level": "Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Automation",
+        "Backend"
+      ],
+      "url": "https://owasp.org/www-project-juice-shop/",
+      "access": "Free; open source",
+      "estimated_time": "Ongoing labs",
+      "use": "Authorised security training application with challenges and documentation.",
+      "notes": "Run locally or use official training instances; never attack systems without permission.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R125",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        1,
+        2,
+        44
+      ],
+      "module": "Interview Preparation",
+      "topics": [
+        "Java coding",
+        "problem solving"
+      ],
+      "title": "HackerRank Java",
+      "provider": "HackerRank",
+      "resource_type": "Interactive coding practice",
+      "level": "Beginner–Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.hackerrank.com/domains/java",
+      "access": "Free account available",
+      "estimated_time": "Ongoing",
+      "use": "Java language and coding challenges for interview practice and syntax fluency.",
+      "notes": "Use selected easy and medium problems.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R126",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        4,
+        44
+      ],
+      "module": "Interview Preparation",
+      "topics": [
+        "SQL",
+        "joins",
+        "queries"
+      ],
+      "title": "HackerRank SQL",
+      "provider": "HackerRank",
+      "resource_type": "Interactive coding practice",
+      "level": "Beginner–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.hackerrank.com/domains/sql",
+      "access": "Free account available",
+      "estimated_time": "Ongoing",
+      "use": "Progressive SQL questions covering selection, aggregation, joins and advanced queries.",
+      "notes": "Pair with PostgreSQL project queries.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R127",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        2,
+        44
+      ],
+      "module": "Interview Preparation",
+      "topics": [
+        "DSA",
+        "coding interviews"
+      ],
+      "title": "LeetCode Problemset",
+      "provider": "LeetCode",
+      "resource_type": "Interactive coding practice",
+      "level": "Beginner–Advanced",
+      "priority": "P1",
+      "tracks": [
+        "Shared",
+        "Backend"
+      ],
+      "url": "https://leetcode.com/problemset/",
+      "access": "Many problems free; premium features optional",
+      "estimated_time": "Ongoing",
+      "use": "Targeted easy and medium problems for Software Engineer I and backend interviews.",
+      "notes": "Use a curated list; avoid random high-volume grinding.",
+      "primary_or_supplementary": "Practice",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R128",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        1,
+        3,
+        15,
+        37,
+        43,
+        44
+      ],
+      "module": "Java Career Roadmap",
+      "topics": [
+        "Java roadmap",
+        "career planning"
+      ],
+      "title": "Java Developer Roadmap",
+      "provider": "roadmap.sh community",
+      "resource_type": "Visual roadmap",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://roadmap.sh/java",
+      "access": "Free core content; account features may vary",
+      "estimated_time": "Reference",
+      "use": "Visual overview of Java developer topics and possible learning order.",
+      "notes": "Community roadmap; use only as supplementary orientation.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R129",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        8,
+        9,
+        10,
+        17,
+        43,
+        44
+      ],
+      "module": "QA Career Roadmap",
+      "topics": [
+        "QA",
+        "automation",
+        "testing roadmap"
+      ],
+      "title": "QA Roadmap",
+      "provider": "roadmap.sh community",
+      "resource_type": "Visual roadmap",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Automation"
+      ],
+      "url": "https://roadmap.sh/qa",
+      "access": "Free core content; account features may vary",
+      "estimated_time": "Reference",
+      "use": "Visual map of testing, automation, API, performance and quality-engineering topics.",
+      "notes": "Community roadmap; platform priorities should override it.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R130",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        5,
+        7,
+        10,
+        43
+      ],
+      "module": "API Project Discovery",
+      "topics": [
+        "public APIs",
+        "integration project"
+      ],
+      "title": "Public APIs List",
+      "provider": "Public APIs community",
+      "resource_type": "Community directory",
+      "level": "Beginner–Intermediate",
+      "priority": "P2",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://github.com/public-apis/public-apis",
+      "access": "Free directory; individual APIs have different terms",
+      "estimated_time": "Reference",
+      "use": "Find public APIs for integration and automation practice.",
+      "notes": "Verify each API’s availability, authentication, terms and data policy before use.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R131",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        13,
+        43
+      ],
+      "module": "Testcontainers Examples",
+      "topics": [
+        "integration test examples",
+        "databases",
+        "services"
+      ],
+      "title": "Testcontainers Java Examples",
+      "provider": "Testcontainers",
+      "resource_type": "Open-source examples",
+      "level": "Intermediate",
+      "priority": "P1",
+      "tracks": [
+        "Backend",
+        "Automation"
+      ],
+      "url": "https://github.com/testcontainers/testcontainers-java/tree/main/examples",
+      "access": "Free; open source",
+      "estimated_time": "Code reference",
+      "use": "Working examples for databases, services and integration-test patterns.",
+      "notes": "Use after the quickstart and Docker basics.",
+      "primary_or_supplementary": "Reference",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R132",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        1
+      ],
+      "module": "Core Java",
+      "topics": [
+        "Java fundamentals",
+        "OOP",
+        "IntelliJ",
+        "video course"
+      ],
+      "title": "Java Full Course",
+      "provider": "Amigoscode via YouTube / Class Central",
+      "resource_type": "YouTube video course",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Shared"
+      ],
+      "url": "https://www.classcentral.com/course/youtube-java-full-course-new-92913",
+      "access": "Free video; Class Central landing page links to YouTube",
+      "estimated_time": "3 hours 35 minutes",
+      "use": "Concise video-led introduction to Java syntax, development setup, control flow, methods, classes and objects.",
+      "notes": "Use as a supplementary video path alongside current official Java documentation.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    },
+    {
+      "id": "R133",
+      "section": "Professional practice, optional skills and portfolio",
+      "module_no": [
+        3
+      ],
+      "module": "Java Backend Development",
+      "topics": [
+        "Spring Boot",
+        "REST API",
+        "video course"
+      ],
+      "title": "Spring Boot Tutorial for Beginners — Full Course 2025",
+      "provider": "Amigoscode via YouTube / Class Central",
+      "resource_type": "YouTube video course",
+      "level": "Beginner",
+      "priority": "P1",
+      "tracks": [
+        "Backend"
+      ],
+      "url": "https://www.classcentral.com/course/youtube-spring-boot-tutorial-for-beginners-full-course-2025-446662",
+      "access": "Free video; Class Central landing page links to YouTube",
+      "estimated_time": "1 hour 12 minutes",
+      "use": "Fast visual introduction to creating and structuring a modern Spring Boot application.",
+      "notes": "Use after the official Spring Boot guide; verify examples against current Spring documentation.",
+      "primary_or_supplementary": "Supplementary",
+      "last_reviewed": "2026-07-29",
+      "active": true
+    }
+  ]
+}

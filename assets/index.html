@@ -5,13 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Compile Daily</title>
 <style>
-:root{--bg:#f2f2f7;--card:#ffffff;--ink:#1c1c1e;--muted:#8a8a8e;--brand:#007aff;--brand2:#34c759;--line:#e5e5ea;--warn:#ff9500;--danger:#ff3b30;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 20px rgba(30,30,40,.06);--radius:18px;--ringTrack:#e5e5ea}
-@media(prefers-color-scheme:dark){:root{--bg:#000000;--card:#1c1c1e;--ink:#f2f2f7;--muted:#98989f;--brand:#0a84ff;--brand2:#30d158;--line:#38383a;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 20px rgba(0,0,0,.35);--ringTrack:#2c2c2e}}
+:root{--bg:#f4f5fa;--card:#ffffff;--elevated:#ffffff;--ink:#171b2b;--muted:#5c6478;--muted2:#8890a3;--brand:#6552e0;--brand2:#1fae7a;--sky:#0f8fd9;--line:#e3e5f0;--warn:#c97a0f;--danger:#d43f52;--shadow:0 1px 2px rgba(23,20,60,.04),0 8px 20px rgba(23,20,60,.07);--radius:16px;--ringTrack:#e6e8f2}
+@media(prefers-color-scheme:dark){:root{--bg:#0b1020;--card:#121a2a;--elevated:#182235;--ink:#f7f9fc;--muted:#aeb8cc;--muted2:#7f8aa3;--brand:#7968f2;--brand2:#35d39a;--sky:#4cb8ff;--line:#29344b;--warn:#ffb454;--danger:#ff6b7a;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 24px rgba(0,0,0,.35);--ringTrack:#232e46}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
 body{padding-bottom:96px}.app{max-width:760px;margin:auto;min-height:100vh}
 button{font-family:inherit}
+.icon{width:22px;height:22px;display:block}
 .top{padding:calc(env(safe-area-inset-top) + 16px) 18px 6px}
-.toprow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.eyebrow{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}.top h1{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:3px 0 3px}.top p{font-size:14px;color:var(--muted);margin:0;font-weight:600}
+.top.compact{padding:calc(env(safe-area-inset-top) + 14px) 18px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top.compact h1{font-size:24px;font-weight:800;letter-spacing:-.01em;margin:0}
+.top.compact .compactSub{font-size:13px;color:var(--muted);font-weight:600;margin-top:2px}
+.top.compact .actions{display:flex;gap:6px;align-items:center;flex:none}
+.top.compact .actions button{border:0;background:transparent;color:var(--brand);font-weight:700;font-size:13.5px;padding:9px 8px;min-height:40px}
+.toprow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.eyebrow{font-size:12px;color:var(--muted2);font-weight:700;letter-spacing:.06em;text-transform:uppercase}.top h1{font-size:29px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:3px 0 3px}.top p{font-size:14px;color:var(--muted);margin:0;font-weight:600}
 .avatar{height:44px;width:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px;flex:none;margin-top:2px;cursor:pointer;transition:transform .12s ease}.avatar:active{transform:scale(.9)}
 .heroGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
 .heroCard{display:flex;align-items:center;gap:11px;padding:13px}
@@ -19,46 +25,52 @@ button{font-family:inherit}
 .streakBadge{font-size:21px;display:flex;align-items:center;gap:5px}.streakBadge b{font-size:21px;font-weight:800}
 .ring{--p:0;width:44px;height:44px;border-radius:50%;background:conic-gradient(var(--accent,var(--brand)) calc(var(--p)*3.6deg),var(--ringTrack) 0);display:grid;place-items:center;flex:none;transition:.3s}
 .ring span{width:33px;height:33px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:10.5px;font-weight:800;color:var(--ink)}
-main{padding:16px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 11px}.sectionHead h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0}.sectionHead button{border:0;background:transparent;color:var(--brand);font-weight:650;font-size:14px;padding:4px}
+main{padding:16px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 11px;gap:10px}.sectionHead h2{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:0}.sectionHead button{border:0;background:transparent;color:var(--brand);font-weight:700;font-size:14px;padding:9px 6px;min-height:40px}
 .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:12px;transition:transform .15s ease,box-shadow .15s ease}.card h3{margin:0 0 8px;font-size:16px;font-weight:750}.muted{color:var(--muted)}
-.empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:13px}
-.focus{display:flex;align-items:flex-start;gap:12px}.focusIcon{height:42px;width:42px;border-radius:13px;background:rgba(0,122,255,.12);color:var(--brand);display:grid;place-items:center;font-size:19px;flex:none}.focus h3{margin:1px 0 4px}.tag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(120,120,128,.14);color:var(--muted);padding:4px 9px;font-size:11px;font-weight:700;margin:3px 4px 0 0}.tag.green{background:rgba(52,199,89,.14);color:#1f8a3d}.tag.purple{background:rgba(0,122,255,.12);color:var(--brand)}.tag.orange{background:rgba(255,149,0,.14);color:#a86300}
-.task{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}.task:first-child{border-top:0}
+.empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:13.5px;line-height:1.5}
+.focus{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(150deg,rgba(101,82,224,.14),rgba(76,184,255,.08));border-color:rgba(101,82,224,.25)}.focusIcon{height:44px;width:44px;border-radius:13px;background:rgba(101,82,224,.16);color:var(--brand);display:grid;place-items:center;font-size:19px;flex:none}.focus h3{margin:1px 0 4px}.tag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(120,120,140,.14);color:var(--muted);padding:5px 10px;font-size:12px;font-weight:700;margin:3px 4px 0 0}.tag.green{background:rgba(31,174,122,.15);color:#1a9166}.tag.purple{background:rgba(101,82,224,.14);color:var(--brand)}.tag.orange{background:rgba(201,122,15,.14);color:var(--warn)}
+@media(prefers-color-scheme:dark){.tag.green{color:#3fe0a8}}
+.task{display:flex;gap:11px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}.task:first-child{border-top:0}
 input[type=checkbox].circle{appearance:none;-webkit-appearance:none;width:24px;height:24px;border-radius:50%;border:2px solid #c7c7cc;background:transparent;margin:0;flex:none;position:relative;transition:transform .15s ease,background .15s ease,border-color .15s ease;cursor:pointer}
 input[type=checkbox].circle:active{transform:scale(.88)}
 input[type=checkbox].circle:checked{background:var(--brand);border-color:var(--brand);animation:checkPop .28s cubic-bezier(.34,1.56,.64,1)}
 input[type=checkbox].circle:checked:after{content:'';position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
 @keyframes checkPop{0%{transform:scale(.7)}55%{transform:scale(1.18)}100%{transform:scale(1)}}
 .task{transition:opacity .2s ease}
-.task label{font-size:14.5px;line-height:1.35;flex:1;font-weight:600}.task label span{display:block;color:var(--muted);font-size:11.5px;margin-top:3px;font-weight:600}.task.done label{color:#7e899a}
+.task label{font-size:15px;line-height:1.4;flex:1;font-weight:600}.task label span{display:block;color:var(--muted);font-size:13px;margin-top:3px;font-weight:600}.task.done label{color:var(--muted2)}
 .doneDate{color:var(--brand2)!important;cursor:pointer}.estMin{color:var(--muted)}
-.role{border-left:5px solid var(--brand);padding-left:14px}.role h3{font-size:17px}.roleMeta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:650}.score{font-weight:800;color:var(--brand)}.stack{font-size:13px;line-height:1.55}
-.role button,.primary{border:0;border-radius:14px;background:var(--brand);color:#fff;padding:12px 14px;font-weight:700;font-size:15px;transition:transform .12s ease,opacity .12s ease}
-.secondary{border:0;background:rgba(120,120,128,.14);color:var(--brand);border-radius:14px;padding:11px 12px;font-weight:700;font-size:15px;transition:transform .12s ease,opacity .12s ease}
+.role{border-left:5px solid var(--brand);padding-left:14px}.role h3{font-size:17px}.roleMeta{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:650}.score{font-weight:800;color:var(--brand)}.stack{font-size:14px;line-height:1.55}
+.role button,.primary{border:0;border-radius:14px;background:var(--brand);color:#fff;padding:14px 16px;font-weight:700;font-size:15px;min-height:48px;transition:transform .12s ease,opacity .12s ease}
+.secondary{border:0;background:rgba(120,120,140,.14);color:var(--brand);border-radius:14px;padding:12px 14px;font-weight:700;font-size:15px;min-height:44px;transition:transform .12s ease,opacity .12s ease}
 button{transition:transform .12s ease,opacity .12s ease}
 button:active{opacity:.7;transform:scale(.96)}
-.phaseHead{display:flex;align-items:center;gap:12px;cursor:pointer;border-radius:12px;transition:background .15s ease}
-.phaseHead:active{background:rgba(120,120,128,.08)}
-.phaseInfo{flex:1;min-width:0}.phaseInfo h3{margin:1px 0 2px;font-size:15.5px}.weeks{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
-.chev{color:#c7c7cc;font-size:18px;transition:transform .25s ease;flex:none}
+.phaseHead{display:flex;align-items:center;gap:12px;cursor:pointer;border-radius:12px;transition:background .15s ease;min-height:44px}
+.phaseHead:active{background:rgba(120,120,140,.08)}
+.phaseInfo{flex:1;min-width:0}.phaseInfo h3{margin:1px 0 2px;font-size:16px}.weeks{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.chev{color:var(--muted2);font-size:18px;transition:transform .25s ease;flex:none}
 .phaseCard.open>.phaseHead .chev.big{transform:rotate(180deg)}
 .phaseBody{max-height:0;overflow:hidden;transition:max-height .3s ease}.phaseCard.open .phaseBody{max-height:6000px}
-.topicHead{display:flex;justify-content:space-between;align-items:center;padding:12px 2px;cursor:pointer;font-weight:700;font-size:13.5px;border-top:1px solid var(--line);transition:opacity .15s ease}
+.topicHead{display:flex;justify-content:space-between;align-items:center;padding:13px 2px;cursor:pointer;font-weight:700;font-size:14px;border-top:1px solid var(--line);transition:opacity .15s ease;min-height:44px}
 .topicHead:active{opacity:.6}
-.topicRight{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:700}
+.topicRight{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12.5px;font-weight:700}
 .topic.open .topicRight .chev{transform:rotate(180deg)}
 .topicBody{display:none;padding:2px 0 4px}.topic.open .topicBody{display:block;animation:fadeIn .2s ease}
-.question{cursor:pointer;transition:opacity .15s ease}.question:active{opacity:.75}.question .q{font-weight:700;font-size:14px;display:flex;justify-content:space-between;gap:12px}.question .ans{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.55}.question.open .ans{display:block;animation:fadeIn .2s ease}.question.open .chev{transform:rotate(180deg)}
+.question{cursor:pointer;transition:opacity .15s ease}.question:active{opacity:.75}.question .q{font-weight:700;font-size:14.5px;display:flex;justify-content:space-between;gap:12px}.question .ans{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);line-height:1.55}.question.open .ans{display:block;animation:fadeIn .2s ease}.question.open .chev{transform:rotate(180deg)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
-.filterRow{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.chip{white-space:nowrap;border:0;background:rgba(120,120,128,.14);border-radius:999px;padding:8px 13px;font-size:12.5px;font-weight:700;color:var(--muted);transition:background .2s ease,color .2s ease,transform .12s ease}.chip.active{background:var(--brand);color:#fff}.chip:active{transform:scale(.94)}
-.projectHead{display:flex;gap:12px}.projectIcon{height:44px;width:44px;border-radius:13px;background:rgba(52,199,89,.14);color:#1f8a3d;display:grid;place-items:center;font-size:20px;flex:none}.projectProgress{height:6px;background:rgba(120,120,128,.16);border-radius:10px;margin:12px 0;overflow:hidden}.projectProgress i{display:block;background:var(--brand2);height:100%;width:0;transition:.3s}
-.settingRow{display:grid;gap:6px;margin-bottom:14px}.settingRow label{font-size:12px;font-weight:750;color:var(--muted)}
-input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--bg);font:inherit;color:var(--ink);outline:none}textarea{min-height:100px;resize:vertical}
-.notice{padding:13px;border-radius:14px;background:rgba(255,149,0,.12);color:#a86300;font-size:12.5px;line-height:1.5;font-weight:600}
-@media(prefers-color-scheme:dark){.notice{color:#ffb340}}
-.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(248,248,250,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid var(--line);display:flex;justify-content:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-@media(prefers-color-scheme:dark){.bottom{background:rgba(20,20,22,.78)}}
-.nav{width:min(760px,100%);display:grid;grid-template-columns:repeat(6,1fr);padding:7px 4px}.nav button{border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:700;padding:4px 2px;transition:color .2s ease,transform .12s ease}.nav button b{display:block;font-size:20px;line-height:1.15;margin-bottom:2px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}.nav button.active{color:var(--brand)}.nav button.active b{transform:translateY(-1px) scale(1.08)}.nav button:active{transform:scale(.92)}
+.filterRow{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;-ms-overflow-style:none}.filterRow::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;border:0;background:rgba(120,120,140,.14);border-radius:999px;padding:10px 15px;font-size:13px;font-weight:700;color:var(--muted);min-height:40px;transition:background .2s ease,color .2s ease,transform .12s ease}.chip.active{background:var(--brand);color:#fff}.chip:active{transform:scale(.94)}
+.projectHead{display:flex;gap:12px}.projectIcon{height:44px;width:44px;border-radius:13px;background:rgba(31,174,122,.14);color:#1a9166;display:grid;place-items:center;font-size:20px;flex:none}.projectProgress{height:6px;background:rgba(120,120,140,.16);border-radius:10px;margin:12px 0;overflow:hidden}.projectProgress i{display:block;background:var(--brand2);height:100%;width:0;transition:.3s}
+.settingRow{display:grid;gap:6px;margin-bottom:14px}.settingRow label{font-size:13px;font-weight:750;color:var(--muted)}
+input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:13px;background:var(--bg);font:inherit;font-size:15px;color:var(--ink);outline:none;min-height:48px}textarea{min-height:100px;resize:vertical}
+.notice{display:flex;gap:11px;align-items:flex-start;padding:14px;border-radius:14px;background:var(--elevated);border:1px solid var(--line);color:var(--ink);font-size:13.5px;line-height:1.55;font-weight:500}
+.notice b{font-weight:800}
+.notice .noticeIcon{font-size:18px;flex:none;line-height:1.4}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(244,245,250,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--line);display:flex;justify-content:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+@media(prefers-color-scheme:dark){.bottom{background:rgba(11,16,32,.86)}}
+.nav{width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px;min-height:64px}
+.nav button{border:0;background:transparent;color:var(--muted2);font-size:11px;font-weight:700;padding:6px 2px;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:color .2s ease,transform .12s ease}
+.nav button .icon{transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+.nav button.active{color:var(--brand)}.nav button.active .icon{transform:translateY(-1px) scale(1.08)}.nav button:active{transform:scale(.94)}
 .view{display:none}.view.active{display:block;animation:viewIn .28s cubic-bezier(.22,.9,.32,1)}
 @keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:80;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .28s ease,background .28s ease}
@@ -70,88 +82,130 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
 .toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%) translateY(20px);background:rgba(28,28,30,.92);color:#fff;padding:11px 16px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .statGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px}
 .statCard{background:var(--card);border-radius:var(--radius);padding:15px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.statCard b{display:block;font-size:24px;font-weight:800;margin-bottom:2px;letter-spacing:-.01em}
-.statCard .lbl{font-size:11.5px;color:var(--muted);font-weight:700}
+.statCard b{display:block;font-size:23px;font-weight:800;margin-bottom:2px;letter-spacing:-.01em}
+.statCard .lbl{font-size:12.5px;color:var(--muted);font-weight:700}
 .weekChart{display:flex;gap:8px;align-items:flex-end;height:100px;margin:12px 0 4px}
 .weekChart .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
 .weekChart .bar i{width:100%;max-width:24px;border-radius:6px 6px 3px 3px;background:var(--brand);display:block;min-height:3px}
-.weekChart .bar span{font-size:10px;color:var(--muted);margin-top:6px;font-weight:700}
+.weekChart .bar span{font-size:11px;color:var(--muted);margin-top:6px;font-weight:700}
 .heatGrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;overflow-x:auto;padding:4px 0}
-.heatCell{width:11px;height:11px;border-radius:3px;background:rgba(120,120,128,.16)}
-.heatCell.l1{background:rgba(0,122,255,.35)}.heatCell.l2{background:rgba(0,122,255,.65)}.heatCell.l3{background:var(--brand)}
+.heatCell{width:11px;height:11px;border-radius:3px;background:rgba(120,120,140,.16)}
+.heatCell.l1{background:rgba(101,82,224,.35)}.heatCell.l2{background:rgba(101,82,224,.65)}.heatCell.l3{background:var(--brand)}
 .milestoneRow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);gap:10px}.milestoneRow:first-child{border-top:0}
-.milestoneRow .mTitle{font-size:13.5px;font-weight:700}.milestoneRow .mDate{font-size:11px;color:var(--muted);font-weight:600;flex:none}
-@media(max-width:430px){.top h1{font-size:28px}.card{padding:14px}}
+.milestoneRow .mTitle{font-size:14px;font-weight:700}.milestoneRow .mDate{font-size:12px;color:var(--muted);font-weight:600;flex:none}
+.stageCard{background:var(--card);border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:13px}
+.stageHead{display:flex;align-items:center;gap:12px;cursor:pointer;min-height:44px}
+.stageHead .stageInfo{flex:1;min-width:0}.stageHead h3{margin:1px 0 2px;font-size:17px}
+.stageTag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(120,120,140,.14);color:var(--muted);padding:3px 9px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-left:8px;vertical-align:middle}
+.priorityBadge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800;letter-spacing:.02em;margin-left:8px;vertical-align:middle}
+.priorityBadge.p-M{background:var(--brand);color:#fff}
+.priorityBadge.p-I{background:rgba(15,143,217,.16);color:var(--sky)}
+.priorityBadge.p-L{background:rgba(120,120,140,.16);color:var(--muted)}
+.priorityBadge.p-O{background:rgba(120,120,140,.10);color:var(--muted2)}
+.stageBody{max-height:0;overflow:hidden;transition:max-height .35s ease}.stageCard.open .stageBody{max-height:20000px}
+.stageCard.open>.stageHead .chev.big{transform:rotate(180deg)}
+.readinessRow{display:flex;justify-content:space-between;gap:8px;margin:4px 0}
+.readinessBar{height:8px;border-radius:6px;background:rgba(120,120,140,.16);overflow:hidden;margin:8px 0 12px}.readinessBar i{display:block;height:100%;background:var(--brand)}
+.skillPill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 11px;font-size:12.5px;font-weight:700;margin:0 6px 6px 0}
+.skillPill.have{background:rgba(31,174,122,.14);color:#1a9166}
+.skillPill.next{background:rgba(101,82,224,.12);color:var(--brand)}
+@media(prefers-color-scheme:dark){.skillPill.have{color:#3fe0a8}}
+@media(min-width:760px){
+ body{padding-bottom:0;padding-left:96px}
+ .app{max-width:1080px;margin:0 auto}
+ .bottom{left:0;right:auto;top:0;bottom:0;width:96px;border-top:0;border-right:1px solid var(--line);padding-bottom:0;align-items:flex-start;padding-top:calc(env(safe-area-inset-top) + 20px)}
+ .nav{width:100%;grid-template-columns:1fr;grid-auto-rows:min-content;gap:6px;padding:0 8px}
+ .nav button{min-height:60px}
+ .statGrid,.heroGrid{grid-template-columns:repeat(2,1fr)}
+ main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+ .top{max-width:720px;margin:0 auto}
+ .top.compact{max-width:720px;margin:0 auto}
+}
+@media(min-width:1024px){
+ .app{max-width:1200px}
+ main{max-width:1200px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+ .top,.top.compact{max-width:1200px}
+}
+@media(max-width:430px){.top h1{font-size:26px}.card{padding:14px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="top">
- <div class="toprow"><div><div class="eyebrow">Java Career Preparation</div><h1 id="hello">Hello, Moushana</h1><p id="targetLine">Target: Associate Java Backend Developer</p></div><div class="avatar" id="avatar" onclick="openSettings()">L</div></div>
+<header class="top" id="heroHeader">
+ <div class="toprow"><div><div class="eyebrow">Compile Daily</div><h1 id="hello">Hello, Moushana</h1><p id="targetLine">Target: Associate Java Backend Developer</p></div><div class="avatar" id="avatar" onclick="openSettings()" role="button" aria-label="Open profile settings">M</div></div>
  <div class="heroGrid">
-  <div class="card heroCard"><div class="ring" id="overallRing" style="--accent:#007aff"><span id="overall">0%</span></div><div><div class="lbl">Overall roadmap</div><div class="muted" style="font-size:11px;font-weight:600">Keep going</div></div></div>
-  <div class="card heroCard"><div class="streakBadge">🔥<b id="streak">0</b></div><div><div class="lbl">Day streak</div><div class="muted" style="font-size:11px;font-weight:600" id="bestStreakLine">Best: 0</div></div></div>
+  <div class="card heroCard" onclick="go('tracker')" role="button" aria-label="View progress"><div class="ring" id="overallRing" style="--accent:#6552e0"><span id="overall">0%</span></div><div><div class="lbl">Overall roadmap</div><div class="muted" style="font-size:12px;font-weight:600" id="overallSub">Ready to begin</div></div></div>
+  <div class="card heroCard" onclick="go('tracker')" role="button" aria-label="View progress"><div class="streakBadge" id="streakBadge">🔥<b id="streak">0</b></div><div><div class="lbl">Day streak</div><div class="muted" style="font-size:12px;font-weight:600" id="bestStreakLine">Start today</div></div></div>
  </div>
+</header>
+<header class="top compact" id="compactHeader" style="display:none">
+ <div><h1 id="compactTitle">Roadmap</h1><div class="compactSub" id="compactSub"></div></div>
+ <div class="actions" id="compactActions"></div>
 </header>
 
 <main>
 <section id="home" class="view active">
- <div class="sectionHead"><h2>Today's focus</h2><button onclick="shuffleFocus()">Refresh</button></div>
- <div class="card focus"><div class="focusIcon">☕</div><div><h3 id="focusTitle">Core Java practice</h3><div class="muted" id="focusText">Complete one focused topic and code a small example.</div><div id="focusTags"><span class="tag purple">Java</span><span class="tag green">45 min</span></div></div></div>
- <div class="sectionHead"><h2>Daily checklist</h2><button onclick="resetDaily()">Reset</button></div>
+ <div class="sectionHead"><h2>Today's focus</h2><button onclick="shuffleFocus()">Change focus</button></div>
+ <div class="card focus"><div class="focusIcon">☕</div><div style="flex:1"><h3 id="focusTitle">Core Java practice</h3><div class="muted" id="focusText">Complete one focused topic and code a small example.</div><div id="focusTags"><span class="tag purple">Java</span><span class="tag green">45 min</span></div><button class="primary" style="margin-top:12px;width:100%" onclick="continueFocus()">Continue in Learn</button></div></div>
+ <div class="sectionHead"><h2>Today's plan</h2><button onclick="resetDaily()">Reset</button></div>
  <div class="card" id="dailyTasks"></div>
- <div class="sectionHead"><h2>Current target</h2><button onclick="openRoles()">Change</button></div>
+ <div class="sectionHead"><h2>Your career goal</h2><button onclick="openRoles()">Edit goal</button></div>
  <div class="card role" id="targetCard"></div>
- <div class="notice">Tip: Apply now for Java SDET and automation roles while building Spring Boot projects for backend roles.</div>
+ <div class="notice"><span class="noticeIcon">💡</span><div><b>Coach note</b><br>You don't need to finish the whole roadmap before applying. Start applying once Core Java, one testing/automation track, and one strong project are solid.</div></div>
 </section>
 
 <section id="roadmap" class="view">
- <div class="sectionHead"><h2>Full-stack curriculum</h2><button onclick="openGithubGuide()">GitHub guide</button></div>
+ <div id="roadmapCurrentCard"></div>
  <div id="roadmapList"></div>
 </section>
 
 <section id="tracker" class="view">
- <div class="sectionHead"><h2>Progress tracker</h2></div>
  <div id="trackerStats"></div>
 </section>
 
 <section id="learn" class="view">
- <div class="sectionHead"><h2>Learn & assess</h2><button onclick="openDoubt()">Ask AI</button></div>
  <div class="filterRow" id="learnPhaseFilter"></div>
- <div class="sectionHead"><h2 style="font-size:15px">Resources</h2></div>
+ <div class="sectionHead"><h2 style="font-size:16px">Resources</h2></div>
  <div id="resourceList"></div>
- <div class="sectionHead"><h2 style="font-size:15px">Assessments</h2></div>
- <div class="row" style="margin-bottom:10px"><select id="learnTopicSelect"></select><button class="secondary" style="flex:none" onclick="generateAssessmentClick(event)">Generate with AI</button></div>
+ <div class="sectionHead"><h2 style="font-size:16px">Assessments</h2></div>
+ <div class="row" style="margin-bottom:10px"><select id="learnTopicSelect"></select><button class="secondary" style="flex:none" onclick="generateAssessmentClick(event)">Create assessment</button></div>
  <div id="assessmentList"></div>
 </section>
 
 <section id="practice" class="view">
- <div class="sectionHead"><h2>Interview practice</h2><button onclick="randomQuestion()">Random</button></div>
  <div class="filterRow" id="filters"></div>
  <div id="questionList"></div>
 </section>
 
 <section id="projects" class="view">
- <div class="sectionHead"><h2>Portfolio projects</h2><div style="display:flex;gap:14px"><button onclick="openGithubGuide()">GitHub guide</button><button onclick="showAddNote()">Notes</button></div></div>
- <div class="notice" style="margin-bottom:13px">Give each project its own public GitHub repo, then paste the repo link below to mark it created.</div>
+ <div class="notice" style="margin-bottom:13px"><span class="noticeIcon">🗂️</span><div><b>One repo per project</b><br>Give each project its own public GitHub repo, then paste the link below to mark it created.</div></div>
  <div id="projectList"></div>
- <div class="card"><h3>Personal notes</h3><div class="muted" style="font-size:13px;white-space:pre-wrap" id="notesPreview">No notes yet.</div></div>
+ <div class="card"><h3>Personal notes</h3><div class="muted" style="font-size:14px;white-space:pre-wrap" id="notesPreview">No notes yet.</div></div>
 </section>
 </main>
 </div>
 
 <nav class="bottom"><div class="nav">
-<button class="active" data-view="home" onclick="go('home')"><b>⌂</b>Home</button>
-<button data-view="roadmap" onclick="go('roadmap')"><b>☑</b>Roadmap</button>
-<button data-view="tracker" onclick="go('tracker')"><b>◔</b>Tracker</button>
-<button data-view="learn" onclick="go('learn')"><b>🎓</b>Learn</button>
-<button data-view="practice" onclick="go('practice')"><b>?</b>Practice</button>
-<button data-view="projects" onclick="go('projects')"><b>▣</b>Projects</button>
+<button class="active" data-view="home" onclick="go('home')" aria-label="Home">
+ <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5"/></svg>
+ Home</button>
+<button data-view="roadmap" onclick="go('roadmap')" aria-label="Roadmap">
+ <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3 6 1.3 1.3L6.5 5"/><path d="m3 12 1.3 1.3L6.5 11"/><path d="m3 18 1.3 1.3L6.5 17"/></svg>
+ Roadmap</button>
+<button data-view="learn" onclick="go('learn')" aria-label="Learn">
+ <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5z"/></svg>
+ Learn</button>
+<button data-view="practice" onclick="go('practice')" aria-label="Practice">
+ <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.6 1.3c0 1.7-2.1 1.9-2.1 3.4"/><path d="M12 17h.01"/></svg>
+ Practice</button>
+<button data-view="projects" onclick="go('projects')" aria-label="Projects">
+ <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+ Projects</button>
 </div></nav>
 
 <div class="modal" id="settingsModal" onclick="closeOnBackdrop(event)"><div class="sheet">
  <div class="sheetHandle"></div><h2 style="margin-top:0">Preparation profile</h2>
- <div class="settingRow"><label>Your name</label><input id="nameInput" type="text" placeholder="Moushana"></div>
+ <div class="settingRow"><label>Your name</label><input type="text" value="Moushana Bharadwaj" disabled style="opacity:.6"></div>
  <div class="settingRow"><label>Primary target role</label><select id="roleSelect"></select></div>
  <div class="settingRow"><label>Daily study goal</label><select id="goalSelect"><option value="45">45 minutes</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option><option value="180">3 hours</option></select></div>
  <div class="settingRow"><label>Backend URL (cloud sync + AI)</label><input id="apiBaseInput" type="text" placeholder="https://your-backend.onrender.com"></div>
@@ -212,14 +266,45 @@ input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-
 
 <script>
 const roles=[
- {id:'sdet',name:'SDET – Java',score:'9/10',recommendation:'Apply immediately',use:'Automation frameworks, API testing, utilities and test infrastructure.',stack:['Advanced Java','Selenium WebDriver','TestNG / JUnit 5','Cucumber','REST Assured','SQL / JDBC','Maven','GitHub Actions / Jenkins','Docker','Selenium Grid','Allure / Extent Reports']},
- {id:'automation',name:'Java Automation Engineer',score:'9/10',recommendation:'Apply immediately',use:'Selenium, TestNG, Cucumber, Maven and API automation.',stack:['Core + Advanced Java','Selenium','TestNG','Cucumber BDD','REST Assured','Postman','Maven','Git','SQL','CI/CD','Docker','BrowserStack / Sauce Labs']},
- {id:'qa-dev',name:'QA Automation Developer',score:'8.5/10',recommendation:'Apply immediately',use:'Framework development, reusable Java libraries and CI/CD.',stack:['Advanced Java','SOLID + design patterns','JUnit 5 / TestNG','Mockito','REST Assured','WireMock','Testcontainers','Spring Boot basics','Docker','CI/CD','SQL','Reusable libraries']},
- {id:'backend',name:'Associate Java Backend Developer',score:'5/10',recommendation:'Best development target',use:'Spring Boot, REST APIs, SQL and JPA/Hibernate.',stack:['Java 21+','Spring Boot','Spring MVC','Spring Data JPA','Hibernate','PostgreSQL','REST APIs','Validation','Spring Security + JWT','JUnit 5 + Mockito','Docker','GitHub Actions','OpenAPI / Swagger']},
- {id:'swe',name:'Software Engineer I – Java',score:'4.5/10',recommendation:'Target after projects',use:'Application development, debugging, APIs and databases.',stack:['Advanced Java','DSA','Spring Boot','REST APIs','SQL','JUnit + Mockito','Git','Docker','Linux','OOP design','DBMS + OS + Networks','Basic system design']},
- {id:'api',name:'Java API Developer',score:'4.5/10',recommendation:'Target after API project',use:'REST APIs, JSON, authentication and integrations.',stack:['Java 21+','Spring Boot','Spring MVC','REST design','OpenAPI','PostgreSQL','Spring Security','JWT / OAuth2','WebClient','Resilience4j','JUnit + Mockito','Docker','Kafka basics']}
+ {id:'sdet',name:'SDET – Java',score:'9/10',recommendation:'Strong current match',use:'Automation frameworks, API testing, utilities and test infrastructure.',stack:['Advanced Java','Selenium WebDriver','TestNG / JUnit 5','Cucumber','REST Assured','SQL / JDBC','Maven','GitHub Actions / Jenkins','Docker','Selenium Grid','Allure / Extent Reports']},
+ {id:'automation',name:'Java Automation Engineer',score:'9/10',recommendation:'Strong current match',use:'Selenium, TestNG, Cucumber, Maven and API automation.',stack:['Core + Advanced Java','Selenium','TestNG','Cucumber BDD','REST Assured','Postman','Maven','Git','SQL','CI/CD','Docker','BrowserStack / Sauce Labs']},
+ {id:'qa-dev',name:'QA Automation Developer',score:'8.5/10',recommendation:'Strong current match',use:'Framework development, reusable Java libraries and CI/CD.',stack:['Advanced Java','SOLID + design patterns','JUnit 5 / TestNG','Mockito','REST Assured','WireMock','Testcontainers','Spring Boot basics','Docker','CI/CD','SQL','Reusable libraries']},
+ {id:'backend',name:'Associate Java Backend Developer',score:'5/10',recommendation:'Recommended focus',use:'Spring Boot, REST APIs, SQL and JPA/Hibernate.',stack:['Java 21+','Spring Boot','Spring MVC','Spring Data JPA','Hibernate','PostgreSQL','REST APIs','Validation','Spring Security + JWT','JUnit 5 + Mockito','Docker','GitHub Actions','OpenAPI / Swagger']},
+ {id:'swe',name:'Software Engineer I – Java',score:'4.5/10',recommendation:'Reachable with projects',use:'Application development, debugging, APIs and databases.',stack:['Advanced Java','DSA','Spring Boot','REST APIs','SQL','JUnit + Mockito','Git','Docker','Linux','OOP design','DBMS + OS + Networks','Basic system design']},
+ {id:'api',name:'Java API Developer',score:'4.5/10',recommendation:'Reachable with an API project',use:'REST APIs, JSON, authentication and integrations.',stack:['Java 21+','Spring Boot','Spring MVC','REST design','OpenAPI','PostgreSQL','Spring Security','JWT / OAuth2','WebClient','Resilience4j','JUnit + Mockito','Docker','Kafka basics']}
 ];
-const phaseColors=['#007aff','#34c759','#ff9500','#af52de','#ff2d55','#5ac8fa'];
+const phaseColors=['#6552e0','#1fae7a','#0f8fd9','#c97a0f','#d43f52','#8a5cf6'];
+// The 45 modules (below) grouped into 6 broader stages for the Roadmap tab.
+// "optional" stages are enrichment beyond a typical SDET/backend hiring bar.
+const stages=[
+ {title:'Programming Foundation',summary:'Core Java and data structures & algorithms',range:[0,1]},
+ {title:'Backend & Data Engineering',summary:'Spring Boot APIs, databases and REST design',range:[2,6]},
+ {title:'Test Automation Engineering',summary:'Selenium, API automation and framework architecture',range:[7,13]},
+ {title:'Delivery & Platform Engineering',summary:'Build tools, Git, CI/CD, Docker and cloud deployment',range:[14,18]},
+ {title:'Engineering Craft & Extras',summary:'Frontend, tooling, security, architecture and more',range:[19,38],optional:true},
+ {title:'Career Readiness',summary:'Documentation, portfolio and interview preparation',range:[39,44]}
+];
+// Per-module priority for each of the two career tracks Moushana's six target
+// roles fall into: M=Must learn, I=Important, L=Learn later, O=Optional.
+// Index-aligned with `phases` (module 1 "Core Java" = index 0, etc).
+const TRACK_LABEL={automation:'Java Test Automation / SDET',backend:'Java Backend Engineering'};
+function roleTrack(roleId){return['sdet','automation','qa-dev'].includes(roleId)?'automation':'backend'}
+const PRIORITY_LABEL={M:'Must learn',I:'Important',L:'Learn later',O:'Optional'};
+const PRIORITY_RANK={M:0,I:1,L:2,O:3};
+const modulePriority=[
+ {automation:'M',backend:'M'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},
+ {automation:'M',backend:'M'},{automation:'I',backend:'I'},{automation:'M',backend:'I'},{automation:'M',backend:'L'},
+ {automation:'M',backend:'O'},{automation:'M',backend:'I'},{automation:'M',backend:'L'},{automation:'I',backend:'M'},
+ {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'M',backend:'M'},{automation:'M',backend:'M'},
+ {automation:'M',backend:'I'},{automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'O',backend:'L'},
+ {automation:'O',backend:'O'},{automation:'O',backend:'O'},{automation:'I',backend:'L'},{automation:'L',backend:'L'},
+ {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'I',backend:'M'},{automation:'I',backend:'M'},
+ {automation:'L',backend:'I'},{automation:'I',backend:'L'},{automation:'L',backend:'I'},{automation:'L',backend:'I'},
+ {automation:'L',backend:'I'},{automation:'L',backend:'I'},{automation:'L',backend:'I'},{automation:'O',backend:'L'},
+ {automation:'I',backend:'I'},{automation:'I',backend:'M'},{automation:'M',backend:'M'},{automation:'L',backend:'L'},
+ {automation:'I',backend:'I'},{automation:'I',backend:'I'},{automation:'M',backend:'M'},{automation:'M',backend:'M'},
+ {automation:'L',backend:'L'}
+];
 // Each of the 45 modules below mirrors the full curriculum outline, grouped into
 // scannable topics (every original heading is preserved as a checkable task).
 // Every leaf task defaults to a 30-minute study block via allLeafTasks() — a
@@ -269,6 +354,7 @@ const phases=[
    {name:'Other Clients',tasks:['IntelliJ HTTP Client','cURL','Insomnia']}
  ]},
  {title:'Java Test Automation',icon:'🧪',project:{title:'Hybrid Automation Framework',desc:'A Selenium + TestNG + Cucumber framework for a sample app, with a POM layer and HTML reports.'},topics:[
+   {name:'Manual QA Fundamentals',tasks:['Test Scenarios and Test Cases','Boundary Value Analysis','Equivalence Partitioning','Decision Tables','State Transition Testing','Exploratory Testing','Risk-Based Testing','Severity versus Priority','Defect Lifecycle','Regression Strategy','Test Coverage','Requirement Traceability']},
    {name:'Core Tooling',tasks:['Selenium WebDriver','TestNG','JUnit 5','Cucumber BDD','Maven']},
    {name:'Framework Design',tasks:['Page Object Model','Page Component Model','Data-Driven Testing','Keyword-Driven Testing','Hybrid Framework Development']},
    {name:'Execution Strategies',tasks:['Cross-Browser Testing','Parallel Execution','Headless Execution','Screenshot Handling','Retry Mechanism']},
@@ -513,14 +599,18 @@ const S={get:(k,d)=>{try{let v=localStorage.getItem(k);return v===null?d:JSON.pa
 let filter='All';
 let openPhases=new Set([0]);
 let openTopics=new Set();
+let openStages=new Set();
 function todayStr(){return new Date().toISOString().slice(0,10)}
 function dateStr(offset){return new Date(Date.now()+offset*86400000).toISOString().slice(0,10)}
 function fmtDate(d){if(!d)return '';return new Date(d+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}
 async function init(){populateSettings();renderAll();await pullState();renderAll();if(document.getElementById('learn').classList.contains('active')){renderLearnFilters();loadResources();loadAssessments()}}
-function profile(){return S.get('profile',{name:'Moushana',role:'backend',goal:'60'})}
+const USER_NAME='Moushana Bharadwaj';
+const USER_FIRST_NAME='Moushana';
+const USER_INITIALS='MB';
+function profile(){let p=S.get('profile',{role:'backend',goal:'60'});p.name=USER_NAME;return p}
 function apiBase(){return S.get('apiBase','')}
 async function api(path,opts){let base=apiBase();if(!base)return null;try{let r=await fetch(base.replace(/\/$/,'')+path,Object.assign({headers:{'Content-Type':'application/json'}},opts||{}));if(!r.ok)throw new Error('status '+r.status);return await r.json()}catch(e){console.warn('API call failed',path,e);return null}}
-async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:s.profile.name,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks)}
+async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:USER_NAME,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks)}
 function populateSettings(){roleSelect.innerHTML=roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
 function allLeafTasks(){return phases.flatMap((p,pi)=>p.topics.flatMap((t,ti)=>t.tasks.map((label,ki)=>({id:`${pi}-${ti}-${ki}`,pi,ti,ki,m:30,t:label}))))}
 function recordActivity(date){let log=S.get('activityLog',{});log[date]=(log[date]||0)+1;S.set('activityLog',log)}
@@ -540,45 +630,73 @@ function computeStreak(){
  return{current,longest};
 }
 function renderAll(){renderHeader();renderDaily();renderTarget();renderRoadmap();renderFilters();renderQuestions();renderProjects();renderNotes();updateOverall();}
-function renderHeader(){let p=profile(),r=roles.find(x=>x.id===p.role)||roles[3];hello.textContent=`Hello, ${p.name||'Moushana'}`;targetLine.textContent=`Target: ${r.name}`;avatar.textContent=(p.name||'M').trim().charAt(0).toUpperCase();}
-function renderDaily(){let day=todayStr(),state=S.get('daily',{});let vals=state.day===day?state.done:[];dailyTasks.innerHTML=dailyBase.map((t,i)=>taskHtml(`daily-${i}`,t,`Daily goal · ${profile().goal} min plan`,vals.includes(i),`toggleDaily(${i})`)).join('')}
+function renderHeader(){let p=profile(),r=roles.find(x=>x.id===p.role)||roles[3];hello.textContent=`Hello, ${USER_FIRST_NAME}`;targetLine.textContent=`Target: ${r.name}`;avatar.textContent=USER_INITIALS;}
+function renderDaily(){let day=todayStr(),state=S.get('daily',{});let vals=state.day===day?state.done:[];let goal=Number(profile().goal)||60;let slice=Math.max(5,Math.round(goal/dailyBase.length/5)*5);dailyTasks.innerHTML=dailyBase.map((t,i)=>taskHtml(`daily-${i}`,t,`~${slice} min · part of today's ${goal} min plan`,vals.includes(i),`toggleDaily(${i})`)).join('')}
 function toggleDaily(i){let day=todayStr(),st=S.get('daily',{day,done:[]});if(st.day!==day)st={day,done:[]};let was=st.done.includes(i);st.done=was?st.done.filter(x=>x!==i):[...st.done,i];S.set('daily',st);was?decrementActivity(day):recordActivity(day);api('/api/daily/toggle',{method:'POST',body:JSON.stringify({taskIndex:i,done:!was})});renderDaily();updateOverall()}
-function resetDaily(){S.set('daily',{day:todayStr(),done:[]});renderDaily();updateOverall();toastMsg('Daily checklist reset')}
+function resetDaily(){if(!confirm("Reset today's plan? This clears today's 5 items — your logged time and roadmap progress are not affected."))return;S.set('daily',{day:todayStr(),done:[]});renderDaily();updateOverall();toastMsg("Today's plan reset")}
 function taskHtml(id,title,sub,done,click){return `<div class="task ${done?'done':''}"><input class="circle" id="${id}" type="checkbox" ${done?'checked':''} onchange="${click}"><label for="${id}">${title}<span>${sub}</span></label></div>`}
-function renderTarget(){let r=roles.find(x=>x.id===profile().role)||roles[3];targetCard.innerHTML=`<h3>${r.name}</h3><div class="roleMeta"><span class="score">Suitability ${r.score}</span><span>${r.recommendation}</span></div><div class="stack">${r.use}</div><div style="margin-top:9px">${r.stack.slice(0,5).map(x=>`<span class="tag purple">${x}</span>`).join('')}</div>`}
+function renderTarget(){let r=roles.find(x=>x.id===profile().role)||roles[3];let track=roleTrack(r.id);targetCard.innerHTML=`<h3>${r.name}</h3><div class="tag purple" style="margin-bottom:8px">${TRACK_LABEL[track]} track</div><div class="roleMeta"><span class="score">Role readiness ${r.score}</span><span>${r.recommendation}</span></div><div class="muted" style="font-size:12px;margin:-4px 0 8px">General fit for this role based on typical hiring expectations — not yet personalised to your progress.</div><div class="stack">${r.use}</div><div style="margin-top:9px">${r.stack.slice(0,5).map(x=>`<span class="tag purple">${x}</span>`).join('')}</div>`}
 function phaseStats(pi){let leaves=allLeafTasks().filter(l=>l.pi===pi);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length,pct:leaves.length?Math.round(done/leaves.length*100):0}}
 function topicStats(pi,ti){let leaves=allLeafTasks().filter(l=>l.pi===pi&&l.ti===ti);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length}}
-function renderRoadmap(){
- let progress=S.get('roadmapProgress',{});
- let ghLinks=S.get('githubLinks',{});
- roadmapList.innerHTML=phases.map((p,pi)=>{
-  let st=phaseStats(pi),color=phaseColors[pi%phaseColors.length],open=openPhases.has(pi);
-  let topicsHtml=p.topics.map((t,ti)=>{
-   let tst=topicStats(pi,ti),topen=openTopics.has(`${pi}-${ti}`);
-   let tasksHtml=t.tasks.map((label,ki)=>{
-    let id=`${pi}-${ti}-${ki}`,info=progress[id];
-    let sub=info?`<span class="doneDate" onclick="editRoadmapDate('${id}',event)">✓ Done ${fmtDate(info.date)} · tap to edit</span>`:`<span class="estMin">~30 min</span>`;
-    return `<div class="task ${info?'done':''}"><input class="circle" type="checkbox" ${info?'checked':''} onchange="toggleRoadmapTask('${id}')"><label>${label}${sub}</label></div>`;
-   }).join('');
-   return `<div class="topic ${topen?'open':''}"><div class="topicHead" onclick="toggleTopic('${pi}-${ti}')"><span>${t.name}</span><span class="topicRight"><b>${tst.done}/${tst.total}</b><i class="chev">⌄</i></span></div><div class="topicBody">${tasksHtml}</div></div>`;
+function stageStats(si){let[a,b]=stages[si].range;let leaves=allLeafTasks().filter(l=>l.pi>=a&&l.pi<=b);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length,pct:leaves.length?Math.round(done/leaves.length*100):0,modules:b-a+1}}
+function computeCurrentModuleIndex(){let track=roleTrack(profile().role);let candidates=phases.map((p,pi)=>({pi,pct:phaseStats(pi).pct,rank:PRIORITY_RANK[modulePriority[pi][track]]})).filter(c=>c.pct<100);if(!candidates.length)return phases.length-1;candidates.sort((x,y)=>x.rank-y.rank||x.pi-y.pi);return candidates[0].pi}
+function computeCurrentStageIndex(){let cm=computeCurrentModuleIndex();for(let si=0;si<stages.length;si++){if(cm>=stages[si].range[0]&&cm<=stages[si].range[1])return si}return 0}
+function moduleCardHtml(pi){
+ let progress=S.get('roadmapProgress',{}),ghLinks=S.get('githubLinks',{});
+ let p=phases[pi],st=phaseStats(pi),color=phaseColors[pi%phaseColors.length],open=openPhases.has(pi);
+ let topicsHtml=p.topics.map((t,ti)=>{
+  let tst=topicStats(pi,ti),topen=openTopics.has(`${pi}-${ti}`);
+  let tasksHtml=t.tasks.map((label,ki)=>{
+   let id=`${pi}-${ti}-${ki}`,info=progress[id];
+   let sub=info?`<span class="doneDate" onclick="editRoadmapDate('${id}',event)">✓ Done ${fmtDate(info.date)} · tap to edit</span>`:`<span class="estMin">~30 min</span>`;
+   return `<div class="task ${info?'done':''}"><input class="circle" type="checkbox" ${info?'checked':''} onchange="toggleRoadmapTask('${id}')"><label>${label}${sub}</label></div>`;
   }).join('');
-  let ghUrl=ghLinks[pi]&&ghLinks[pi].url;
-  let projectHtml=`<div class="card" style="margin:0 0 12px;background:rgba(0,122,255,.06)">
-   <div style="font-weight:700;font-size:13.5px;margin-bottom:2px">🚀 Milestone project: ${p.project.title}</div>
-   <div class="muted" style="font-size:12.5px;margin-bottom:10px">${p.project.desc}</div>
-   ${ghUrl?`<div style="font-size:12.5px"><span class="doneDate" style="cursor:default">✓ Submitted</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:4px 9px;font-size:11px;margin-left:4px" onclick="editGithubLink(${pi},event)">Edit</button></div>`
-    :`<div class="row"><input type="text" id="gh-${pi}" placeholder="Paste your GitHub repo/PR link"><button class="secondary" style="flex:none" onclick="saveGithubLink(${pi},event)">Save</button></div>`}
-  </div>`;
-  return `<div class="card phaseCard ${open?'open':''}">
-   <div class="phaseHead" onclick="togglePhase(${pi})">
-    <div class="ring" style="--p:${st.pct};--accent:${color}"><span>${st.pct}%</span></div>
-    <div class="phaseInfo"><div class="weeks" style="color:${color}">Module ${pi+1} of ${phases.length}</div><h3>${p.icon} ${p.title}</h3><div class="muted" style="font-size:11.5px;font-weight:600">${st.done}/${st.total} tasks complete${ghUrl?' · project submitted':''}</div></div>
+  return `<div class="topic ${topen?'open':''}"><div class="topicHead" onclick="toggleTopic('${pi}-${ti}')"><span>${t.name}</span><span class="topicRight"><b>${tst.done}/${tst.total}</b><i class="chev">⌄</i></span></div><div class="topicBody">${tasksHtml}</div></div>`;
+ }).join('');
+ let ghUrl=ghLinks[pi]&&ghLinks[pi].url;
+ let projectHtml=`<div class="card" style="margin:0 0 12px;background:rgba(101,82,224,.08)">
+  <div style="font-weight:700;font-size:14px;margin-bottom:2px">🚀 Milestone project: ${p.project.title}</div>
+  <div class="muted" style="font-size:13px;margin-bottom:10px">${p.project.desc}</div>
+  ${ghUrl?`<div style="font-size:13px"><span class="doneDate" style="cursor:default">✓ Submitted</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:6px 10px;font-size:12px;margin-left:4px" onclick="editGithubLink(${pi},event)">Edit</button></div>`
+   :`<div class="row"><input type="text" id="gh-${pi}" placeholder="Paste your GitHub repo/PR link"><button class="secondary" style="flex:none" onclick="saveGithubLink(${pi},event)">Save</button></div>`}
+ </div>`;
+ let track=roleTrack(profile().role),pr=modulePriority[pi][track];
+ return `<div class="card phaseCard ${open?'open':''}" id="module-${pi}">
+  <div class="phaseHead" onclick="togglePhase(${pi})">
+   <div class="ring" style="--p:${st.pct};--accent:${color}"><span>${st.pct}%</span></div>
+   <div class="phaseInfo"><div class="weeks" style="color:${color}">Module ${pi+1} of ${phases.length}<span class="priorityBadge p-${pr}">${PRIORITY_LABEL[pr]}</span></div><h3>${p.icon} ${p.title}</h3><div class="muted" style="font-size:12.5px;font-weight:600">${st.done}/${st.total} tasks complete${ghUrl?' · project submitted':''}</div></div>
+   <i class="chev big">⌄</i>
+  </div>
+  <div class="phaseBody">${projectHtml}${topicsHtml}</div>
+ </div>`;
+}
+function renderRoadmap(){
+ let track=roleTrack(profile().role);
+ let currentModule=computeCurrentModuleIndex(),currentStage=computeCurrentStageIndex();
+ if(!openStages.size)openStages.add(currentStage);
+ let cp=phases[currentModule],cst=phaseStats(currentModule);
+ roadmapCurrentCard.innerHTML=`<div class="card" style="background:rgba(101,82,224,.08);border-color:rgba(101,82,224,.25)">
+  <div class="muted" style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em">Continue where you left off · ${TRACK_LABEL[track]}</div>
+  <h3 style="margin:4px 0 2px">${cp.icon} ${cp.title}<span class="priorityBadge p-${modulePriority[currentModule][track]}">${PRIORITY_LABEL[modulePriority[currentModule][track]]}</span></h3>
+  <div class="muted" style="font-size:13px;margin-bottom:10px">${cst.done} of ${cst.total} tasks complete · ${stages[currentStage].title}</div>
+  <button class="primary" style="width:100%" onclick="continueCurrentModule()">Continue current module</button>
+ </div>`;
+ roadmapList.innerHTML=stages.map((sg,si)=>{
+  let[a,b]=sg.range,sst=stageStats(si),open=openStages.has(si);
+  let pis=Array.from({length:b-a+1},(_,k)=>a+k).sort((x,y)=>PRIORITY_RANK[modulePriority[x][track]]-PRIORITY_RANK[modulePriority[y][track]]||x-y);
+  let modulesHtml=open?pis.map(pi=>moduleCardHtml(pi)).join(''):'';
+  return `<div class="stageCard ${open?'open':''}">
+   <div class="stageHead" onclick="toggleStage(${si})">
+    <div class="ring" style="--p:${sst.pct};--accent:${phaseColors[si%phaseColors.length]}"><span>${sst.pct}%</span></div>
+    <div class="stageInfo"><h3>${sg.title}${sg.optional?'<span class="stageTag">Optional</span>':''}</h3><div class="muted" style="font-size:13px">${sst.modules} modules · ${sg.summary}</div></div>
     <i class="chev big">⌄</i>
    </div>
-   <div class="phaseBody">${projectHtml}${topicsHtml}</div>
+   <div class="stageBody"><div style="padding-top:12px">${modulesHtml}</div></div>
   </div>`;
  }).join('');
 }
+function toggleStage(si){if(openStages.has(si))openStages.delete(si);else openStages.add(si);renderRoadmap()}
+function continueCurrentModule(){let pi=computeCurrentModuleIndex(),si=computeCurrentStageIndex();openStages.add(si);openPhases.add(pi);renderRoadmap();setTimeout(()=>{let el=document.getElementById('module-'+pi);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},80)}
 function togglePhase(pi){if(openPhases.has(pi))openPhases.delete(pi);else openPhases.add(pi);renderRoadmap()}
 function toggleTopic(key){if(openTopics.has(key))openTopics.delete(key);else openTopics.add(key);renderRoadmap()}
 function toggleRoadmapTask(id){let done=S.get('roadmapProgress',{});if(done[id]){let rec=done[id];delete done[id];S.set('roadmapProgress',done);decrementActivity(rec.date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:false})})}else{let date=todayStr();done[id]={date};S.set('roadmapProgress',done);recordActivity(date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:true,date})})}renderRoadmap();updateOverall()}
@@ -588,7 +706,7 @@ function editGithubLink(pi,ev){ev.stopPropagation();if(!confirm('Remove the save
 function openGithubGuide(){githubGuideModal.classList.add('show')}
 function closeGithubGuide(){githubGuideModal.classList.remove('show')}
 function closeGithubGuideBackdrop(e){if(e.target.id==='githubGuideModal')closeGithubGuide()}
-function renderRolesList(){let current=profile().role;roleListModal.innerHTML=roles.map((r,i)=>`<div class="card role" style="border-left-color:${phaseColors[i%phaseColors.length]}"><h3>${r.name}</h3><div class="roleMeta"><span class="score">Suitability ${r.score}</span><span>${r.recommendation}</span></div><p class="muted" style="font-size:13px;line-height:1.5">${r.use}</p><div class="stack"><b>Learn:</b> ${r.stack.join(' · ')}</div><button style="margin-top:12px" onclick="setRole('${r.id}')">${current===r.id?'✓ Current target':'Set as target'}</button></div>`).join('')}
+function renderRolesList(){let current=profile().role;roleListModal.innerHTML=roles.map((r,i)=>`<div class="card role" style="border-left-color:${phaseColors[i%phaseColors.length]}"><h3>${r.name}</h3><div class="roleMeta"><span class="score">Role readiness ${r.score}</span><span>${r.recommendation}</span></div><p class="muted" style="font-size:14px;line-height:1.5">${r.use}</p><div class="stack"><b>Learn:</b> ${r.stack.join(' · ')}</div><button style="margin-top:12px" onclick="setRole('${r.id}')">${current===r.id?'✓ Current goal':'Set as goal'}</button></div>`).join('')}
 function setRole(id){let p=profile();p.role=id;S.set('profile',p);closeRoles();renderAll();toastMsg('Target role updated')}
 function openRoles(){renderRolesList();rolesModal.classList.add('show')}
 function closeRoles(){rolesModal.classList.remove('show')}
@@ -622,8 +740,10 @@ function updateOverall(){
  let day=S.get('daily',{done:[]}).done.length||0;
  let pct=Math.round(((roadDone+projDone+day)/(roadTotal+projTotal+dailyBase.length))*100);
  overall.textContent=pct+'%';overallRing.style.setProperty('--p',pct);
+ overallSub.textContent=pct===0?'Ready to begin':'Keep going';
  let st=computeStreak();
- streak.textContent=st.current;bestStreakLine.textContent='Best: '+st.longest+' days';
+ if(st.current>0){streakBadge.innerHTML=`🔥<b id="streak">${st.current}</b>`;bestStreakLine.textContent='Best: '+st.longest+' days'}
+ else{streakBadge.innerHTML='<b id="streak">0</b>';bestStreakLine.textContent='Start your first study day'}
  renderTracker();
 }
 function renderTracker(){
@@ -657,36 +777,99 @@ function renderTracker(){
  let heatDays=[...Array(70)].map((_,i)=>dateStr(-(69-i)));
  trackerStats.innerHTML=`
   <div class="statGrid">
-   <div class="statCard"><b>${hours}h</b><div class="lbl">Study time logged</div></div>
+   <div class="statCard"><b>${totalMinutes?hours+'h':'—'}</b><div class="lbl">${totalMinutes?'Study time logged':'No sessions yet'}</div></div>
    <div class="statCard"><b>${doneLeaves.length}/${leaves.length}</b><div class="lbl">Roadmap tasks done</div></div>
-   <div class="statCard"><b>🔥 ${st.current}</b><div class="lbl">Current streak (days)</div></div>
-   <div class="statCard"><b>🏆 ${st.longest}</b><div class="lbl">Best streak (days)</div></div>
+   <div class="statCard"><b>${st.current?'🔥 '+st.current:'—'}</b><div class="lbl">${st.current?'Current streak (days)':'Start your first day'}</div></div>
+   <div class="statCard"><b>${st.longest?'🏆 '+st.longest:'—'}</b><div class="lbl">${st.longest?'Best streak (days)':'No streak yet'}</div></div>
   </div>
-  <div class="card"><h3>This week</h3><div class="muted" style="font-size:12px;margin-bottom:4px;font-weight:600">${weekTotal} min logged</div>
+  <div class="card"><h3>This week</h3><div class="muted" style="font-size:13px;margin-bottom:4px;font-weight:600">${weekTotal?weekTotal+' min logged':'Complete one 15-minute session to begin tracking your activity'}</div>
    <div class="weekChart">${week.map((d,i)=>`<div class="bar"><i style="height:${Math.round(weekMin[i]/maxW*100)}%"></i><span>${new Date(d+'T00:00:00').toLocaleDateString(undefined,{weekday:'narrow'})}</span></div>`).join('')}</div>
   </div>
   <div class="card"><h3>Activity (last 10 weeks)</h3>
    <div class="heatGrid">${heatDays.map(d=>{let c=log[d]||0,cls=c===0?'':c===1?'l1':c===2?'l2':'l3';return `<div class="heatCell ${cls}" title="${d}: ${c} completed"></div>`}).join('')}</div>
+   <div class="muted" style="font-size:12px;margin-top:8px">Darker squares mean more completed that day.</div>
   </div>
   <div class="card"><h3>Milestones</h3>
-   ${milestones.length?milestones.map(m=>`<div class="milestoneRow"><div><div class="mTitle">${m.type==='phase'?'🏁 ':'🎯 '}${m.title}</div><div class="mDate">${m.sub}</div></div><div class="mDate">${fmtDate(m.date)}</div></div>`).join(''):'<div class="empty">Complete a topic to unlock your first milestone.</div>'}
+   ${milestones.length?milestones.map(m=>`<div class="milestoneRow"><div><div class="mTitle">${m.type==='phase'?'🏁 ':'🎯 '}${m.title}</div><div class="mDate">${m.sub}</div></div><div class="mDate">${fmtDate(m.date)}</div></div>`).join(''):'<div class="empty">Your first milestone unlocks when you complete a full topic — most start at 3-8 tasks.</div>'}
   </div>`;
 }
 function shuffleFocus(){let x=focusPool[Math.floor(Math.random()*focusPool.length)];focusTitle.textContent=x[0];focusText.textContent=x[1];focusTags.innerHTML=x[2].map((t,i)=>`<span class="tag ${i?'green':'purple'}">${t}</span>`).join('')}
-function openSettings(){let p=profile();nameInput.value=p.name;roleSelect.value=p.role;goalSelect.value=p.goal;apiBaseInput.value=apiBase();settingsModal.classList.add('show')}
-function saveSettings(){let p={name:nameInput.value.trim()||'Moushana',role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);let newBase=apiBaseInput.value.trim().replace(/\/$/,'');let baseChanged=newBase!==apiBase();S.set('apiBase',newBase);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved');if(baseChanged)pullState().then(renderAll)}
+function continueFocus(){learnPhase=computeCurrentModuleIndex();go('learn')}
+function openSettings(){let p=profile();roleSelect.value=p.role;goalSelect.value=p.goal;apiBaseInput.value=apiBase();settingsModal.classList.add('show')}
+function saveSettings(){let p={name:USER_NAME,role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);let newBase=apiBaseInput.value.trim().replace(/\/$/,'');let baseChanged=newBase!==apiBase();S.set('apiBase',newBase);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved');if(baseChanged)pullState().then(renderAll)}
 function closeSettings(){settingsModal.classList.remove('show')}function closeOnBackdrop(e){if(e.target.id==='settingsModal')closeSettings()}
-function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo(0,0);if(id==='learn'){renderLearnFilters();loadResources();loadAssessments()}}
+const viewMeta={
+ roadmap:()=>({title:`${(roles.find(x=>x.id===profile().role)||roles[3]).name} roadmap`,sub:`6 stages · 45 modules · ${TRACK_LABEL[roleTrack(profile().role)]} track`,actions:`<button onclick="openGithubGuide()">GitHub guide</button>`}),
+ tracker:()=>({title:'Progress & insights',sub:'Your consistency, time and milestones',actions:''}),
+ learn:()=>({title:'Learn',sub:'Lessons, links and practice for your roadmap',actions:`<button onclick="openDoubt()">Ask AI</button>`}),
+ practice:()=>({title:'Practice',sub:'Interview questions across Java, Selenium, API, Spring, SQL',actions:`<button onclick="randomQuestion()">Surprise me</button>`}),
+ projects:()=>({title:'Portfolio projects',sub:'Evidence of applied ability for recruiters',actions:`<button onclick="openGithubGuide()">GitHub guide</button><button onclick="showAddNote()">Notes</button>`})
+};
+function go(id){
+ document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));
+ if(id==='home'){heroHeader.style.display='';compactHeader.style.display='none'}
+ else{heroHeader.style.display='none';compactHeader.style.display='flex';let m=viewMeta[id]();compactTitle.textContent=m.title;compactSub.textContent=m.sub;compactActions.innerHTML=m.actions}
+ window.scrollTo(0,0);
+ if(id==='roadmap')renderRoadmap();
+ if(id==='learn'){renderLearnFilters();loadResources();loadAssessments()}
+}
 function toastMsg(t){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
 
 // ---- Learn tab: resources, assessments, ask-AI doubt (backed by the server) ----
 let learnPhase=0,currentAssessments=[],quizAssessmentId=null;
-function renderLearnFilters(){learnPhaseFilter.innerHTML=phases.map((p,i)=>`<button class="chip ${learnPhase===i?'active':''}" onclick="setLearnPhase(${i})">${p.icon} P${i+1}</button>`).join('');learnTopicSelect.innerHTML=phases[learnPhase].topics.map((t,ti)=>`<option value="${ti}">${t.name}</option>`).join('')}
+function shortTitle(s){return s.length>16?s.slice(0,15)+'…':s}
+function renderLearnFilters(){learnPhaseFilter.innerHTML=phases.map((p,i)=>`<button class="chip ${learnPhase===i?'active':''}" onclick="setLearnPhase(${i})">${p.icon} ${shortTitle(p.title)}</button>`).join('');learnTopicSelect.innerHTML=phases[learnPhase].topics.map((t,ti)=>`<option value="${ti}">${t.name}</option>`).join('')}
 function setLearnPhase(i){learnPhase=i;renderLearnFilters();loadResources();loadAssessments()}
-const kindIcon={video:'▶',article:'📄',docs:'📘',course:'🎓',practice:'🧩'};
-async function loadResources(){if(!apiBase()){resourceList.innerHTML='<div class="empty">Add a Backend URL in Settings to load curated resources, links and videos.</div>';return}resourceList.innerHTML='<div class="empty">Loading…</div>';let list=await api(`/api/resources?phase=${learnPhase}`);if(!list){resourceList.innerHTML='<div class="empty">Could not reach the backend. Check the Backend URL in Settings.</div>';return}if(!list.length){resourceList.innerHTML='<div class="empty">No resources yet for this phase.</div>';return}resourceList.innerHTML=list.map(r=>`<div class="card" style="padding:13px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><div style="font-weight:700;font-size:13.5px">${kindIcon[r.kind]||'🔗'} ${r.title}</div><div class="muted" style="font-size:11.5px;margin-top:2px;font-weight:600">${r.source||''}${r.is_free?' · Free':''}</div></div><a class="secondary" style="text-decoration:none;text-align:center;padding:8px 12px;font-size:12.5px;flex:none" href="${r.url}" target="_blank" rel="noopener">Open</a></div></div>`).join('')}
-async function loadAssessments(){if(!apiBase()){assessmentList.innerHTML='<div class="empty">Add a Backend URL in Settings to load assessments.</div>';return}assessmentList.innerHTML='<div class="empty">Loading…</div>';let list=await api(`/api/assessments?phase=${learnPhase}`);if(!list){assessmentList.innerHTML='<div class="empty">Could not reach the backend. Check the Backend URL in Settings.</div>';return}currentAssessments=list;if(!list.length){assessmentList.innerHTML='<div class="empty">No assessments yet — try Generate with AI.</div>';return}assessmentList.innerHTML=list.map(a=>`<div class="card" style="padding:13px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div style="font-weight:700;font-size:13.5px">${a.title}</div><div class="muted" style="font-size:11.5px;margin-top:2px;font-weight:600">${a.questions.length} questions · ${a.source==='ai'?'AI generated':'Planned'}</div></div><button class="secondary" style="padding:8px 12px;font-size:12.5px;flex:none" onclick="openQuiz(${a.id})">Take</button></div></div>`).join('')}
-async function generateAssessmentClick(ev){if(!apiBase()){toastMsg('Add a Backend URL in Settings first');return}let ti=Number(learnTopicSelect.value),p=phases[learnPhase],t=p.topics[ti],btn=ev.currentTarget,label=btn.textContent;btn.disabled=true;btn.textContent='Generating…';let res=await api('/api/assessments/generate',{method:'POST',body:JSON.stringify({phaseIndex:learnPhase,topicIndex:ti,phaseTitle:p.title,topicName:t.name})});btn.disabled=false;btn.textContent=label;if(res){toastMsg('New AI assessment ready');loadAssessments()}else{toastMsg('Could not reach the backend')}}
+const RESOURCE_PRIORITY_BADGE={P0:'M',P1:'I',P2:'L',P3:'O'};
+const RESOURCE_PRIORITY_LABEL={P0:'Essential',P1:'Important',P2:'Recommended later',P3:'Optional'};
+const ROLE_SECTION={Primary:'Start here',Practice:'Practise',Reference:'Keep for reference',Supplementary:'Alternative explanations',Optional:'Further exploration'};
+const ROLE_ORDER=['Primary','Practice','Reference','Supplementary','Optional'];
+function scoreResource(r,track){
+ let score=0;
+ if(r.tracks&&r.tracks.includes('Shared'))score+=25;
+ if(r.tracks&&r.tracks.includes(track==='automation'?'Automation':'Backend'))score+=25;
+ if(r.tracks&&r.tracks.includes('Advanced'))score+=5;
+ score+={P0:25,P1:15,P2:5,P3:-10}[r.priority]||0;
+ score+={Primary:20,Practice:12,Reference:3,Supplementary:5,Optional:-5}[r.resource_role]||0;
+ return score;
+}
+function resourceCardHtml(r,compact){
+ let pr=RESOURCE_PRIORITY_BADGE[r.priority]||'L';
+ let trackBadge=(r.tracks||[]).filter(t=>t!=='Shared').map(t=>`<span class="tag purple">${t}</span>`).join('');
+ return `<div class="card" style="padding:14px">
+  <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+   <div style="flex:1;min-width:0">
+    <div style="font-weight:700;font-size:14.5px">${r.title}</div>
+    <div class="muted" style="font-size:12.5px;margin-top:3px;font-weight:600">${r.provider||''} · ${r.resource_type||''}${r.estimated_time?' · '+r.estimated_time:''}</div>
+    ${compact?'':`<div class="muted" style="font-size:13px;margin-top:6px;line-height:1.5">${r.use_desc||''}</div>`}
+    <div style="margin-top:8px"><span class="priorityBadge p-${pr}" style="margin-left:0">${RESOURCE_PRIORITY_LABEL[r.priority]||r.priority}</span>${trackBadge}</div>
+    ${r.access?`<div class="muted" style="font-size:12px;margin-top:6px">${r.access}</div>`:''}
+   </div>
+   <a class="secondary" style="text-decoration:none;text-align:center;padding:9px 13px;font-size:13px;flex:none" href="${r.url}" target="_blank" rel="noopener" onclick="recordActivity(todayStr())">Open</a>
+  </div>
+ </div>`;
+}
+async function loadResources(){
+ if(!apiBase()){resourceList.innerHTML='<div class="empty">Your learning library is being prepared.<br>Open Settings to connect it, or continue with Practice questions in the meantime.</div>';return}
+ resourceList.innerHTML='<div class="empty">Loading…</div>';
+ let list=await api(`/api/resources?phase=${learnPhase}`);
+ if(!list){resourceList.innerHTML='<div class="empty">Resources could not be loaded right now. Your saved progress is safe — try again shortly.</div>';return}
+ if(!list.length){resourceList.innerHTML='<div class="empty">No resources yet for this module. Try Practice questions or a different module.</div>';return}
+ let track=roleTrack(profile().role);
+ let scored=list.map(r=>({r,s:scoreResource(r,track)})).sort((a,b)=>b.s-a.s);
+ let recommended=scored.slice(0,3).map(x=>x.r);
+ let recommendedIds=new Set(recommended.map(r=>r.id));
+ let remaining=scored.map(x=>x.r).filter(r=>!recommendedIds.has(r.id));
+ let sections=ROLE_ORDER.map(role=>{
+  let items=remaining.filter(r=>r.resource_role===role);
+  if(!items.length)return'';
+  return `<div class="sectionHead"><h2 style="font-size:15px">${ROLE_SECTION[role]}</h2></div>${items.map(r=>resourceCardHtml(r,true)).join('')}`;
+ }).join('');
+ resourceList.innerHTML=`<div class="sectionHead"><h2 style="font-size:15px">Recommended for you</h2></div>${recommended.map(r=>resourceCardHtml(r,false)).join('')}${sections}`;
+}
+async function loadAssessments(){if(!apiBase()){assessmentList.innerHTML='<div class="empty">Assessments will appear here once your learning library is connected.</div>';return}assessmentList.innerHTML='<div class="empty">Loading…</div>';let list=await api(`/api/assessments?phase=${learnPhase}`);if(!list){assessmentList.innerHTML='<div class="empty">Assessments could not be loaded right now — try again shortly.</div>';return}currentAssessments=list;if(!list.length){assessmentList.innerHTML='<div class="empty">No assessments yet for this module — try Create assessment.</div>';return}assessmentList.innerHTML=list.map(a=>`<div class="card" style="padding:13px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div style="font-weight:700;font-size:14px">${a.title}</div><div class="muted" style="font-size:12.5px;margin-top:2px;font-weight:600">${a.questions.length} questions · ${a.source==='ai'?'AI generated':'Planned'}</div></div><button class="secondary" style="padding:9px 13px;font-size:13px;flex:none" onclick="openQuiz(${a.id})">Take</button></div></div>`).join('')}
+async function generateAssessmentClick(ev){if(!apiBase()){toastMsg('Connect your learning library in Settings first');return}let ti=Number(learnTopicSelect.value),p=phases[learnPhase],t=p.topics[ti],btn=ev.currentTarget,label=btn.textContent;btn.disabled=true;btn.textContent='Generating…';let res=await api('/api/assessments/generate',{method:'POST',body:JSON.stringify({phaseIndex:learnPhase,topicIndex:ti,phaseTitle:p.title,topicName:t.name})});btn.disabled=false;btn.textContent=label;if(res){toastMsg('New assessment ready');loadAssessments()}else{toastMsg('Could not create the assessment — try again shortly')}}
 function openQuiz(id){let a=currentAssessments.find(x=>x.id===id);if(!a)return;quizAssessmentId=id;quizTitle.textContent=a.title;quizBody.innerHTML=a.questions.map((q,qi)=>`<div style="margin-bottom:14px"><div style="font-weight:700;font-size:13.5px;margin-bottom:6px">${qi+1}. ${q.q}</div>${q.options.map((o,oi)=>`<label style="display:flex;gap:8px;align-items:center;padding:7px 0;font-size:13px"><input type="radio" name="quizq${qi}" value="${oi}"> ${o}</label>`).join('')}</div>`).join('');quizResult.textContent='';quizModal.classList.add('show')}
 async function submitQuiz(){let a=currentAssessments.find(x=>x.id===quizAssessmentId);if(!a)return;let answers=a.questions.map((q,qi)=>{let sel=document.querySelector(`input[name="quizq${qi}"]:checked`);return sel?Number(sel.value):-1});let res=await api(`/api/assessments/${quizAssessmentId}/attempt`,{method:'POST',body:JSON.stringify({answers})});quizResult.textContent=res?`Score: ${res.score}/${res.total}`:'Could not submit — check backend connection.'}
 function closeQuiz(){quizModal.classList.remove('show')}
@@ -694,7 +877,7 @@ function closeQuizBackdrop(e){if(e.target.id==='quizModal')closeQuiz()}
 function openDoubt(){doubtAnswer.textContent='';doubtQuestion.value='';doubtTopic.value='';doubtModal.classList.add('show');loadDoubtHistory()}
 function closeDoubt(){doubtModal.classList.remove('show')}
 function closeDoubtBackdrop(e){if(e.target.id==='doubtModal')closeDoubt()}
-async function askDoubt(){if(!apiBase()){doubtAnswer.textContent='Add a Backend URL in Settings first.';return}let q=doubtQuestion.value.trim();if(!q)return;askBtn.disabled=true;askBtn.textContent='Thinking…';doubtAnswer.textContent='';let res=await api('/api/doubt',{method:'POST',body:JSON.stringify({question:q,topic:doubtTopic.value.trim()})});askBtn.disabled=false;askBtn.textContent='Ask';doubtAnswer.textContent=res?res.answer:'Could not reach the AI backend. Check the Backend URL in Settings.';if(res)loadDoubtHistory()}
+async function askDoubt(){if(!apiBase()){doubtAnswer.textContent='Your learning coach needs to be connected first — open Settings to set it up.';return}let q=doubtQuestion.value.trim();if(!q)return;askBtn.disabled=true;askBtn.textContent='Thinking…';doubtAnswer.textContent='';let res=await api('/api/doubt',{method:'POST',body:JSON.stringify({question:q,topic:doubtTopic.value.trim()})});askBtn.disabled=false;askBtn.textContent='Ask';doubtAnswer.textContent=res?res.answer:'Could not reach your learning coach right now — please try again shortly.';if(res)loadDoubtHistory()}
 async function loadDoubtHistory(){if(!apiBase()){doubtHistory.innerHTML='';return}let list=await api('/api/doubt/history');if(!list){doubtHistory.innerHTML='';return}doubtHistory.innerHTML='<h3 style="font-size:13px;margin-top:6px">Recent</h3>'+list.slice(0,8).map(h=>`<div style="padding:8px 0;border-top:1px solid var(--line);font-size:12.5px"><b>${h.question}</b><div class="muted" style="margin-top:3px">${h.answer.slice(0,140)}${h.answer.length>140?'…':''}</div></div>`).join('')}
 
 init();

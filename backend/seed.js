@@ -1,5 +1,6 @@
-// One-time (and re-runnable) seed of curated "planned" resources and
-// hand-written assessments. Safe to re-run: it replaces prior planned rows.
+// One-time (and re-runnable) seed of hand-written assessments. Resources are
+// no longer seeded here — run `npm run import-resources` for the real 133-item
+// catalogue (backend/data/java_career_resource_seed.json via import-resources.js).
 require('dotenv').config();
 const { Pool } = require('pg');
 
@@ -7,70 +8,6 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
-
-// phase_index lines up with the `phases` array in assets/index.html (0-based,
-// module 1 "Core Java" = 0, module 2 "Data Structures and Algorithms" = 1, ...
-// module 45 "Optional Advanced Learnings" = 44). topic_index is left null
-// throughout — resources apply to the whole module rather than one sub-topic.
-const RESOURCES = [
-  // Module 1 — Core Java (index 0)
-  { phase: 0, topic: null, title: 'Oracle Java Tutorials (official)', url: 'https://docs.oracle.com/javase/tutorial/', kind: 'docs', source: 'Oracle', free: true },
-  { phase: 0, topic: null, title: 'Baeldung — Java articles & how-tos', url: 'https://www.baeldung.com/', kind: 'article', source: 'Baeldung', free: true },
-  { phase: 0, topic: null, title: 'GeeksforGeeks — Java', url: 'https://www.geeksforgeeks.org/java/', kind: 'article', source: 'GeeksforGeeks', free: true },
-  { phase: 0, topic: null, title: 'Telusko — Java video series', url: 'https://www.youtube.com/@Telusko', kind: 'video', source: 'YouTube', free: true },
-  { phase: 0, topic: null, title: 'Java Brains — Java & Spring videos', url: 'https://www.youtube.com/@Java.Brains', kind: 'video', source: 'YouTube', free: true },
-
-  // Module 2 — Data Structures and Algorithms (index 1)
-  { phase: 1, topic: null, title: 'LeetCode — coding practice', url: 'https://leetcode.com/', kind: 'practice', source: 'LeetCode', free: true },
-  { phase: 1, topic: null, title: 'HackerRank — Java domain', url: 'https://www.hackerrank.com/domains/java', kind: 'practice', source: 'HackerRank', free: true },
-
-  // Module 3 — Java Backend Development (index 2)
-  { phase: 2, topic: null, title: 'Spring Boot reference documentation', url: 'https://docs.spring.io/spring-boot/reference/index.html', kind: 'docs', source: 'Spring', free: true },
-  { phase: 2, topic: null, title: 'Spring official guides', url: 'https://spring.io/guides', kind: 'course', source: 'Spring', free: true },
-
-  // Module 4 — Database Development (index 3)
-  { phase: 3, topic: null, title: 'PostgreSQL Tutorial', url: 'https://www.postgresqltutorial.com/', kind: 'article', source: 'postgresqltutorial.com', free: true },
-  { phase: 3, topic: null, title: 'W3Schools — SQL', url: 'https://www.w3schools.com/sql/', kind: 'article', source: 'W3Schools', free: true },
-  { phase: 3, topic: null, title: 'Baeldung — Spring Data JPA', url: 'https://www.baeldung.com/spring-data-jpa-query', kind: 'article', source: 'Baeldung', free: true },
-  { phase: 3, topic: null, title: 'PostgreSQL documentation', url: 'https://www.postgresql.org/docs/', kind: 'docs', source: 'PostgreSQL', free: true },
-
-  // Module 7 — API Development and Testing Tools (index 6)
-  { phase: 6, topic: null, title: 'Postman Learning Center', url: 'https://learning.postman.com/', kind: 'docs', source: 'Postman', free: true },
-
-  // Module 8 — Java Test Automation (index 7)
-  { phase: 7, topic: null, title: 'Selenium official documentation', url: 'https://www.selenium.dev/documentation/', kind: 'docs', source: 'Selenium', free: true },
-  { phase: 7, topic: null, title: 'TestNG official documentation', url: 'https://testng.org/doc/', kind: 'docs', source: 'TestNG', free: true },
-  { phase: 7, topic: null, title: 'Cucumber official documentation', url: 'https://cucumber.io/docs/cucumber/', kind: 'docs', source: 'Cucumber', free: true },
-  { phase: 7, topic: null, title: 'Amigoscode — software engineering videos', url: 'https://www.youtube.com/@amigoscode', kind: 'video', source: 'YouTube', free: true },
-  { phase: 7, topic: null, title: 'freeCodeCamp — full courses', url: 'https://www.youtube.com/@freecodecamp', kind: 'video', source: 'YouTube', free: true },
-
-  // Module 10 — API Automation (index 9)
-  { phase: 9, topic: null, title: 'REST Assured documentation', url: 'https://rest-assured.io/', kind: 'docs', source: 'REST Assured', free: true },
-
-  // Module 12 — Unit and Integration Testing (index 11)
-  { phase: 11, topic: null, title: 'JUnit 5 user guide', url: 'https://junit.org/junit5/docs/current/user-guide/', kind: 'docs', source: 'JUnit', free: true },
-  { phase: 11, topic: null, title: 'Mockito documentation', url: 'https://site.mockito.org/', kind: 'docs', source: 'Mockito', free: true },
-
-  // Module 13 — Testcontainers (index 12)
-  { phase: 12, topic: null, title: 'Testcontainers — getting started', url: 'https://testcontainers.com/getting-started/', kind: 'docs', source: 'Testcontainers', free: true },
-
-  // Module 14 — Mocking and Service Virtualization (index 13)
-  { phase: 13, topic: null, title: 'WireMock documentation', url: 'https://wiremock.org/docs/', kind: 'docs', source: 'WireMock', free: true },
-
-  // Module 17 — CI/CD (index 16)
-  { phase: 16, topic: null, title: 'GitHub Actions documentation', url: 'https://docs.github.com/en/actions', kind: 'docs', source: 'GitHub', free: true },
-  { phase: 16, topic: null, title: 'Jenkins documentation', url: 'https://www.jenkins.io/doc/', kind: 'docs', source: 'Jenkins', free: true },
-
-  // Module 18 — Containerization (index 17)
-  { phase: 17, topic: null, title: 'Docker — getting started', url: 'https://docs.docker.com/get-started/', kind: 'docs', source: 'Docker', free: true },
-
-  // Module 27 — Application Security (index 26)
-  { phase: 26, topic: null, title: 'Baeldung — Spring Security', url: 'https://www.baeldung.com/security-spring', kind: 'article', source: 'Baeldung', free: true },
-
-  // Module 44 — Interview Preparation (index 43)
-  { phase: 43, topic: null, title: 'Codewars — practice katas', url: 'https://www.codewars.com/', kind: 'practice', source: 'Codewars', free: true },
-  { phase: 43, topic: null, title: 'GeeksforGeeks — Interview Corner', url: 'https://www.geeksforgeeks.org/interview-corner/', kind: 'article', source: 'GeeksforGeeks', free: true }
-];
 
 // Hand-written ("planned") assessments — one per phase to start. More can be
 // generated on demand via OpenAI from the app (source: 'ai').
@@ -123,14 +60,6 @@ async function seed() {
   const client = await pool.connect();
   try {
     await client.query('begin');
-    await client.query("delete from resources where added_by = 'planned'");
-    for (const r of RESOURCES) {
-      await client.query(
-        `insert into resources (phase_index, topic_index, title, url, kind, source, is_free, added_by)
-         values ($1,$2,$3,$4,$5,$6,$7,'planned')`,
-        [r.phase, r.topic, r.title, r.url, r.kind, r.source, r.free]
-      );
-    }
     await client.query("delete from assessments where source = 'planned'");
     for (const a of ASSESSMENTS) {
       await client.query(
@@ -140,7 +69,7 @@ async function seed() {
       );
     }
     await client.query('commit');
-    console.log(`Seeded ${RESOURCES.length} resources and ${ASSESSMENTS.length} assessments.`);
+    console.log(`Seeded ${ASSESSMENTS.length} assessments. (Run "npm run import-resources" for the resource catalogue.)`);
   } catch (e) {
     await client.query('rollback');
     throw e;

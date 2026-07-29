@@ -55,7 +55,7 @@ app.get('/api/state', async (req, res, next) => {
     projectGithubLinks.rows.forEach(r => { projectGithubLinksMap[r.project_id] = { url: r.url, date: r.submitted_at.toISOString().slice(0, 10) }; });
 
     res.json({
-      profile: profile.rows[0] || { name: 'Moushana', role: 'backend', goal_minutes: 60 },
+      profile: profile.rows[0] || { name: 'Moushana Bharadwaj', role: 'backend', goal_minutes: 60 },
       roadmapProgress,
       dailyDone: daily.rows.map(r => r.task_index),
       projectDone,
@@ -72,7 +72,7 @@ app.post('/api/profile', async (req, res, next) => {
     const { name, role, goalMinutes } = req.body;
     await pool.query(
       `update profile set name=$1, role=$2, goal_minutes=$3, updated_at=now() where id=1`,
-      [name || 'Moushana', role || 'backend', goalMinutes || 60]
+      [name || 'Moushana Bharadwaj', role || 'backend', goalMinutes || 60]
     );
     res.json({ ok: true });
   } catch (e) { next(e); }
@@ -218,15 +218,14 @@ app.delete('/api/project-github-link/:projectId', async (req, res, next) => {
   } catch (e) { next(e); }
 });
 
-// ---- Resources --------------------------------------------------------------
+// ---- Resources (real 133-item catalogue, see backend/data + import-resources.js) --
 app.get('/api/resources', async (req, res, next) => {
   try {
-    const { phase, topic } = req.query;
-    let q = 'select * from resources where 1=1';
+    const { phase } = req.query;
+    let q = 'select * from resources where active = true';
     const params = [];
-    if (phase !== undefined) { params.push(phase); q += ` and phase_index = $${params.length}`; }
-    if (topic !== undefined) { params.push(topic); q += ` and (topic_index = $${params.length} or topic_index is null)`; }
-    q += ' order by created_at asc';
+    if (phase !== undefined) { params.push(Number(phase)); q += ` and $${params.length} = any(module_indexes)`; }
+    q += " order by array_position(array['P0','P1','P2','P3'], priority), array_position(array['Primary','Practice','Reference','Supplementary','Optional'], resource_role)";
     const r = await pool.query(q, params);
     res.json(r.rows);
   } catch (e) { next(e); }
@@ -234,12 +233,13 @@ app.get('/api/resources', async (req, res, next) => {
 
 app.post('/api/resources', async (req, res, next) => {
   try {
-    const { phaseIndex, topicIndex, title, url, kind, source } = req.body;
+    const { phaseIndex, title, url, resourceType, provider } = req.body;
     if (!title || !url) return res.status(400).json({ error: 'title and url required' });
+    const id = 'user-' + Date.now().toString(36);
     const r = await pool.query(
-      `insert into resources (phase_index, topic_index, title, url, kind, source, is_free, added_by)
-       values ($1,$2,$3,$4,$5,$6,true,'user') returning *`,
-      [phaseIndex ?? null, topicIndex ?? null, title, url, kind || 'article', source || 'Custom']
+      `insert into resources (id, phase_index, module_indexes, title, provider, resource_type, priority, tracks, url, resource_role, topics, active, added_by)
+       values ($1,$2,$3::int[],$4,$5,$6,'P2','{Shared}',$7,'Optional','{}',true,'user') returning *`,
+      [id, phaseIndex ?? null, phaseIndex !== undefined && phaseIndex !== null ? [phaseIndex] : [], title, provider || 'Custom', resourceType || 'Reference', url]
     );
     res.json(r.rows[0]);
   } catch (e) { next(e); }
