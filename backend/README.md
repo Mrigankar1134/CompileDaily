@@ -1,8 +1,8 @@
 # Compile Daily — backend
 
-Small Express API that owns the Neon Postgres connection and the OpenAI API
+Small Express API that owns the Neon Postgres connection and the Gemini API
 key. The app (assets/index.html, running inside the Android WebView) talks
-to this over HTTPS — it never sees the database URL or the OpenAI key.
+to this over HTTPS — it never sees the database URL or the Gemini key.
 
 ## 1. Rotate the database password first
 
@@ -15,7 +15,7 @@ In the Neon console: your project → **Roles** → reset the password for
 ```
 cd backend
 cp .env.example .env
-# edit .env: paste the (rotated) DATABASE_URL and your OPENAI_API_KEY
+# edit .env: paste the (rotated) DATABASE_URL and your GEMINI_API_KEY
 npm install
 npm run seed     # creates tables (schema.sql is applied via psql, see below) + seeds curated resources/assessments
 npm start
@@ -40,7 +40,7 @@ Health check: `curl http://localhost:8080/api/health` → `{"ok":true}`
    - Build command: `npm install`
    - Start command: `npm start`
 3. Add environment variables in Render's dashboard (Settings → Environment):
-   `DATABASE_URL`, `OPENAI_API_KEY`, `OPENAI_MODEL` (optional),
+   `DATABASE_URL`, `GEMINI_API_KEY`, `GEMINI_MODEL` (optional),
    `ALLOWED_ORIGINS=null` (the WebView's file:// origin), `PORT` (Render sets
    this automatically — you can leave it out).
 4. Deploy. Render gives you a URL like `https://javacareerprep-api.onrender.com`.
@@ -66,7 +66,7 @@ while can take a few seconds to wake up. That's expected.
 - `GET  /api/resources?phase=&topic=`
 - `POST /api/resources` `{phaseIndex, topicIndex, title, url, kind, source}`
 - `GET  /api/assessments?phase=&topic=`
-- `POST /api/assessments/generate` `{phaseIndex, topicIndex, phaseTitle, topicName, count?}` — calls OpenAI
+- `POST /api/assessments/generate` `{phaseIndex, topicIndex, phaseTitle, topicName, count?}` — calls Gemini
 - `POST /api/assessments/:id/attempt` `{answers:[...]}`
-- `POST /api/doubt` `{question, topic}` — calls OpenAI
+- `POST /api/doubt` `{question, topic}` — calls Gemini
 - `GET  /api/doubt/history`

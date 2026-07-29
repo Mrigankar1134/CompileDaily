@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { pool, bumpActivity } = require('./db');
-const { answerDoubt, generateAssessment } = require('./openai');
+const { answerDoubt, generateAssessment } = require('./gemini');
 
 const app = express();
 app.use(express.json());
@@ -289,7 +289,7 @@ app.post('/api/assessments/:id/attempt', async (req, res, next) => {
   } catch (e) { next(e); }
 });
 
-// ---- Ask-a-doubt (OpenAI) ----------------------------------------------------
+// ---- Ask-a-doubt (Gemini) ----------------------------------------------------
 app.post('/api/doubt', async (req, res, next) => {
   try {
     const { question, topic } = req.body;

@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 // Hand-written ("planned") assessments — one per phase to start. More can be
-// generated on demand via OpenAI from the app (source: 'ai').
+// generated on demand via Gemini from the app (source: 'ai').
 const ASSESSMENTS = [
   { phase: 0, topic: null, title: 'Core Java Foundation — check yourself', questions: [
     { q: 'What does the HashMap load factor control?', options: ['The initial capacity only', 'When the map resizes based on how full it is', 'The maximum number of null keys allowed', 'The iteration order'], answerIndex: 1, explanation: 'Load factor is the threshold (fraction full) at which the map resizes and rehashes to keep lookups close to O(1).' },
