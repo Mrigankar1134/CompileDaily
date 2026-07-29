@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Compile Daily</title>
+<style>
+:root{--bg:#f2f2f7;--card:#ffffff;--ink:#1c1c1e;--muted:#8a8a8e;--brand:#007aff;--brand2:#34c759;--line:#e5e5ea;--warn:#ff9500;--danger:#ff3b30;--shadow:0 1px 2px rgba(0,0,0,.04),0 8px 20px rgba(30,30,40,.06);--radius:18px;--ringTrack:#e5e5ea}
+@media(prefers-color-scheme:dark){:root{--bg:#000000;--card:#1c1c1e;--ink:#f2f2f7;--muted:#98989f;--brand:#0a84ff;--brand2:#30d158;--line:#38383a;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 20px rgba(0,0,0,.35);--ringTrack:#2c2c2e}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+body{padding-bottom:96px}.app{max-width:760px;margin:auto;min-height:100vh}
+button{font-family:inherit}
+.top{padding:calc(env(safe-area-inset-top) + 16px) 18px 6px}
+.toprow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.eyebrow{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}.top h1{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:3px 0 3px}.top p{font-size:14px;color:var(--muted);margin:0;font-weight:600}
+.avatar{height:44px;width:44px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:17px;flex:none;margin-top:2px;cursor:pointer;transition:transform .12s ease}.avatar:active{transform:scale(.9)}
+.heroGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.heroCard{display:flex;align-items:center;gap:11px;padding:13px}
+.heroCard .lbl{font-size:12.5px;font-weight:700}
+.streakBadge{font-size:21px;display:flex;align-items:center;gap:5px}.streakBadge b{font-size:21px;font-weight:800}
+.ring{--p:0;width:44px;height:44px;border-radius:50%;background:conic-gradient(var(--accent,var(--brand)) calc(var(--p)*3.6deg),var(--ringTrack) 0);display:grid;place-items:center;flex:none;transition:.3s}
+.ring span{width:33px;height:33px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:10.5px;font-weight:800;color:var(--ink)}
+main{padding:16px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 11px}.sectionHead h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0}.sectionHead button{border:0;background:transparent;color:var(--brand);font-weight:650;font-size:14px;padding:4px}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);padding:16px;margin-bottom:12px;transition:transform .15s ease,box-shadow .15s ease}.card h3{margin:0 0 8px;font-size:16px;font-weight:750}.muted{color:var(--muted)}
+.empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:13px}
+.focus{display:flex;align-items:flex-start;gap:12px}.focusIcon{height:42px;width:42px;border-radius:13px;background:rgba(0,122,255,.12);color:var(--brand);display:grid;place-items:center;font-size:19px;flex:none}.focus h3{margin:1px 0 4px}.tag{display:inline-flex;align-items:center;border-radius:999px;background:rgba(120,120,128,.14);color:var(--muted);padding:4px 9px;font-size:11px;font-weight:700;margin:3px 4px 0 0}.tag.green{background:rgba(52,199,89,.14);color:#1f8a3d}.tag.purple{background:rgba(0,122,255,.12);color:var(--brand)}.tag.orange{background:rgba(255,149,0,.14);color:#a86300}
+.task{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line)}.task:first-child{border-top:0}
+input[type=checkbox].circle{appearance:none;-webkit-appearance:none;width:24px;height:24px;border-radius:50%;border:2px solid #c7c7cc;background:transparent;margin:0;flex:none;position:relative;transition:transform .15s ease,background .15s ease,border-color .15s ease;cursor:pointer}
+input[type=checkbox].circle:active{transform:scale(.88)}
+input[type=checkbox].circle:checked{background:var(--brand);border-color:var(--brand);animation:checkPop .28s cubic-bezier(.34,1.56,.64,1)}
+input[type=checkbox].circle:checked:after{content:'';position:absolute;left:7px;top:3px;width:6px;height:11px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+@keyframes checkPop{0%{transform:scale(.7)}55%{transform:scale(1.18)}100%{transform:scale(1)}}
+.task{transition:opacity .2s ease}
+.task label{font-size:14.5px;line-height:1.35;flex:1;font-weight:600}.task label span{display:block;color:var(--muted);font-size:11.5px;margin-top:3px;font-weight:600}.task.done label{color:#7e899a}
+.doneDate{color:var(--brand2)!important;cursor:pointer}.estMin{color:var(--muted)}
+.role{border-left:5px solid var(--brand);padding-left:14px}.role h3{font-size:17px}.roleMeta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:650}.score{font-weight:800;color:var(--brand)}.stack{font-size:13px;line-height:1.55}
+.role button,.primary{border:0;border-radius:14px;background:var(--brand);color:#fff;padding:12px 14px;font-weight:700;font-size:15px;transition:transform .12s ease,opacity .12s ease}
+.secondary{border:0;background:rgba(120,120,128,.14);color:var(--brand);border-radius:14px;padding:11px 12px;font-weight:700;font-size:15px;transition:transform .12s ease,opacity .12s ease}
+button{transition:transform .12s ease,opacity .12s ease}
+button:active{opacity:.7;transform:scale(.96)}
+.phaseHead{display:flex;align-items:center;gap:12px;cursor:pointer;border-radius:12px;transition:background .15s ease}
+.phaseHead:active{background:rgba(120,120,128,.08)}
+.phaseInfo{flex:1;min-width:0}.phaseInfo h3{margin:1px 0 2px;font-size:15.5px}.weeks{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.03em}
+.chev{color:#c7c7cc;font-size:18px;transition:transform .25s ease;flex:none}
+.phaseCard.open>.phaseHead .chev.big{transform:rotate(180deg)}
+.phaseBody{max-height:0;overflow:hidden;transition:max-height .3s ease}.phaseCard.open .phaseBody{max-height:6000px}
+.topicHead{display:flex;justify-content:space-between;align-items:center;padding:12px 2px;cursor:pointer;font-weight:700;font-size:13.5px;border-top:1px solid var(--line);transition:opacity .15s ease}
+.topicHead:active{opacity:.6}
+.topicRight{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:700}
+.topic.open .topicRight .chev{transform:rotate(180deg)}
+.topicBody{display:none;padding:2px 0 4px}.topic.open .topicBody{display:block;animation:fadeIn .2s ease}
+.question{cursor:pointer;transition:opacity .15s ease}.question:active{opacity:.75}.question .q{font-weight:700;font-size:14px;display:flex;justify-content:space-between;gap:12px}.question .ans{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);line-height:1.55}.question.open .ans{display:block;animation:fadeIn .2s ease}.question.open .chev{transform:rotate(180deg)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.filterRow{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.chip{white-space:nowrap;border:0;background:rgba(120,120,128,.14);border-radius:999px;padding:8px 13px;font-size:12.5px;font-weight:700;color:var(--muted);transition:background .2s ease,color .2s ease,transform .12s ease}.chip.active{background:var(--brand);color:#fff}.chip:active{transform:scale(.94)}
+.projectHead{display:flex;gap:12px}.projectIcon{height:44px;width:44px;border-radius:13px;background:rgba(52,199,89,.14);color:#1f8a3d;display:grid;place-items:center;font-size:20px;flex:none}.projectProgress{height:6px;background:rgba(120,120,128,.16);border-radius:10px;margin:12px 0;overflow:hidden}.projectProgress i{display:block;background:var(--brand2);height:100%;width:0;transition:.3s}
+.settingRow{display:grid;gap:6px;margin-bottom:14px}.settingRow label{font-size:12px;font-weight:750;color:var(--muted)}
+input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--bg);font:inherit;color:var(--ink);outline:none}textarea{min-height:100px;resize:vertical}
+.notice{padding:13px;border-radius:14px;background:rgba(255,149,0,.12);color:#a86300;font-size:12.5px;line-height:1.5;font-weight:600}
+@media(prefers-color-scheme:dark){.notice{color:#ffb340}}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:rgba(248,248,250,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid var(--line);display:flex;justify-content:center;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+@media(prefers-color-scheme:dark){.bottom{background:rgba(20,20,22,.78)}}
+.nav{width:min(760px,100%);display:grid;grid-template-columns:repeat(6,1fr);padding:7px 4px}.nav button{border:0;background:transparent;color:var(--muted);font-size:10px;font-weight:700;padding:4px 2px;transition:color .2s ease,transform .12s ease}.nav button b{display:block;font-size:20px;line-height:1.15;margin-bottom:2px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}.nav button.active{color:var(--brand)}.nav button.active b{transform:translateY(-1px) scale(1.08)}.nav button:active{transform:scale(.92)}
+.view{display:none}.view.active{display:block;animation:viewIn .28s cubic-bezier(.22,.9,.32,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:80;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .28s ease,background .28s ease}
+.modal.show{opacity:1;pointer-events:auto;background:rgba(0,0,0,.42)}
+.sheet{background:var(--bg);width:100%;max-height:88vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px;box-shadow:0 -10px 30px rgba(0,0,0,.2);transform:translateY(100%);transition:transform .32s cubic-bezier(.22,.9,.32,1)}
+.modal.show .sheet{transform:translateY(0)}
+.sheetHandle{width:38px;height:5px;border-radius:8px;background:var(--line);margin:0 auto 17px}
+.row{display:flex;gap:9px;align-items:center}.row>*{flex:1}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%) translateY(20px);background:rgba(28,28,30,.92);color:#fff;padding:11px 16px;border-radius:14px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.2s;z-index:100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.statGrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px}
+.statCard{background:var(--card);border-radius:var(--radius);padding:15px;box-shadow:var(--shadow);border:1px solid var(--line)}
+.statCard b{display:block;font-size:24px;font-weight:800;margin-bottom:2px;letter-spacing:-.01em}
+.statCard .lbl{font-size:11.5px;color:var(--muted);font-weight:700}
+.weekChart{display:flex;gap:8px;align-items:flex-end;height:100px;margin:12px 0 4px}
+.weekChart .bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.weekChart .bar i{width:100%;max-width:24px;border-radius:6px 6px 3px 3px;background:var(--brand);display:block;min-height:3px}
+.weekChart .bar span{font-size:10px;color:var(--muted);margin-top:6px;font-weight:700}
+.heatGrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;overflow-x:auto;padding:4px 0}
+.heatCell{width:11px;height:11px;border-radius:3px;background:rgba(120,120,128,.16)}
+.heatCell.l1{background:rgba(0,122,255,.35)}.heatCell.l2{background:rgba(0,122,255,.65)}.heatCell.l3{background:var(--brand)}
+.milestoneRow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);gap:10px}.milestoneRow:first-child{border-top:0}
+.milestoneRow .mTitle{font-size:13.5px;font-weight:700}.milestoneRow .mDate{font-size:11px;color:var(--muted);font-weight:600;flex:none}
+@media(max-width:430px){.top h1{font-size:28px}.card{padding:14px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+ <div class="toprow"><div><div class="eyebrow">Java Career Preparation</div><h1 id="hello">Hello, Moushana</h1><p id="targetLine">Target: Associate Java Backend Developer</p></div><div class="avatar" id="avatar" onclick="openSettings()">L</div></div>
+ <div class="heroGrid">
+  <div class="card heroCard"><div class="ring" id="overallRing" style="--accent:#007aff"><span id="overall">0%</span></div><div><div class="lbl">Overall roadmap</div><div class="muted" style="font-size:11px;font-weight:600">Keep going</div></div></div>
+  <div class="card heroCard"><div class="streakBadge">🔥<b id="streak">0</b></div><div><div class="lbl">Day streak</div><div class="muted" style="font-size:11px;font-weight:600" id="bestStreakLine">Best: 0</div></div></div>
+ </div>
+</header>
+
+<main>
+<section id="home" class="view active">
+ <div class="sectionHead"><h2>Today's focus</h2><button onclick="shuffleFocus()">Refresh</button></div>
+ <div class="card focus"><div class="focusIcon">☕</div><div><h3 id="focusTitle">Core Java practice</h3><div class="muted" id="focusText">Complete one focused topic and code a small example.</div><div id="focusTags"><span class="tag purple">Java</span><span class="tag green">45 min</span></div></div></div>
+ <div class="sectionHead"><h2>Daily checklist</h2><button onclick="resetDaily()">Reset</button></div>
+ <div class="card" id="dailyTasks"></div>
+ <div class="sectionHead"><h2>Current target</h2><button onclick="openRoles()">Change</button></div>
+ <div class="card role" id="targetCard"></div>
+ <div class="notice">Tip: Apply now for Java SDET and automation roles while building Spring Boot projects for backend roles.</div>
+</section>
+
+<section id="roadmap" class="view">
+ <div class="sectionHead"><h2>Full-stack curriculum</h2><button onclick="openGithubGuide()">GitHub guide</button></div>
+ <div id="roadmapList"></div>
+</section>
+
+<section id="tracker" class="view">
+ <div class="sectionHead"><h2>Progress tracker</h2></div>
+ <div id="trackerStats"></div>
+</section>
+
+<section id="learn" class="view">
+ <div class="sectionHead"><h2>Learn & assess</h2><button onclick="openDoubt()">Ask AI</button></div>
+ <div class="filterRow" id="learnPhaseFilter"></div>
+ <div class="sectionHead"><h2 style="font-size:15px">Resources</h2></div>
+ <div id="resourceList"></div>
+ <div class="sectionHead"><h2 style="font-size:15px">Assessments</h2></div>
+ <div class="row" style="margin-bottom:10px"><select id="learnTopicSelect"></select><button class="secondary" style="flex:none" onclick="generateAssessmentClick(event)">Generate with AI</button></div>
+ <div id="assessmentList"></div>
+</section>
+
+<section id="practice" class="view">
+ <div class="sectionHead"><h2>Interview practice</h2><button onclick="randomQuestion()">Random</button></div>
+ <div class="filterRow" id="filters"></div>
+ <div id="questionList"></div>
+</section>
+
+<section id="projects" class="view">
+ <div class="sectionHead"><h2>Portfolio projects</h2><div style="display:flex;gap:14px"><button onclick="openGithubGuide()">GitHub guide</button><button onclick="showAddNote()">Notes</button></div></div>
+ <div class="notice" style="margin-bottom:13px">Give each project its own public GitHub repo, then paste the repo link below to mark it created.</div>
+ <div id="projectList"></div>
+ <div class="card"><h3>Personal notes</h3><div class="muted" style="font-size:13px;white-space:pre-wrap" id="notesPreview">No notes yet.</div></div>
+</section>
+</main>
+</div>
+
+<nav class="bottom"><div class="nav">
+<button class="active" data-view="home" onclick="go('home')"><b>⌂</b>Home</button>
+<button data-view="roadmap" onclick="go('roadmap')"><b>☑</b>Roadmap</button>
+<button data-view="tracker" onclick="go('tracker')"><b>◔</b>Tracker</button>
+<button data-view="learn" onclick="go('learn')"><b>🎓</b>Learn</button>
+<button data-view="practice" onclick="go('practice')"><b>?</b>Practice</button>
+<button data-view="projects" onclick="go('projects')"><b>▣</b>Projects</button>
+</div></nav>
+
+<div class="modal" id="settingsModal" onclick="closeOnBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Preparation profile</h2>
+ <div class="settingRow"><label>Your name</label><input id="nameInput" type="text" placeholder="Moushana"></div>
+ <div class="settingRow"><label>Primary target role</label><select id="roleSelect"></select></div>
+ <div class="settingRow"><label>Daily study goal</label><select id="goalSelect"><option value="45">45 minutes</option><option value="60">1 hour</option><option value="90">1.5 hours</option><option value="120">2 hours</option><option value="180">3 hours</option></select></div>
+ <div class="settingRow"><label>Backend URL (cloud sync + AI)</label><input id="apiBaseInput" type="text" placeholder="https://your-backend.onrender.com"></div>
+ <div class="row"><button class="secondary" onclick="closeSettings()">Cancel</button><button class="primary" onclick="saveSettings()">Save profile</button></div>
+</div></div>
+
+<div class="modal" id="notesModal" onclick="closeNotesBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Study notes</h2>
+ <textarea id="notesInput" placeholder="Write interview points, weak areas, project ideas or weekly goals..."></textarea>
+ <div class="row" style="margin-top:12px"><button class="secondary" onclick="closeNotes()">Cancel</button><button class="primary" onclick="saveNotes()">Save notes</button></div>
+</div></div>
+
+<div class="modal" id="rolesModal" onclick="closeRolesBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Target roles</h2>
+ <div id="roleListModal"></div>
+</div></div>
+
+<div class="modal" id="doubtModal" onclick="closeDoubtBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">Ask a doubt</h2>
+ <div class="settingRow"><label>Topic (optional)</label><input id="doubtTopic" type="text" placeholder="e.g. HashMap internals"></div>
+ <div class="settingRow"><label>Your question</label><textarea id="doubtQuestion" placeholder="Ask anything about Java, Spring, Selenium, SQL..."></textarea></div>
+ <div class="row"><button class="secondary" onclick="closeDoubt()">Cancel</button><button class="primary" id="askBtn" onclick="askDoubt()">Ask</button></div>
+ <div id="doubtAnswer" style="margin-top:14px;font-size:13.5px;line-height:1.55;white-space:pre-wrap"></div>
+ <div id="doubtHistory"></div>
+</div></div>
+
+<div class="modal" id="quizModal" onclick="closeQuizBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0" id="quizTitle">Assessment</h2>
+ <div id="quizBody"></div>
+ <div class="row" style="margin-top:8px"><button class="secondary" onclick="closeQuiz()">Close</button><button class="primary" onclick="submitQuiz()">Submit</button></div>
+ <div id="quizResult" style="margin-top:12px;font-weight:700"></div>
+</div></div>
+
+<div class="modal" id="githubGuideModal" onclick="closeGithubGuideBackdrop(event)"><div class="sheet">
+ <div class="sheetHandle"></div><h2 style="margin-top:0">GitHub setup guide</h2>
+ <div class="muted" style="font-size:13px;line-height:1.7">
+  <b>1. Create your account & a repo</b><br>
+  Go to github.com → sign up (or sign in) → "New repository" → name it (e.g. <code>java-career-prep</code>) → keep it Public so it's visible to recruiters.<br><br>
+  <b>2. Install Git & connect your machine</b><br>
+  Install Git from git-scm.com. Then, inside your project folder:<br>
+  <code>git init</code><br>
+  <code>git add .</code><br>
+  <code>git commit -m "Initial commit"</code><br>
+  <code>git branch -M main</code><br>
+  <code>git remote add origin https://github.com/&lt;you&gt;/&lt;repo&gt;.git</code><br>
+  <code>git push -u origin main</code><br><br>
+  <b>3. One repo (or folder) per milestone project</b><br>
+  Either create a fresh repo per module's project, or one folder per module inside a single monorepo — whichever is easier to keep organized.<br><br>
+  <b>4. Submit a milestone</b><br>
+  Once a module's project is pushed, copy its GitHub URL (the repo link, or a specific PR/commit) and paste it into that module's "Milestone project" box in the Roadmap tab — that's what marks the milestone complete here.<br><br>
+  <b>5. Keep it recruiter-ready</b><br>
+  Add a README to every repo (setup steps, what it does, tech stack). Modules 42 (Technical Documentation) and 43 (Portfolio Development) cover this in depth.
+ </div>
+ <div class="row" style="margin-top:14px"><button class="primary" onclick="closeGithubGuide()">Got it</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const roles=[
+ {id:'sdet',name:'SDET – Java',score:'9/10',recommendation:'Apply immediately',use:'Automation frameworks, API testing, utilities and test infrastructure.',stack:['Advanced Java','Selenium WebDriver','TestNG / JUnit 5','Cucumber','REST Assured','SQL / JDBC','Maven','GitHub Actions / Jenkins','Docker','Selenium Grid','Allure / Extent Reports']},
+ {id:'automation',name:'Java Automation Engineer',score:'9/10',recommendation:'Apply immediately',use:'Selenium, TestNG, Cucumber, Maven and API automation.',stack:['Core + Advanced Java','Selenium','TestNG','Cucumber BDD','REST Assured','Postman','Maven','Git','SQL','CI/CD','Docker','BrowserStack / Sauce Labs']},
+ {id:'qa-dev',name:'QA Automation Developer',score:'8.5/10',recommendation:'Apply immediately',use:'Framework development, reusable Java libraries and CI/CD.',stack:['Advanced Java','SOLID + design patterns','JUnit 5 / TestNG','Mockito','REST Assured','WireMock','Testcontainers','Spring Boot basics','Docker','CI/CD','SQL','Reusable libraries']},
+ {id:'backend',name:'Associate Java Backend Developer',score:'5/10',recommendation:'Best development target',use:'Spring Boot, REST APIs, SQL and JPA/Hibernate.',stack:['Java 21+','Spring Boot','Spring MVC','Spring Data JPA','Hibernate','PostgreSQL','REST APIs','Validation','Spring Security + JWT','JUnit 5 + Mockito','Docker','GitHub Actions','OpenAPI / Swagger']},
+ {id:'swe',name:'Software Engineer I – Java',score:'4.5/10',recommendation:'Target after projects',use:'Application development, debugging, APIs and databases.',stack:['Advanced Java','DSA','Spring Boot','REST APIs','SQL','JUnit + Mockito','Git','Docker','Linux','OOP design','DBMS + OS + Networks','Basic system design']},
+ {id:'api',name:'Java API Developer',score:'4.5/10',recommendation:'Target after API project',use:'REST APIs, JSON, authentication and integrations.',stack:['Java 21+','Spring Boot','Spring MVC','REST design','OpenAPI','PostgreSQL','Spring Security','JWT / OAuth2','WebClient','Resilience4j','JUnit + Mockito','Docker','Kafka basics']}
+];
+const phaseColors=['#007aff','#34c759','#ff9500','#af52de','#ff2d55','#5ac8fa'];
+// Each of the 45 modules below mirrors the full curriculum outline, grouped into
+// scannable topics (every original heading is preserved as a checkable task).
+// Every leaf task defaults to a 30-minute study block via allLeafTasks() — a
+// rough estimate for the time tracker, not a per-topic tuned figure, given the
+// scale of the syllabus. Each module also carries one small milestone project;
+// paste its GitHub link in the Roadmap tab to mark that milestone complete.
+const phases=[
+ {title:'Core Java',icon:'☕',project:{title:'Library Management Console App',desc:'A small console app using OOP, collections, streams and clean exception handling.'},topics:[
+   {name:'Language Foundations',tasks:['Java Fundamentals','Object-Oriented Programming','Collections Framework','Generics','Exception Handling']},
+   {name:'Modern Java & Functional Style',tasks:['Java Streams','Lambda Expressions','Optional','Records','Annotations','Reflection Basics','File Handling','Date and Time API']},
+   {name:'Concurrency',tasks:['Multithreading','Concurrency','CompletableFuture']},
+   {name:'JVM Internals',tasks:['JVM Memory Management','Garbage Collection Basics']},
+   {name:'Design Quality',tasks:['SOLID Principles','Design Patterns','Clean Code Practices']}
+ ]},
+ {title:'Data Structures and Algorithms',icon:'🧮',project:{title:'30-Problem DSA Journal',desc:'Solve and document 30 problems across arrays, trees, graphs and DP in a public repo with explanations.'},topics:[
+   {name:'Core Structures',tasks:['Arrays','Strings','HashMap and HashSet','Linked Lists','Stacks','Queues']},
+   {name:'Trees & Graphs',tasks:['Trees','Binary Search Trees','Heaps','Graphs']},
+   {name:'Techniques',tasks:['Recursion','Backtracking','Sorting Algorithms','Binary Search','Sliding Window','Two-Pointer Technique','Prefix Sum','Dynamic Programming']},
+   {name:'Complexity Analysis',tasks:['Time Complexity','Space Complexity']}
+ ]},
+ {title:'Java Backend Development',icon:'🌱',project:{title:'CRUD REST API',desc:'A task/book-manager REST API with validation, pagination and global exception handling.'},topics:[
+   {name:'Spring Foundations',tasks:['Spring Framework','Spring Boot','Dependency Injection','Inversion of Control','Spring MVC']},
+   {name:'Building REST APIs',tasks:['REST API Development','Controller Layer','Service Layer','Repository Layer','DTO Design','Entity Mapping']},
+   {name:'Robustness',tasks:['Input Validation','Global Exception Handling','Pagination','Sorting','Filtering','API Versioning']},
+   {name:'Configuration & Ops',tasks:['Spring Profiles','Configuration Management','Spring Boot Actuator']}
+ ]},
+ {title:'Database Development',icon:'🗄️',project:{title:'Normalized Domain Schema',desc:'Design a normalized schema (e.g. insurance or e-commerce) with Flyway migrations and real relations.'},topics:[
+   {name:'SQL & Engines',tasks:['SQL Fundamentals','MySQL','PostgreSQL','JDBC']},
+   {name:'ORM',tasks:['Spring Data JPA','Hibernate']},
+   {name:'Entity Relationships',tasks:['One-to-One','One-to-Many','Many-to-Many']},
+   {name:'Schema Design',tasks:['Database Normalization','Primary Keys','Foreign Keys','Constraints','Indexes']},
+   {name:'Transactions & Performance',tasks:['Transactions','ACID Properties','Isolation Levels','Optimistic Locking','Pessimistic Locking','Query Optimization','Execution Plans','Connection Pooling','N+1 Query Problem']},
+   {name:'Auditing & Migration',tasks:['Database Auditing']},
+   {name:'Database Migration',tasks:['Flyway','Liquibase']}
+ ]},
+ {title:'REST API Engineering',icon:'🔗',project:{title:'Versioned, Documented API',desc:'Design and document a versioned REST API for an existing project, adding rate limiting and webhooks.'},topics:[
+   {name:'HTTP Basics',tasks:['HTTP Fundamentals','HTTP Status Codes','Headers','Path Parameters','Query Parameters','Request Bodies','Response Models','JSON','XML Basics']},
+   {name:'HTTP Methods',tasks:['GET','POST','PUT','PATCH','DELETE']},
+   {name:'API Design Practices',tasks:['API Validation','API Error Handling','API Pagination','API Filtering','API Sorting','API Documentation','API Versioning','API Backward Compatibility']},
+   {name:'Advanced API Concerns',tasks:['Idempotency','Rate Limiting','Webhooks','File Uploads','Third-Party API Integration']}
+ ]},
+ {title:'API Documentation Tools',icon:'📘',project:{title:'Published Swagger UI',desc:'Add Springdoc OpenAPI to one project and publish a fully documented Swagger UI.'},topics:[
+   {name:'Documentation',tasks:['OpenAPI','Swagger UI','Springdoc OpenAPI','API Examples','Request and Response Schemas','Authentication Documentation','Error Response Documentation']}
+ ]},
+ {title:'API Development and Testing Tools',icon:'📮',project:{title:'Exported Postman Collection',desc:'Build a full Postman collection (environments, pre-request/test scripts) and export it into your repo.'},topics:[
+   {name:'Postman',tasks:['Collections','Environments','Variables','Pre-Request Scripts','Test Scripts','Collection Runner','Mock Servers','API Documentation','OpenAPI Import','Request Chaining']},
+   {name:'Other Clients',tasks:['IntelliJ HTTP Client','cURL','Insomnia']}
+ ]},
+ {title:'Java Test Automation',icon:'🧪',project:{title:'Hybrid Automation Framework',desc:'A Selenium + TestNG + Cucumber framework for a sample app, with a POM layer and HTML reports.'},topics:[
+   {name:'Core Tooling',tasks:['Selenium WebDriver','TestNG','JUnit 5','Cucumber BDD','Maven']},
+   {name:'Framework Design',tasks:['Page Object Model','Page Component Model','Data-Driven Testing','Keyword-Driven Testing','Hybrid Framework Development']},
+   {name:'Execution Strategies',tasks:['Cross-Browser Testing','Parallel Execution','Headless Execution','Screenshot Handling','Retry Mechanism']},
+   {name:'Test Organization',tasks:['Test Listeners','Test Groups','Test Tags','Test Suites','Test Configuration','Environment Management','Test Data Management']}
+ ]},
+ {title:'Selenium Advanced Topics',icon:'🕸️',project:{title:'Complex Flow Automation',desc:'Automate a real-world flow end to end: file upload, dynamic table, iframe/alert handling.'},topics:[
+   {name:'Locators',tasks:['ID','Name','XPath','CSS Selector']},
+   {name:'Waits',tasks:['Explicit Wait','Fluent Wait','Implicit Wait','Dynamic Elements']},
+   {name:'Browser Interactions',tasks:['Frames','Windows','Tabs','Alerts','Dropdowns','Mouse Actions','Keyboard Actions','JavaScript Executor']},
+   {name:'Advanced Handling',tasks:['File Upload','File Download','Shadow DOM','Web Tables','Stale Element Handling']},
+   {name:'Distributed Execution',tasks:['Selenium Grid','Remote WebDriver']}
+ ]},
+ {title:'API Automation',icon:'🔌',project:{title:'REST Assured Test Suite',desc:'A 10+ scenario REST Assured suite covering auth, chaining, schema validation and DB verification.'},topics:[
+   {name:'REST Assured Basics',tasks:['REST Assured','Request Specification','Response Specification','JSONPath','XMLPath']},
+   {name:'Data Handling',tasks:['Serialization','Deserialization','Jackson']},
+   {name:'Advanced Validation',tasks:['Authentication Testing','Schema Validation','API Chaining','Database Validation','Contract Validation']},
+   {name:'Negative Testing',tasks:['Negative Testing','Boundary Testing','Error Response Testing']}
+ ]},
+ {title:'Testing Framework Architecture',icon:'🏗️',project:{title:'Layered Framework Refactor',desc:'Refactor your automation framework into clean layers (driver factory, API client, reporting), applying two design patterns.'},topics:[
+   {name:'Core Building Blocks',tasks:['Base Test Classes','Driver Factory','ThreadLocal WebDriver','Configuration Manager','Test Data Factory']},
+   {name:'Layers',tasks:['API Client Layer','Database Utility Layer','Reporting Layer','Logging Layer','Screenshot Utility','Retry Analyzer']},
+   {name:'Reusability',tasks:['Custom Annotations','Test Listeners','Reusable Components']},
+   {name:'Design Patterns in Automation',tasks:['Factory Pattern','Builder Pattern','Strategy Pattern','Singleton Pattern']}
+ ]},
+ {title:'Unit and Integration Testing',icon:'✅',project:{title:'Full-Coverage Test Suite',desc:'Reach meaningful coverage on your CRUD API: unit tests per layer plus one full MockMvc integration test.'},topics:[
+   {name:'Core Tools',tasks:['JUnit 5','Mockito','MockMvc','Spring Boot Test']},
+   {name:'Layer Testing',tasks:['Repository Testing','Controller Testing','Service Testing','Integration Testing','End-to-End Testing']},
+   {name:'Test Craft',tasks:['Parameterized Tests','Test Fixtures','Test Coverage','Test Isolation']},
+   {name:'Test Doubles',tasks:['Mock','Stub','Spy','Fake']}
+ ]},
+ {title:'Testcontainers',icon:'🐳',project:{title:'Testcontainers Integration Suite',desc:'An integration test suite that spins up real Postgres (and Redis or Kafka) via Testcontainers.'},topics:[
+   {name:'Data Stores',tasks:['PostgreSQL Testcontainers','MySQL Testcontainers','Redis Testcontainers']},
+   {name:'Messaging & Cloud',tasks:['Kafka Testcontainers','RabbitMQ Testcontainers','LocalStack','MockServer']},
+   {name:'Lifecycle',tasks:['Container Lifecycle','Dynamic Ports','Integration Test Environments']}
+ ]},
+ {title:'Mocking and Service Virtualization',icon:'🎭',project:{title:'Simulated Flaky Dependency',desc:'Use WireMock to simulate a flaky third-party API (failures + latency) and prove your service handles it.'},topics:[
+   {name:'Tools',tasks:['Mockito','WireMock','MockServer','Postman Mock Server']},
+   {name:'Techniques',tasks:['Stub Responses','Failure Simulation','Latency Simulation','Third-Party API Mocking']}
+ ]},
+ {title:'Build and Dependency Management',icon:'📦',project:{title:'Multi-Module Maven Build',desc:'Convert a single-module project into a multi-module Maven build (e.g. api + core + tests).'},topics:[
+   {name:'Maven',tasks:['Project Structure','Dependencies','Plugins','Profiles','Test Execution','Packaging','Multi-Module Projects']},
+   {name:'Other Tooling',tasks:['Gradle Basics','Dependency Conflict Resolution','Version Management','Maven Wrapper']}
+ ]},
+ {title:'Version Control',icon:'🌿',project:{title:'Real Git Workflow',desc:'Set up a repo with a feature-branch workflow, a PR template, and one tagged release.'},topics:[
+   {name:'Git & GitHub Basics',tasks:['Git','GitHub','Repository Management','Branching Strategy','Feature Branches']},
+   {name:'Collaboration',tasks:['Pull Requests','Code Reviews','Merge Conflicts','Rebase','Squash','Cherry-Pick','Revert']},
+   {name:'Release Management',tasks:['Tags','Releases','Conventional Commits','Changelog Management']},
+   {name:'GitHub Workflow',tasks:['GitHub Issues','GitHub Projects','Pull Request Templates']}
+ ]},
+ {title:'CI/CD',icon:'⚙️',project:{title:'GitHub Actions Pipeline',desc:'A pipeline that builds, tests and packages one project on every push.'},topics:[
+   {name:'Platforms',tasks:['GitHub Actions','Jenkins']},
+   {name:'Pipelines',tasks:['Build Pipelines','Test Pipelines','Pull Request Validation','Automated Test Execution']},
+   {name:'Artifacts & Ops',tasks:['Test Reports','Build Artifacts','Environment Variables','Secrets Management']},
+   {name:'Deployment',tasks:['Docker Image Build','Deployment Pipelines','Rollback Strategies']}
+ ]},
+ {title:'Containerization',icon:'🐋',project:{title:'Dockerized Full Stack',desc:'Dockerize your backend + database with Docker Compose, including health checks.'},topics:[
+   {name:'Docker Basics',tasks:['Docker','Docker Desktop','Dockerfile','Docker Images','Docker Containers']},
+   {name:'Runtime',tasks:['Container Logs','Port Mapping','Environment Variables','Volumes','Docker Networks','Health Checks']},
+   {name:'Compose & Security',tasks:['Docker Compose','Multi-Container Applications','Container Security','Image Optimization']}
+ ]},
+ {title:'Cloud Development',icon:'☁️',project:{title:'Live Cloud Deployment',desc:'Deploy one Dockerized backend to a free-tier cloud service and document the steps.'},topics:[
+   {name:'AWS Foundations',tasks:['AWS Fundamentals','IAM','EC2','S3','RDS']},
+   {name:'Ops & Networking',tasks:['CloudWatch','Elastic Container Registry','Elastic Container Service','Load Balancers','Secrets Manager','VPC Basics']},
+   {name:'Deployment',tasks:['Application Deployment','Health Checks','Auto Scaling Basics','Logging and Monitoring']},
+   {name:'Alternatives',tasks:['Azure or Google Cloud Basics']}
+ ]},
+ {title:'Frontend UI Development',icon:'💻',project:{title:'React Dashboard',desc:'A React dashboard that consumes one of your Spring Boot APIs, with routing and auth.'},topics:[
+   {name:'Web Basics',tasks:['HTML','CSS','JavaScript','TypeScript']},
+   {name:'React Core',tasks:['React','React Components','Props','State','Hooks']},
+   {name:'App Behaviour',tasks:['Forms','API Integration','Routing','Protected Routes','Authentication Handling']},
+   {name:'UX States',tasks:['Loading States','Error States','Responsive Design']}
+ ]},
+ {title:'React UI Tools',icon:'🧩',project:{title:'Polished Dashboard UI',desc:'Add Material UI + React Hook Form to your dashboard with validated forms and a data table.'},topics:[
+   {name:'Libraries',tasks:['Material UI','React Router','Axios','Fetch API','React Hook Form','Form Validation']},
+   {name:'Components',tasks:['Data Tables','Modals','Alerts','Cards','Navigation Bars','Sidebars','Pagination','Charts','Date Pickers']}
+ ]},
+ {title:'UI and UX Design',icon:'🎨',project:{title:'Figma Wireframe → Build',desc:'Wireframe your dashboard in Figma before building it, and note 3 design decisions you carried into code.'},topics:[
+   {name:'Design Tools',tasks:['Figma','FigJam','Wireframes','Page Layouts']},
+   {name:'Visual Language',tasks:['Typography','Spacing','Colour Consistency','Reusable Components','Responsive Layouts']},
+   {name:'Interaction States',tasks:['Loading States','Empty States','Error States','Form Design','Dashboard Design']},
+   {name:'Handoff',tasks:['Developer Handoff','Figma Dev Mode']}
+ ]},
+ {title:'Browser Development Tools',icon:'🔍',project:{title:'Profiled & Fixed Frontend Bug',desc:'Use DevTools to profile and fix one real performance or network issue in your frontend.'},topics:[
+   {name:'DevTools',tasks:['Chrome DevTools','Elements Panel','Network Panel','Console']},
+   {name:'Client Storage',tasks:['Application Storage','Cookies','Local Storage','Session Storage']},
+   {name:'Diagnostics',tasks:['Performance Analysis','API Request Inspection','Responsive Device Testing','JavaScript Debugging']}
+ ]},
+ {title:'Database UI Tools',icon:'🗃️',project:{title:'ER Diagram in the README',desc:'Generate an ER diagram for your schema using DBeaver or pgAdmin and add it to your project README.'},topics:[
+   {name:'Clients',tasks:['DBeaver','IntelliJ Database Tools','pgAdmin','MySQL Workbench']},
+   {name:'Everyday Use',tasks:['Schema Browsing','Query Execution','Execution Plans','Data Export','Data Import']},
+   {name:'Modeling',tasks:['ER Diagrams','Index Inspection','Transaction Management']}
+ ]},
+ {title:'IntelliJ IDEA Productivity',icon:'🛠️',project:{title:'Documented Debug Session',desc:'Debug a real bug end-to-end using a conditional breakpoint and thread view; write up what you learned.'},topics:[
+   {name:'Debugging',tasks:['Debugging','Conditional Breakpoints','Exception Breakpoints','Watches','Evaluate Expression','Thread Debugging','Remote Debugging']},
+   {name:'Workflow',tasks:['Refactoring','Code Navigation','Maven Integration','Git Integration','Database Integration','HTTP Client']},
+   {name:'Insight',tasks:['Profiling','Dependency Analysis','Code Inspection']}
+ ]},
+ {title:'Code Quality',icon:'🧹',project:{title:'Clean SonarCloud Report',desc:'Wire SonarCloud + JaCoCo into CI and clear all blocker/critical issues on one project.'},topics:[
+   {name:'Static Analysis',tasks:['SonarQube','SonarCloud','SonarLint','Checkstyle','SpotBugs','PMD','OWASP Dependency-Check']},
+   {name:'Coverage & Standards',tasks:['JaCoCo','Code Coverage','Quality Gates','Secure Coding Rules']},
+   {name:'Hygiene',tasks:['Code Smells','Technical Debt','Duplicate Code']}
+ ]},
+ {title:'Application Security',icon:'🔐',project:{title:'JWT-Secured API',desc:'Add JWT auth with role-based access control to your CRUD API and document the OWASP risks mitigated.'},topics:[
+   {name:'AuthN / AuthZ',tasks:['Spring Security','Authentication','Authorization','JWT','Access Tokens','Refresh Tokens','OAuth 2.0','OpenID Connect','Role-Based Access Control']},
+   {name:'Defensive Practices',tasks:['Password Hashing','CORS','CSRF','SQL Injection Prevention','Input Validation','Rate Limiting']},
+   {name:'Ops Security',tasks:['Secrets Management','Secure Logging','Dependency Vulnerability Scanning','API Security','OWASP Top 10']}
+ ]},
+ {title:'Logging',icon:'📝',project:{title:'Correlation-ID Logging',desc:'Add structured logging with correlation IDs across a request\'s full lifecycle in your backend.'},topics:[
+   {name:'Core Tooling',tasks:['SLF4J','Logback']},
+   {name:'Log Levels',tasks:['TRACE','DEBUG','INFO','WARN','ERROR']},
+   {name:'Practices',tasks:['Structured Logging','Correlation IDs','Request Logging','Error Logging','Sensitive Data Masking','Centralized Logging']}
+ ]},
+ {title:'Monitoring and Observability',icon:'📊',project:{title:'Grafana Latency Dashboard',desc:'Instrument your backend with Actuator + Micrometer and build a Grafana dashboard for latency and error rate.'},topics:[
+   {name:'Foundations',tasks:['Spring Boot Actuator','Micrometer','Prometheus','Grafana','OpenTelemetry']},
+   {name:'Signals',tasks:['Application Metrics','JVM Metrics','API Response Time','Error Rate','Request Count','Database Connection Metrics']},
+   {name:'Reliability',tasks:['Health Checks','Distributed Tracing','Alerts','Monitoring Dashboards']}
+ ]},
+ {title:'Performance Testing',icon:'🚦',project:{title:'Documented Load Test',desc:'Run a k6 or JMeter load test against your API and document the breaking point and bottleneck.'},topics:[
+   {name:'Tools',tasks:['Apache JMeter','k6','Gatling']},
+   {name:'Metrics',tasks:['Response Time','Throughput','Concurrent Users','Percentiles']},
+   {name:'Test Types',tasks:['Load Testing','Stress Testing','Spike Testing','Endurance Testing','Bottleneck Analysis']}
+ ]},
+ {title:'Microservices',icon:'🧭',project:{title:'Two-Service Split',desc:'Split one monolith into two small services communicating over REST, with a circuit breaker in place.'},topics:[
+   {name:'Foundations',tasks:['Microservice Architecture','Service Discovery','API Gateway','Centralized Configuration']},
+   {name:'Communication',tasks:['Inter-Service Communication','Synchronous Communication','Asynchronous Communication']},
+   {name:'Resilience Patterns',tasks:['Circuit Breaker','Retry','Timeout','Bulkhead Pattern']},
+   {name:'Cross-Cutting Concerns',tasks:['Distributed Tracing','Centralized Logging','Event-Driven Architecture','Database Per Service','Saga Pattern Basics']}
+ ]},
+ {title:'Messaging Systems',icon:'📡',project:{title:'Kafka Producer/Consumer Pair',desc:'Add a Kafka producer/consumer pair (e.g. order-placed events) with a dead-letter queue.'},topics:[
+   {name:'Platforms',tasks:['Apache Kafka','RabbitMQ']},
+   {name:'Core Concepts',tasks:['Producers','Consumers','Topics','Partitions','Consumer Groups']},
+   {name:'Reliability',tasks:['Message Serialization','Retry Topics','Dead-Letter Queues','Idempotent Consumers']},
+   {name:'Evolution',tasks:['Event Schemas','Event Versioning']}
+ ]},
+ {title:'Caching',icon:'⚡',project:{title:'Redis-Cached Endpoint',desc:'Add Redis caching to your most-read API endpoint and measure the latency improvement.'},topics:[
+   {name:'Redis Basics',tasks:['Redis','Cache-Aside Pattern','TTL','Cache Invalidation']},
+   {name:'Advanced Use',tasks:['Distributed Cache','Session Storage','Rate Limiting with Redis']}
+ ]},
+ {title:'Resilience Engineering',icon:'🛡️',project:{title:'Resilience4j-Wrapped Call',desc:'Wrap one external API call with Resilience4j retry + circuit breaker + fallback.'},topics:[
+   {name:'Resilience4j',tasks:['Resilience4j','Retry','Circuit Breaker','Rate Limiter','Bulkhead','Timeout','Fallback']},
+   {name:'Practices',tasks:['Failure Handling','Graceful Degradation']}
+ ]},
+ {title:'Architecture and System Design',icon:'🏛️',project:{title:'Scale-to-10x Design Doc',desc:'Write a one-page system design doc for scaling one of your projects to 10x traffic.'},topics:[
+   {name:'Design Foundations',tasks:['Object-Oriented Design','Low-Level Design','High-Level Design']},
+   {name:'Architecture Styles',tasks:['Modular Monolith','Layered Architecture','Clean Architecture','Hexagonal Architecture','Domain-Driven Design Basics']},
+   {name:'Scaling & Reliability',tasks:['Scalability','Availability','Reliability','Load Balancing','Caching','Database Scaling','Horizontal Scaling','Vertical Scaling','Fault Tolerance']}
+ ]},
+ {title:'Architecture Diagram Tools',icon:'📐',project:{title:'Diagrammed Architecture',desc:'Diagram your best project\'s architecture (context + sequence diagram) with Mermaid and add it to the README.'},topics:[
+   {name:'Tools',tasks:['Mermaid','draw.io','PlantUML','Figma']},
+   {name:'Diagram Types',tasks:['System Context Diagram','Component Diagram','Sequence Diagram','Entity Relationship Diagram','Deployment Diagram','Authentication Flow Diagram','Data Flow Diagram']}
+ ]},
+ {title:'Linux and Command Line',icon:'🐧',project:{title:'Log-Scanning Shell Script',desc:'A shell script that tails your app\'s logs, greps for ERROR, and reports a count.'},topics:[
+   {name:'Basics',tasks:['File Navigation','File Permissions','Process Management','Port Checking','Log Reading','Environment Variables','Shell Commands']},
+   {name:'Remote & Transfer',tasks:['SSH','SCP','cURL']},
+   {name:'Everyday Commands',tasks:['grep','find','tail','head','ps','kill','top','systemctl','journalctl']},
+   {name:'Scripting',tasks:['Shell Scripting Basics']}
+ ]},
+ {title:'Computer Science Fundamentals',icon:'🧠',project:{title:'Concept Notes',desc:'Write short notes explaining processes vs threads and TCP vs UDP in your own words.'},topics:[
+   {name:'Systems',tasks:['Operating Systems','Processes','Threads','Memory Management']},
+   {name:'Networking',tasks:['Networking','TCP/IP','HTTP','DNS']},
+   {name:'Data & Compilation',tasks:['Database Management Systems','Transactions','Indexing','Object-Oriented Design','Compiler and JVM Basics','Data Structures','Algorithms']}
+ ]},
+ {title:'Debugging Skills',icon:'🐞',project:{title:'Root-Cause Analysis Doc',desc:'Pick a real bug you hit this month and write a short root-cause-analysis doc for it.'},topics:[
+   {name:'Application Debugging',tasks:['Java Debugging','API Debugging','Database Debugging','Spring Boot Debugging','Authentication Debugging']},
+   {name:'Infra Debugging',tasks:['Docker Debugging','CI/CD Debugging','Network Debugging','Automation Failure Analysis']},
+   {name:'Root Cause',tasks:['Log Analysis','Root Cause Analysis','Performance Debugging','Memory Debugging','Thread Debugging']}
+ ]},
+ {title:'AI-Assisted Development',icon:'🤖',project:{title:'AI-Assisted Debug Log',desc:'Use this app\'s Ask-AI feature to debug a real stack trace, then validate the suggestion yourself.'},topics:[
+   {name:'Tools',tasks:['GitHub Copilot','ChatGPT for Development']},
+   {name:'Use Cases',tasks:['Code Generation','Test-Case Generation','Code Explanation','Refactoring Assistance','Stack-Trace Analysis','Documentation Generation','SQL Assistance','Pull Request Review','Edge-Case Identification']},
+   {name:'Responsible Use',tasks:['AI Output Validation','Secure AI Usage','AI-Assisted Debugging']}
+ ]},
+ {title:'Collaboration and Agile Development',icon:'🤝',project:{title:'Mini Sprint',desc:'Run one project as a one-week sprint: backlog, daily notes, and a retro write-up.'},topics:[
+   {name:'Agile Foundations',tasks:['Agile','Scrum','Kanban','Jira']},
+   {name:'Ceremonies',tasks:['Sprint Planning','Daily Stand-Ups','Retrospectives','Backlog Refinement']},
+   {name:'Delivery Craft',tasks:['User Stories','Acceptance Criteria','Estimation','Code Reviews']},
+   {name:'Communication',tasks:['Client Communication','Technical Documentation','Cross-Functional Collaboration']}
+ ]},
+ {title:'Technical Documentation',icon:'📄',project:{title:'Recruiter-Ready README',desc:'Write a complete README (setup, architecture, API docs) for your strongest project.'},topics:[
+   {name:'Project Docs',tasks:['README Documentation','Installation Guide','API Documentation','Architecture Documentation']},
+   {name:'Ops Docs',tasks:['Database Documentation','Testing Documentation','Deployment Documentation','Troubleshooting Guide']},
+   {name:'Release Docs',tasks:['Release Notes','Changelog','Postman Collections','Swagger Documentation']}
+ ]},
+ {title:'Portfolio Development',icon:'💼',project:{title:'Three-Project Showcase',desc:'Polish your 3 strongest projects\' READMEs and record a 3-minute demo video for each.'},topics:[
+   {name:'Automation Portfolio',tasks:['Java Automation Framework','API Automation Framework']},
+   {name:'Backend Portfolio',tasks:['Insurance Management Backend','Claims Management System','Order Management API']},
+   {name:'Full-Stack & Ops',tasks:['React Admin Dashboard','Dockerized Application','CI/CD Pipeline','Monitoring Dashboard']},
+   {name:'Presentation',tasks:['Architecture Documentation','Test Reports','Public GitHub Repository','Project Demonstration Video','Live Deployment']}
+ ]},
+ {title:'Interview Preparation',icon:'🎯',project:{title:'Mock Interview Rounds',desc:'Do 3 mock interviews (self-recorded or with a friend) covering technical and behavioural questions.'},topics:[
+   {name:'Technical Recall',tasks:['Core Java Questions','Java Coding Problems','Selenium Questions','TestNG Questions','Cucumber Questions','API Testing Questions']},
+   {name:'Backend Recall',tasks:['Spring Boot Questions','REST API Questions','SQL Questions','Database Questions']},
+   {name:'Ops & Systems Recall',tasks:['Docker Questions','Git Questions','CI/CD Questions','Security Questions','DSA Questions','System Design Questions']},
+   {name:'Delivery',tasks:['Debugging Scenarios','Project Explanation','Behavioural Questions']}
+ ]},
+ {title:'Optional Advanced Learnings',icon:'🚀',project:{title:'One Advanced Proof-of-Concept',desc:'Pick one optional topic (e.g. Kubernetes or GraphQL) and build a tiny proof-of-concept.'},topics:[
+   {name:'Contract Testing',tasks:['Pact','Spring Cloud Contract']},
+   {name:'Mobile Automation',tasks:['Appium']},
+   {name:'Cloud Browser Testing',tasks:['BrowserStack','Sauce Labs']},
+   {name:'Infrastructure as Code',tasks:['Terraform Basics']},
+   {name:'Emerging Tech & Ops',tasks:['Kubernetes Basics','Accessibility Testing','Feature Flags','Chaos Engineering Basics','GraphQL Basics','WebSocket Basics','gRPC Basics']}
+ ]}
+];
+const questions=[
+ {cat:'Java',q:'How does HashMap work internally?',a:'Explain hashing, buckets, hash spreading, equals/hashCode, collision handling, resizing, load factor and treeification of heavily-colliding buckets.'},
+ {cat:'Java',q:'Difference between interface and abstract class?',a:'Discuss multiple inheritance of type, state, constructors, access modifiers, default methods and when each models the design more clearly.'},
+ {cat:'Java',q:'What is the difference between checked and unchecked exceptions?',a:'Checked exceptions must be declared or handled; unchecked exceptions extend RuntimeException. Explain recoverability and avoiding exceptions for normal control flow.'},
+ {cat:'Java',q:'Why are String objects immutable?',a:'Immutability supports security, caching/string pool, thread safety and stable hash codes. Operations create new String objects.'},
+ {cat:'Java',q:'Explain equals() and hashCode() contract.',a:'Equal objects must return the same hash code. Unequal objects may collide. Both should use the same significant fields and remain stable while used as map keys.'},
+ {cat:'Selenium',q:'Implicit wait versus explicit wait?',a:'Implicit wait applies globally to element lookup. Explicit wait targets a condition. Prefer explicit waits for predictable synchronization and avoid mixing both.'},
+ {cat:'Selenium',q:'How do you handle stale elements?',a:'Re-locate the element after the DOM changes, wait for a stable condition, avoid caching dynamic elements and design page components around fresh element access.'},
+ {cat:'Selenium',q:'How would you run tests in parallel safely?',a:'Use one WebDriver per thread, commonly with ThreadLocal; avoid mutable shared state; isolate test data; configure TestNG/Cucumber parallelism and thread-safe reporting.'},
+ {cat:'API',q:'PUT versus PATCH?',a:'PUT replaces the full resource representation and is idempotent. PATCH applies a partial update; it can be idempotent depending on the patch operation design.'},
+ {cat:'API',q:'401 versus 403?',a:'401 means authentication is missing or invalid. 403 means the caller is authenticated but lacks permission for the requested action.'},
+ {cat:'API',q:'What makes an API idempotent?',a:'Repeating the same request has the same intended server-side effect as performing it once. GET, PUT and DELETE are designed to be idempotent; POST generally is not.'},
+ {cat:'Spring',q:'What is dependency injection?',a:'Objects receive dependencies from the container rather than constructing them. This reduces coupling, centralizes configuration and improves testability.'},
+ {cat:'Spring',q:'What is the difference between @Component, @Service and @Repository?',a:'All register beans. @Service communicates business-layer intent. @Repository marks persistence components and enables persistence-exception translation.'},
+ {cat:'Spring',q:'Why use DTOs instead of exposing JPA entities?',a:'DTOs define the API contract, prevent accidental data exposure, avoid serialization/lazy-loading problems and decouple persistence models from external clients.'},
+ {cat:'Spring',q:'How do you implement global exception handling?',a:'Use @RestControllerAdvice with @ExceptionHandler methods and return a consistent error model containing status, code, message, timestamp and request context.'},
+ {cat:'SQL',q:'INNER JOIN versus LEFT JOIN?',a:'INNER JOIN returns only matching rows. LEFT JOIN retains every row from the left table and fills unmatched right-side columns with null.'},
+ {cat:'SQL',q:'What is an index and when can it hurt?',a:'An index speeds reads by adding a searchable data structure, but consumes storage and makes inserts, updates and deletes more expensive. Low-selectivity indexes may add little value.'},
+ {cat:'Testing',q:'Unit test versus integration test?',a:'A unit test isolates a small unit with controlled dependencies. An integration test verifies real collaboration between components such as controller, service, repository and database.'},
+ {cat:'Testing',q:'What should be mocked?',a:'Mock boundaries and collaborators that are slow, non-deterministic or outside the unit. Do not mock the class under test or simple value objects.'},
+ {cat:'DevOps',q:'What should a Java CI pipeline do?',a:'Checkout code, configure JDK, cache dependencies, compile, run unit/integration tests, publish reports, package the artifact and optionally build/scan a container image.'}
+];
+const projects=[
+ {id:'insurance',title:'Insurance Policy & Claims API',desc:'A production-style backend aligned to insurance-domain experience.',stack:'Spring Boot · JPA · PostgreSQL · JWT · OpenAPI · Docker',steps:['Design entities and database schema','Create customer and policy CRUD APIs','Add premium quotation flow','Add claim registration and status workflow','Implement validation and global errors','Add JWT login and roles','Write unit and integration tests','Dockerise and deploy','Write architecture README']},
+ {id:'hybrid',title:'Hybrid Java Test Framework',desc:'One framework for UI, API and database validation.',stack:'Java · Selenium · REST Assured · TestNG · JDBC · CI/CD',steps:['Create Maven multi-layer structure','Add configuration and environment handling','Build Page Component layer','Add API client utilities','Add JDBC validation utilities','Enable parallel browser execution','Add logging, screenshots and reports','Run in GitHub Actions','Document commands and design']},
+ {id:'orders',title:'Order & Payment API',desc:'Demonstrate secure APIs, integrations and reliable workflows.',stack:'Spring Boot · Security · PostgreSQL · WebClient · Redis/Kafka basics',steps:['Model products, stock, orders and payments','Build authenticated REST endpoints','Implement inventory validation','Add idempotency for payments','Handle provider webhook updates','Add retries and timeout handling','Add integration tests','Docker Compose setup','Deploy and document']}
+];
+const dailyBase=['Study one roadmap topic','Write or refactor Java code','Solve one coding/SQL problem','Review five interview questions','Commit learning or project work'];
+const focusPool=[
+ ['Core Java: Collections','Implement a small HashMap or Streams exercise and explain its complexity.',['Java','45 min']],
+ ['Spring Boot API','Build or improve one endpoint with validation and clear error responses.',['Spring','60 min']],
+ ['Selenium framework','Improve synchronization, reusability or parallel execution in the framework.',['Selenium','45 min']],
+ ['API automation','Automate a complete REST flow including response and database validation.',['REST Assured','60 min']],
+ ['Interview practice','Answer ten questions aloud and write down weak points.',['Interview','30 min']],
+ ['Portfolio project','Complete one visible project milestone and push it to GitHub.',['Project','90 min']],
+ ['DSA pattern','Practise two problems using HashMap, two pointers or sliding window.',['DSA','45 min']]
+];
+const S={get:(k,d)=>{try{let v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set:(k,v)=>localStorage.setItem(k,JSON.stringify(v))};
+let filter='All';
+let openPhases=new Set([0]);
+let openTopics=new Set();
+function todayStr(){return new Date().toISOString().slice(0,10)}
+function dateStr(offset){return new Date(Date.now()+offset*86400000).toISOString().slice(0,10)}
+function fmtDate(d){if(!d)return '';return new Date(d+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})}
+async function init(){populateSettings();renderAll();await pullState();renderAll();if(document.getElementById('learn').classList.contains('active')){renderLearnFilters();loadResources();loadAssessments()}}
+function profile(){return S.get('profile',{name:'Moushana',role:'backend',goal:'60'})}
+function apiBase(){return S.get('apiBase','')}
+async function api(path,opts){let base=apiBase();if(!base)return null;try{let r=await fetch(base.replace(/\/$/,'')+path,Object.assign({headers:{'Content-Type':'application/json'}},opts||{}));if(!r.ok)throw new Error('status '+r.status);return await r.json()}catch(e){console.warn('API call failed',path,e);return null}}
+async function pullState(){let s=await api('/api/state');if(!s)return;if(s.profile)S.set('profile',{name:s.profile.name,role:s.profile.role,goal:String(s.profile.goal_minutes)});if(s.roadmapProgress)S.set('roadmapProgress',s.roadmapProgress);if(s.projectDone)S.set('projectDone',s.projectDone);if(s.activityLog)S.set('activityLog',s.activityLog);if(typeof s.notes==='string')S.set('notes',s.notes);if(Array.isArray(s.dailyDone))S.set('daily',{day:todayStr(),done:s.dailyDone});if(s.githubLinks)S.set('githubLinks',s.githubLinks);if(s.projectGithubLinks)S.set('projectGithubLinks',s.projectGithubLinks)}
+function populateSettings(){roleSelect.innerHTML=roles.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
+function allLeafTasks(){return phases.flatMap((p,pi)=>p.topics.flatMap((t,ti)=>t.tasks.map((label,ki)=>({id:`${pi}-${ti}-${ki}`,pi,ti,ki,m:30,t:label}))))}
+function recordActivity(date){let log=S.get('activityLog',{});log[date]=(log[date]||0)+1;S.set('activityLog',log)}
+function decrementActivity(date){let log=S.get('activityLog',{});if(log[date]){log[date]--;if(log[date]<=0)delete log[date]}S.set('activityLog',log)}
+function computeStreak(){
+ let log=S.get('activityLog',{});
+ let dates=Object.keys(log).filter(d=>log[d]>0).sort();
+ if(!dates.length)return{current:0,longest:0};
+ let longest=1,cur=1;
+ for(let i=1;i<dates.length;i++){let diff=(new Date(dates[i]+'T00:00:00')-new Date(dates[i-1]+'T00:00:00'))/86400000;if(diff===1){cur++;longest=Math.max(longest,cur)}else{cur=1}}
+ longest=Math.max(longest,cur);
+ let today=todayStr(),yesterday=dateStr(-1),last=dates[dates.length-1],current=0;
+ if(last===today||last===yesterday){
+  current=1;
+  for(let i=dates.length-1;i>0;i--){let diff=(new Date(dates[i]+'T00:00:00')-new Date(dates[i-1]+'T00:00:00'))/86400000;if(diff===1)current++;else break}
+ }
+ return{current,longest};
+}
+function renderAll(){renderHeader();renderDaily();renderTarget();renderRoadmap();renderFilters();renderQuestions();renderProjects();renderNotes();updateOverall();}
+function renderHeader(){let p=profile(),r=roles.find(x=>x.id===p.role)||roles[3];hello.textContent=`Hello, ${p.name||'Moushana'}`;targetLine.textContent=`Target: ${r.name}`;avatar.textContent=(p.name||'M').trim().charAt(0).toUpperCase();}
+function renderDaily(){let day=todayStr(),state=S.get('daily',{});let vals=state.day===day?state.done:[];dailyTasks.innerHTML=dailyBase.map((t,i)=>taskHtml(`daily-${i}`,t,`Daily goal · ${profile().goal} min plan`,vals.includes(i),`toggleDaily(${i})`)).join('')}
+function toggleDaily(i){let day=todayStr(),st=S.get('daily',{day,done:[]});if(st.day!==day)st={day,done:[]};let was=st.done.includes(i);st.done=was?st.done.filter(x=>x!==i):[...st.done,i];S.set('daily',st);was?decrementActivity(day):recordActivity(day);api('/api/daily/toggle',{method:'POST',body:JSON.stringify({taskIndex:i,done:!was})});renderDaily();updateOverall()}
+function resetDaily(){S.set('daily',{day:todayStr(),done:[]});renderDaily();updateOverall();toastMsg('Daily checklist reset')}
+function taskHtml(id,title,sub,done,click){return `<div class="task ${done?'done':''}"><input class="circle" id="${id}" type="checkbox" ${done?'checked':''} onchange="${click}"><label for="${id}">${title}<span>${sub}</span></label></div>`}
+function renderTarget(){let r=roles.find(x=>x.id===profile().role)||roles[3];targetCard.innerHTML=`<h3>${r.name}</h3><div class="roleMeta"><span class="score">Suitability ${r.score}</span><span>${r.recommendation}</span></div><div class="stack">${r.use}</div><div style="margin-top:9px">${r.stack.slice(0,5).map(x=>`<span class="tag purple">${x}</span>`).join('')}</div>`}
+function phaseStats(pi){let leaves=allLeafTasks().filter(l=>l.pi===pi);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length,pct:leaves.length?Math.round(done/leaves.length*100):0}}
+function topicStats(pi,ti){let leaves=allLeafTasks().filter(l=>l.pi===pi&&l.ti===ti);let progress=S.get('roadmapProgress',{});let done=leaves.filter(l=>progress[l.id]).length;return{done,total:leaves.length}}
+function renderRoadmap(){
+ let progress=S.get('roadmapProgress',{});
+ let ghLinks=S.get('githubLinks',{});
+ roadmapList.innerHTML=phases.map((p,pi)=>{
+  let st=phaseStats(pi),color=phaseColors[pi%phaseColors.length],open=openPhases.has(pi);
+  let topicsHtml=p.topics.map((t,ti)=>{
+   let tst=topicStats(pi,ti),topen=openTopics.has(`${pi}-${ti}`);
+   let tasksHtml=t.tasks.map((label,ki)=>{
+    let id=`${pi}-${ti}-${ki}`,info=progress[id];
+    let sub=info?`<span class="doneDate" onclick="editRoadmapDate('${id}',event)">✓ Done ${fmtDate(info.date)} · tap to edit</span>`:`<span class="estMin">~30 min</span>`;
+    return `<div class="task ${info?'done':''}"><input class="circle" type="checkbox" ${info?'checked':''} onchange="toggleRoadmapTask('${id}')"><label>${label}${sub}</label></div>`;
+   }).join('');
+   return `<div class="topic ${topen?'open':''}"><div class="topicHead" onclick="toggleTopic('${pi}-${ti}')"><span>${t.name}</span><span class="topicRight"><b>${tst.done}/${tst.total}</b><i class="chev">⌄</i></span></div><div class="topicBody">${tasksHtml}</div></div>`;
+  }).join('');
+  let ghUrl=ghLinks[pi]&&ghLinks[pi].url;
+  let projectHtml=`<div class="card" style="margin:0 0 12px;background:rgba(0,122,255,.06)">
+   <div style="font-weight:700;font-size:13.5px;margin-bottom:2px">🚀 Milestone project: ${p.project.title}</div>
+   <div class="muted" style="font-size:12.5px;margin-bottom:10px">${p.project.desc}</div>
+   ${ghUrl?`<div style="font-size:12.5px"><span class="doneDate" style="cursor:default">✓ Submitted</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:4px 9px;font-size:11px;margin-left:4px" onclick="editGithubLink(${pi},event)">Edit</button></div>`
+    :`<div class="row"><input type="text" id="gh-${pi}" placeholder="Paste your GitHub repo/PR link"><button class="secondary" style="flex:none" onclick="saveGithubLink(${pi},event)">Save</button></div>`}
+  </div>`;
+  return `<div class="card phaseCard ${open?'open':''}">
+   <div class="phaseHead" onclick="togglePhase(${pi})">
+    <div class="ring" style="--p:${st.pct};--accent:${color}"><span>${st.pct}%</span></div>
+    <div class="phaseInfo"><div class="weeks" style="color:${color}">Module ${pi+1} of ${phases.length}</div><h3>${p.icon} ${p.title}</h3><div class="muted" style="font-size:11.5px;font-weight:600">${st.done}/${st.total} tasks complete${ghUrl?' · project submitted':''}</div></div>
+    <i class="chev big">⌄</i>
+   </div>
+   <div class="phaseBody">${projectHtml}${topicsHtml}</div>
+  </div>`;
+ }).join('');
+}
+function togglePhase(pi){if(openPhases.has(pi))openPhases.delete(pi);else openPhases.add(pi);renderRoadmap()}
+function toggleTopic(key){if(openTopics.has(key))openTopics.delete(key);else openTopics.add(key);renderRoadmap()}
+function toggleRoadmapTask(id){let done=S.get('roadmapProgress',{});if(done[id]){let rec=done[id];delete done[id];S.set('roadmapProgress',done);decrementActivity(rec.date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:false})})}else{let date=todayStr();done[id]={date};S.set('roadmapProgress',done);recordActivity(date);api('/api/roadmap/toggle',{method:'POST',body:JSON.stringify({taskId:id,done:true,date})})}renderRoadmap();updateOverall()}
+function editRoadmapDate(id,ev){ev.stopPropagation();let done=S.get('roadmapProgress',{});let cur=done[id];if(!cur)return;let nd=prompt('Completion date (YYYY-MM-DD):',cur.date);if(!nd)return;if(!/^\d{4}-\d{2}-\d{2}$/.test(nd)||isNaN(new Date(nd+'T00:00:00').getTime())){alert('Please enter a valid date as YYYY-MM-DD');return}decrementActivity(cur.date);cur.date=nd;done[id]=cur;S.set('roadmapProgress',done);recordActivity(nd);api('/api/roadmap/date',{method:'POST',body:JSON.stringify({taskId:id,date:nd})});renderRoadmap();updateOverall()}
+function saveGithubLink(pi,ev){ev.stopPropagation();let el=document.getElementById('gh-'+pi);let url=el.value.trim();if(!url)return;if(!/^https?:\/\//i.test(url)){alert('Please paste a full https:// GitHub link');return}let links=S.get('githubLinks',{});links[pi]={url,date:todayStr()};S.set('githubLinks',links);api('/api/github-link',{method:'POST',body:JSON.stringify({phaseIndex:pi,url})});recordActivity(todayStr());renderRoadmap();updateOverall();toastMsg('Milestone project link saved')}
+function editGithubLink(pi,ev){ev.stopPropagation();if(!confirm('Remove the saved link so you can paste a new one?'))return;let links=S.get('githubLinks',{});delete links[pi];S.set('githubLinks',links);api('/api/github-link/'+pi,{method:'DELETE'});renderRoadmap()}
+function openGithubGuide(){githubGuideModal.classList.add('show')}
+function closeGithubGuide(){githubGuideModal.classList.remove('show')}
+function closeGithubGuideBackdrop(e){if(e.target.id==='githubGuideModal')closeGithubGuide()}
+function renderRolesList(){let current=profile().role;roleListModal.innerHTML=roles.map((r,i)=>`<div class="card role" style="border-left-color:${phaseColors[i%phaseColors.length]}"><h3>${r.name}</h3><div class="roleMeta"><span class="score">Suitability ${r.score}</span><span>${r.recommendation}</span></div><p class="muted" style="font-size:13px;line-height:1.5">${r.use}</p><div class="stack"><b>Learn:</b> ${r.stack.join(' · ')}</div><button style="margin-top:12px" onclick="setRole('${r.id}')">${current===r.id?'✓ Current target':'Set as target'}</button></div>`).join('')}
+function setRole(id){let p=profile();p.role=id;S.set('profile',p);closeRoles();renderAll();toastMsg('Target role updated')}
+function openRoles(){renderRolesList();rolesModal.classList.add('show')}
+function closeRoles(){rolesModal.classList.remove('show')}
+function closeRolesBackdrop(e){if(e.target.id==='rolesModal')closeRoles()}
+function renderFilters(){let cats=['All',...new Set(questions.map(q=>q.cat))];filters.innerHTML=cats.map(c=>`<button class="chip ${filter===c?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('')}
+function setFilter(c){filter=c;renderFilters();renderQuestions()}
+function renderQuestions(){let qs=filter==='All'?questions:questions.filter(q=>q.cat===filter);questionList.innerHTML=qs.map((x,i)=>`<div class="card question" onclick="this.classList.toggle('open')"><div class="q"><span><span class="tag purple">${x.cat}</span><br>${x.q}</span><span class="chev">⌄</span></div><div class="ans">${x.a}</div></div>`).join('')}
+function randomQuestion(){let x=questions[Math.floor(Math.random()*questions.length)];filter=x.cat;renderFilters();renderQuestions();setTimeout(()=>{let cards=document.querySelectorAll('#questionList .question');let idx=questions.filter(q=>q.cat===filter).findIndex(q=>q.q===x.q);if(cards[idx]){cards[idx].classList.add('open');cards[idx].scrollIntoView({behavior:'smooth',block:'center'})}},60)}
+function renderProjects(){
+ let done=S.get('projectDone',{}),ghLinks=S.get('projectGithubLinks',{});
+ projectList.innerHTML=projects.map((p,pi)=>{
+  let d=done[p.id]||[],pct=Math.round(d.length/p.steps.length*100);
+  let gh=ghLinks[p.id],ghUrl=gh&&gh.url;
+  let ghHtml=ghUrl
+   ?`<div style="font-size:12.5px;margin:10px 0"><span class="doneDate" style="cursor:default">✓ Repo created</span> — <a href="${ghUrl}" target="_blank" rel="noopener" style="word-break:break-all">${ghUrl}</a> <button class="secondary" style="padding:4px 9px;font-size:11px;margin-left:4px" onclick="editProjectGithubLink('${p.id}')">Edit</button></div>`
+   :`<div class="row" style="margin:10px 0"><input type="text" id="pgh-${p.id}" placeholder="Paste this project's GitHub repo link"><button class="secondary" style="flex:none" onclick="saveProjectGithubLink('${p.id}')">Save</button></div>`;
+  return `<div class="card"><div class="projectHead"><div class="projectIcon">${['⚙','✓','↗'][pi]}</div><div><h3>${p.title}</h3><div class="muted" style="font-size:12px">${p.desc}</div></div></div><div class="projectProgress"><i style="width:${pct}%"></i></div><div class="roleMeta"><span>${p.stack}</span><span class="score">${pct}%</span></div>${ghHtml}${p.steps.map((s,si)=>taskHtml(`p-${p.id}-${si}`,s,'Portfolio milestone',d.includes(si),`toggleProject('${p.id}',${si})`)).join('')}</div>`;
+ }).join('');
+}
+function toggleProject(id,i){let all=S.get('projectDone',{}),d=all[id]||[];let was=d.includes(i);all[id]=was?d.filter(x=>x!==i):[...d,i];S.set('projectDone',all);let day=todayStr();was?decrementActivity(day):recordActivity(day);api('/api/project/toggle',{method:'POST',body:JSON.stringify({projectId:id,stepIndex:i,done:!was})});renderProjects();updateOverall()}
+function saveProjectGithubLink(id){let el=document.getElementById('pgh-'+id);let url=el.value.trim();if(!url)return;if(!/^https?:\/\//i.test(url)){alert('Please paste a full https:// GitHub link');return}let links=S.get('projectGithubLinks',{});links[id]={url,date:todayStr()};S.set('projectGithubLinks',links);api('/api/project-github-link',{method:'POST',body:JSON.stringify({projectId:id,url})});recordActivity(todayStr());renderProjects();toastMsg('Project repo link saved')}
+function editProjectGithubLink(id){if(!confirm('Remove the saved link so you can paste a new one?'))return;let links=S.get('projectGithubLinks',{});delete links[id];S.set('projectGithubLinks',links);api('/api/project-github-link/'+id,{method:'DELETE'});renderProjects()}
+function renderNotes(){let n=S.get('notes','');notesPreview.textContent=n||'No notes yet.'}
+function showAddNote(){notesInput.value=S.get('notes','');notesModal.classList.add('show')}
+function saveNotes(){let content=notesInput.value.trim();S.set('notes',content);api('/api/notes',{method:'POST',body:JSON.stringify({content})});closeNotes();renderNotes();toastMsg('Notes saved')}
+function closeNotes(){notesModal.classList.remove('show')}function closeNotesBackdrop(e){if(e.target.id==='notesModal')closeNotes()}
+function updateOverall(){
+ let leaves=allLeafTasks(),progress=S.get('roadmapProgress',{});
+ let roadDone=leaves.filter(l=>progress[l.id]).length,roadTotal=leaves.length;
+ let projObj=S.get('projectDone',{}),projDone=Object.values(projObj).reduce((a,x)=>a+x.length,0),projTotal=projects.reduce((a,p)=>a+p.steps.length,0);
+ let day=S.get('daily',{done:[]}).done.length||0;
+ let pct=Math.round(((roadDone+projDone+day)/(roadTotal+projTotal+dailyBase.length))*100);
+ overall.textContent=pct+'%';overallRing.style.setProperty('--p',pct);
+ let st=computeStreak();
+ streak.textContent=st.current;bestStreakLine.textContent='Best: '+st.longest+' days';
+ renderTracker();
+}
+function renderTracker(){
+ let leaves=allLeafTasks(),progress=S.get('roadmapProgress',{}),ghLinks=S.get('githubLinks',{});
+ let doneLeaves=leaves.filter(l=>progress[l.id]);
+ let totalMinutes=doneLeaves.reduce((a,l)=>a+l.m,0),hours=(totalMinutes/60).toFixed(1);
+ let st=computeStreak();
+ let milestones=[];
+ phases.forEach((p,pi)=>{
+  p.topics.forEach((t,ti)=>{
+   let tls=leaves.filter(l=>l.pi===pi&&l.ti===ti);
+   if(tls.length&&tls.every(l=>progress[l.id])){
+    let date=tls.reduce((mx,l)=>progress[l.id].date>mx?progress[l.id].date:mx,progress[tls[0].id].date);
+    milestones.push({title:t.name,sub:p.title,date,type:'topic'});
+   }
+  });
+  let pls=leaves.filter(l=>l.pi===pi);
+  if(ghLinks[pi]){
+   milestones.push({title:p.project.title,sub:`${p.title} — project submitted`,date:ghLinks[pi].date,type:'project'});
+  }
+  if(pls.length&&pls.every(l=>progress[l.id])&&ghLinks[pi]){
+   let date=pls.reduce((mx,l)=>progress[l.id].date>mx?progress[l.id].date:mx,progress[pls[0].id].date);
+   milestones.push({title:p.title,sub:'Module complete (topics + project)',date,type:'phase'});
+  }
+ });
+ milestones.sort((a,b)=>b.date.localeCompare(a.date));
+ let week=[...Array(7)].map((_,i)=>dateStr(-(6-i)));
+ let weekMin=week.map(d=>doneLeaves.filter(l=>progress[l.id].date===d).reduce((a,l)=>a+l.m,0));
+ let maxW=Math.max(60,...weekMin),weekTotal=weekMin.reduce((a,b)=>a+b,0);
+ let log=S.get('activityLog',{});
+ let heatDays=[...Array(70)].map((_,i)=>dateStr(-(69-i)));
+ trackerStats.innerHTML=`
+  <div class="statGrid">
+   <div class="statCard"><b>${hours}h</b><div class="lbl">Study time logged</div></div>
+   <div class="statCard"><b>${doneLeaves.length}/${leaves.length}</b><div class="lbl">Roadmap tasks done</div></div>
+   <div class="statCard"><b>🔥 ${st.current}</b><div class="lbl">Current streak (days)</div></div>
+   <div class="statCard"><b>🏆 ${st.longest}</b><div class="lbl">Best streak (days)</div></div>
+  </div>
+  <div class="card"><h3>This week</h3><div class="muted" style="font-size:12px;margin-bottom:4px;font-weight:600">${weekTotal} min logged</div>
+   <div class="weekChart">${week.map((d,i)=>`<div class="bar"><i style="height:${Math.round(weekMin[i]/maxW*100)}%"></i><span>${new Date(d+'T00:00:00').toLocaleDateString(undefined,{weekday:'narrow'})}</span></div>`).join('')}</div>
+  </div>
+  <div class="card"><h3>Activity (last 10 weeks)</h3>
+   <div class="heatGrid">${heatDays.map(d=>{let c=log[d]||0,cls=c===0?'':c===1?'l1':c===2?'l2':'l3';return `<div class="heatCell ${cls}" title="${d}: ${c} completed"></div>`}).join('')}</div>
+  </div>
+  <div class="card"><h3>Milestones</h3>
+   ${milestones.length?milestones.map(m=>`<div class="milestoneRow"><div><div class="mTitle">${m.type==='phase'?'🏁 ':'🎯 '}${m.title}</div><div class="mDate">${m.sub}</div></div><div class="mDate">${fmtDate(m.date)}</div></div>`).join(''):'<div class="empty">Complete a topic to unlock your first milestone.</div>'}
+  </div>`;
+}
+function shuffleFocus(){let x=focusPool[Math.floor(Math.random()*focusPool.length)];focusTitle.textContent=x[0];focusText.textContent=x[1];focusTags.innerHTML=x[2].map((t,i)=>`<span class="tag ${i?'green':'purple'}">${t}</span>`).join('')}
+function openSettings(){let p=profile();nameInput.value=p.name;roleSelect.value=p.role;goalSelect.value=p.goal;apiBaseInput.value=apiBase();settingsModal.classList.add('show')}
+function saveSettings(){let p={name:nameInput.value.trim()||'Moushana',role:roleSelect.value,goal:goalSelect.value};S.set('profile',p);let newBase=apiBaseInput.value.trim().replace(/\/$/,'');let baseChanged=newBase!==apiBase();S.set('apiBase',newBase);api('/api/profile',{method:'POST',body:JSON.stringify({name:p.name,role:p.role,goalMinutes:Number(p.goal)})});closeSettings();renderAll();toastMsg('Profile saved');if(baseChanged)pullState().then(renderAll)}
+function closeSettings(){settingsModal.classList.remove('show')}function closeOnBackdrop(e){if(e.target.id==='settingsModal')closeSettings()}
+function go(id){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));window.scrollTo(0,0);if(id==='learn'){renderLearnFilters();loadResources();loadAssessments()}}
+function toastMsg(t){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
+
+// ---- Learn tab: resources, assessments, ask-AI doubt (backed by the server) ----
+let learnPhase=0,currentAssessments=[],quizAssessmentId=null;
+function renderLearnFilters(){learnPhaseFilter.innerHTML=phases.map((p,i)=>`<button class="chip ${learnPhase===i?'active':''}" onclick="setLearnPhase(${i})">${p.icon} P${i+1}</button>`).join('');learnTopicSelect.innerHTML=phases[learnPhase].topics.map((t,ti)=>`<option value="${ti}">${t.name}</option>`).join('')}
+function setLearnPhase(i){learnPhase=i;renderLearnFilters();loadResources();loadAssessments()}
+const kindIcon={video:'▶',article:'📄',docs:'📘',course:'🎓',practice:'🧩'};
+async function loadResources(){if(!apiBase()){resourceList.innerHTML='<div class="empty">Add a Backend URL in Settings to load curated resources, links and videos.</div>';return}resourceList.innerHTML='<div class="empty">Loading…</div>';let list=await api(`/api/resources?phase=${learnPhase}`);if(!list){resourceList.innerHTML='<div class="empty">Could not reach the backend. Check the Backend URL in Settings.</div>';return}if(!list.length){resourceList.innerHTML='<div class="empty">No resources yet for this phase.</div>';return}resourceList.innerHTML=list.map(r=>`<div class="card" style="padding:13px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:center"><div><div style="font-weight:700;font-size:13.5px">${kindIcon[r.kind]||'🔗'} ${r.title}</div><div class="muted" style="font-size:11.5px;margin-top:2px;font-weight:600">${r.source||''}${r.is_free?' · Free':''}</div></div><a class="secondary" style="text-decoration:none;text-align:center;padding:8px 12px;font-size:12.5px;flex:none" href="${r.url}" target="_blank" rel="noopener">Open</a></div></div>`).join('')}
+async function loadAssessments(){if(!apiBase()){assessmentList.innerHTML='<div class="empty">Add a Backend URL in Settings to load assessments.</div>';return}assessmentList.innerHTML='<div class="empty">Loading…</div>';let list=await api(`/api/assessments?phase=${learnPhase}`);if(!list){assessmentList.innerHTML='<div class="empty">Could not reach the backend. Check the Backend URL in Settings.</div>';return}currentAssessments=list;if(!list.length){assessmentList.innerHTML='<div class="empty">No assessments yet — try Generate with AI.</div>';return}assessmentList.innerHTML=list.map(a=>`<div class="card" style="padding:13px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div style="font-weight:700;font-size:13.5px">${a.title}</div><div class="muted" style="font-size:11.5px;margin-top:2px;font-weight:600">${a.questions.length} questions · ${a.source==='ai'?'AI generated':'Planned'}</div></div><button class="secondary" style="padding:8px 12px;font-size:12.5px;flex:none" onclick="openQuiz(${a.id})">Take</button></div></div>`).join('')}
+async function generateAssessmentClick(ev){if(!apiBase()){toastMsg('Add a Backend URL in Settings first');return}let ti=Number(learnTopicSelect.value),p=phases[learnPhase],t=p.topics[ti],btn=ev.currentTarget,label=btn.textContent;btn.disabled=true;btn.textContent='Generating…';let res=await api('/api/assessments/generate',{method:'POST',body:JSON.stringify({phaseIndex:learnPhase,topicIndex:ti,phaseTitle:p.title,topicName:t.name})});btn.disabled=false;btn.textContent=label;if(res){toastMsg('New AI assessment ready');loadAssessments()}else{toastMsg('Could not reach the backend')}}
+function openQuiz(id){let a=currentAssessments.find(x=>x.id===id);if(!a)return;quizAssessmentId=id;quizTitle.textContent=a.title;quizBody.innerHTML=a.questions.map((q,qi)=>`<div style="margin-bottom:14px"><div style="font-weight:700;font-size:13.5px;margin-bottom:6px">${qi+1}. ${q.q}</div>${q.options.map((o,oi)=>`<label style="display:flex;gap:8px;align-items:center;padding:7px 0;font-size:13px"><input type="radio" name="quizq${qi}" value="${oi}"> ${o}</label>`).join('')}</div>`).join('');quizResult.textContent='';quizModal.classList.add('show')}
+async function submitQuiz(){let a=currentAssessments.find(x=>x.id===quizAssessmentId);if(!a)return;let answers=a.questions.map((q,qi)=>{let sel=document.querySelector(`input[name="quizq${qi}"]:checked`);return sel?Number(sel.value):-1});let res=await api(`/api/assessments/${quizAssessmentId}/attempt`,{method:'POST',body:JSON.stringify({answers})});quizResult.textContent=res?`Score: ${res.score}/${res.total}`:'Could not submit — check backend connection.'}
+function closeQuiz(){quizModal.classList.remove('show')}
+function closeQuizBackdrop(e){if(e.target.id==='quizModal')closeQuiz()}
+function openDoubt(){doubtAnswer.textContent='';doubtQuestion.value='';doubtTopic.value='';doubtModal.classList.add('show');loadDoubtHistory()}
+function closeDoubt(){doubtModal.classList.remove('show')}
+function closeDoubtBackdrop(e){if(e.target.id==='doubtModal')closeDoubt()}
+async function askDoubt(){if(!apiBase()){doubtAnswer.textContent='Add a Backend URL in Settings first.';return}let q=doubtQuestion.value.trim();if(!q)return;askBtn.disabled=true;askBtn.textContent='Thinking…';doubtAnswer.textContent='';let res=await api('/api/doubt',{method:'POST',body:JSON.stringify({question:q,topic:doubtTopic.value.trim()})});askBtn.disabled=false;askBtn.textContent='Ask';doubtAnswer.textContent=res?res.answer:'Could not reach the AI backend. Check the Backend URL in Settings.';if(res)loadDoubtHistory()}
+async function loadDoubtHistory(){if(!apiBase()){doubtHistory.innerHTML='';return}let list=await api('/api/doubt/history');if(!list){doubtHistory.innerHTML='';return}doubtHistory.innerHTML='<h3 style="font-size:13px;margin-top:6px">Recent</h3>'+list.slice(0,8).map(h=>`<div style="padding:8px 0;border-top:1px solid var(--line);font-size:12.5px"><b>${h.question}</b><div class="muted" style="margin-top:3px">${h.answer.slice(0,140)}${h.answer.length>140?'…':''}</div></div>`).join('')}
+
+init();
+</script>
+</body>
+</html>
